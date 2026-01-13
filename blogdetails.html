@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GrowwGreen Blog Details - Read full article">
+    <meta name="keywords" content="sustainability, green living, eco tips">
+    <meta name="author" content="GrowwGreen">
+    <title>Blog Details - GrowwGreen</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/growwpark_logo.ico">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        :root {
+            --olive-green: #5F6F52;
+            --gold-accent: #C9A227;
+            --background: #FAF9F6;
+            --text: #2E2E2E;
+            --cards: #EAE7DC;
+            --navbar-bg: #5F6F52;
+        }
+        
+        [data-theme="dark"] {
+            --background: #1a1a1a;
+            --text: #FAF9F6;
+            --cards: #2a2a2a;
+            --navbar-bg: #3d4a36;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+        }
+        
+        html { scroll-behavior: smooth; }
+        
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--background); }
+        ::-webkit-scrollbar-thumb { background: var(--olive-green); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gold-accent); }
+        
+        .bg-olive { background-color: var(--olive-green) !important; }
+        .bg-gold { background-color: var(--gold-accent) !important; }
+        .text-olive { color: var(--olive-green) !important; }
+        .text-gold { color: var(--gold-accent) !important; }
+        .card-bg { background-color: var(--cards); }
+        
+        /* Navbar Styles */
+        .navbar-container {
+            background-color: var(--navbar-bg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Dropdown Menu Styles */
+        .nav-link {
+            color: white;
+            padding: 8px 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 500;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        
+        .nav-link:hover {
+            color: var(--gold-accent);
+        }
+        
+        .nav-link.active {
+            color: var(--gold-accent);
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--navbar-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dropdown:hover .dropdown-menu,
+        .dropdown.active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-item:hover {
+            background-color: rgba(201, 162, 39, 0.1);
+            color: var(--gold-accent);
+            padding-left: 28px;
+        }
+        
+        .dropdown-arrow {
+            font-size: 0.7rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .dropdown:hover .dropdown-arrow,
+        .dropdown.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up { animation: fadeInUp 0.6s ease-out; }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active { transform: translateX(0); }
+        
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding-left: 20px;
+        }
+        
+        .mobile-dropdown-content.active {
+            max-height: 500px;
+        }
+        
+        [dir="rtl"] .mobile-menu { 
+            transform: translateX(100%); 
+            left: auto;
+            right: 0;
+        }
+        [dir="rtl"] .mobile-menu.active { transform: translateX(0); }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--olive-green), var(--gold-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .page-header {
+            min-height: 60vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                        url('images/blogherosection.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin-top: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .blog-content {
+            font-size: 1.125rem;
+            line-height: 1.8;
+        }
+        
+        .blog-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 32px 0 16px;
+            color: var(--olive-green);
+        }
+        
+        .blog-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 24px 0 12px;
+            color: var(--gold-accent);
+        }
+        
+        .blog-content p {
+            margin-bottom: 20px;
+        }
+        
+        .blog-content ul, .blog-content ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+        
+        .blog-content li {
+            margin-bottom: 12px;
+        }
+        
+        .blog-content img {
+            width: 100%;
+            border-radius: 16px;
+            margin: 32px 0;
+        }
+        
+        /* UPDATED: Hamburger shows below 1280px (all devices except desktop) */
+        @media (max-width: 1279px) {
+            .desktop-nav {
+                display: none !important;
+            }
+            .mobile-menu-button {
+                display: flex !important;
+            }
+            .navbar-right-desktop {
+                display: none !important;
+            }
+        }
+        
+        /* Desktop 1280px and above - Only true desktop view */
+        @media (min-width: 1280px) {
+            .desktop-nav {
+                display: flex !important;
+            }
+            .mobile-menu-button {
+                display: none !important;
+            }
+            .navbar-right-desktop {
+                display: flex !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar-container py-3 fixed top-0 w-full z-[1000]">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                
+                <!-- Logo - Matching pricing page -->
+                <a href="index.html" class="flex items-center gap-3 no-underline transition-transform duration-300 hover:scale-105">
+                    <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center font-extrabold text-xl text-white shrink-0">
+                        GG
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-white">GrowwGreen</div>
+                        <span class="text-xs text-white/80 block -mt-1">Sustainable Living</span>
+                    </div>
+                </a>
+                
+                <!-- Desktop Menu (Shows at 1280px+) -->
+                <div class="desktop-nav items-center space-x-2" style="display: none;">
+                    
+                    <!-- Home Dropdown -->
+                    <div class="dropdown" id="home-dropdown">
+                        <div class="nav-link" onclick="toggleDesktopDropdown('home-dropdown')">
+                            Home <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </div>
+                        <div class="dropdown-menu">
+                            <a href="index.html" class="dropdown-item">
+                                <i class="fas fa-home mr-2"></i> Home 1
+                            </a>
+                            <a href="homepage2.html" class="dropdown-item">
+                                <i class="fas fa-leaf mr-2"></i> Home 2
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="solutions.html" class="nav-link">Solutions</a>
+                    <a href="pricing.html" class="nav-link">Pricing</a>
+                    <a href="blog.html" class="nav-link active">Blog</a>
+                    <a href="faq.html" class="nav-link">FAQ</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    
+                    <!-- Dashboard Dropdown -->
+                    <div class="dropdown" id="dashboard-dropdown">
+                        <div class="nav-link" onclick="toggleDesktopDropdown('dashboard-dropdown')">
+                            Dashboard <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </div>
+                        <div class="dropdown-menu">
+                            <a href="user-dashboard.html" class="dropdown-item">
+                                <i class="fas fa-user mr-2"></i> User Dashboard
+                            </a>
+                            <a href="admin-dashboard.html" class="dropdown-item">
+                                <i class="fas fa-user-shield mr-2"></i> Admin Dashboard
+                            </a>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <!-- Right Side Buttons (Desktop 1280px+) -->
+                <div class="navbar-right-desktop flex items-center gap-3" style="display: none;">
+                    <button class="w-10 h-10 bg-white/15 rounded-lg flex items-center justify-center text-white transition-all duration-300 hover:bg-gold shrink-0 border-0 cursor-pointer" id="desktop-theme-toggle-btn" title="Toggle Dark/Light Mode">
+                        <i class="fas fa-moon" id="desktop-theme-icon"></i>
+                    </button>
+                    <button class="w-10 h-10 bg-white/15 rounded-lg flex items-center justify-center text-white transition-all duration-300 hover:bg-gold shrink-0 border-0 cursor-pointer" id="desktop-rtl-toggle-btn" title="Toggle RTL">
+                        <i class="fas fa-language"></i>
+                    </button>
+                    <a href="login.html" class="w-10 h-10 bg-white/15 rounded-lg flex items-center justify-center text-white transition-all duration-300 hover:bg-gold shrink-0" title="Login">
+                        <i class="fas fa-user"></i>
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button (Shows below 1280px - ALL DEVICES except desktop) -->
+                <button id="mobile-menu-btn" class="hidden text-white text-2xl cursor-pointer p-2 bg-white/15 rounded-lg w-10 h-10 items-center justify-center mobile-menu-button">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed top-0 left-0 w-full h-full bg-[#2c2c2c] z-[9999] overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center font-extrabold text-xl text-white">GG</div>
+                    <div>
+                        <span class="text-2xl font-bold text-white block">GrowwGreen</span>
+                        <span class="text-xs text-white/80 block -mt-1">Sustainable Living</span>
+                    </div>
+                </a>
+                <div class="flex items-center gap-3">
+                    <a href="login.html" class="w-10 h-10 bg-gold rounded-full flex items-center justify-center text-white hover:bg-white hover:text-gold transition">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <button id="close-mobile-menu" class="text-white text-3xl">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="space-y-2">
+                <!-- Home Dropdown Mobile -->
+                <div>
+                    <button class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline cursor-pointer border-0 bg-transparent" onclick="toggleMobileDropdown('home-mobile')">
+                        <span><i class="fas fa-home mr-2"></i> Home</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </button>
+                    <div id="home-mobile" class="mobile-dropdown-content">
+                        <a href="index.html" class="block text-[#ccc] py-2.5 transition-all duration-300 hover:text-gold hover:pl-2.5">Home 1</a>
+                        <a href="homepage2.html" class="block text-[#ccc] py-2.5 transition-all duration-300 hover:text-gold hover:pl-2.5">Home 2</a>
+                    </div>
+                </div>
+                
+                <a href="about.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                    <span><i class="fas fa-info-circle mr-2"></i> About</span>
+                </a>
+                <a href="solutions.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                    <span><i class="fas fa-lightbulb mr-2"></i> Solutions</span>
+                </a>
+                <a href="pricing.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                    <span><i class="fas fa-tags mr-2"></i> Pricing</span>
+                </a>
+                <a href="blog.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                    <span><i class="fas fa-blog mr-2"></i> Blog</span>
+                </a>
+                <a href="faq.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                    <span><i class="fas fa-question-circle mr-2"></i> FAQ</span>
+                </a>
+                <a href="contact.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                    <span><i class="fas fa-envelope mr-2"></i> Contact</span>
+                </a>
+                
+                <!-- Dashboard Dropdown Mobile -->
+                <div>
+                    <button class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline cursor-pointer border-0 bg-transparent" onclick="toggleMobileDropdown('dashboard-mobile')">
+                        <span><i class="fas fa-tachometer-alt mr-2"></i> Dashboard</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </button>
+                    <div id="dashboard-mobile" class="mobile-dropdown-content">
+                        <a href="user-dashboard.html" class="block text-[#ccc] py-2.5 transition-all duration-300 hover:text-gold hover:pl-2.5">User Dashboard</a>
+                        <a href="admin-dashboard.html" class="block text-[#ccc] py-2.5 transition-all duration-300 hover:text-gold hover:pl-2.5">Admin Dashboard</a>
+                    </div>
+                </div>
+                
+                <!-- SETTINGS SECTION -->
+                <div class="pt-6 mt-6 border-t border-gray-700">
+                    <p class="text-white text-sm font-semibold mb-4 opacity-75">SETTINGS</p>
+                    
+                    <!-- Theme Toggle -->
+                    <div class="bg-white/10 rounded-lg p-3 flex items-center justify-between cursor-pointer transition-all duration-300 hover:bg-[#C9A227]/20 mb-3" id="mobile-theme-toggle">
+                        <div class="flex items-center">
+                            <i class="fas fa-moon text-white text-lg mr-3" id="mobile-theme-icon"></i>
+                            <span class="text-white font-medium">Dark Mode</span>
+                        </div>
+                        <div class="w-12 h-6 bg-gray-600 rounded-full relative">
+                            <div class="theme-switch-dot w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-all"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- RTL Toggle -->
+                    <div class="bg-white/10 rounded-lg p-3 flex items-center justify-between cursor-pointer transition-all duration-300 hover:bg-[#C9A227]/20 mb-3" id="mobile-rtl-toggle">
+                        <div class="flex items-center">
+                            <i class="fas fa-language text-white text-lg mr-3"></i>
+                            <span class="text-white font-medium">RTL Mode</span>
+                        </div>
+                        <div class="w-12 h-6 bg-gray-600 rounded-full relative">
+                            <div class="rtl-switch-dot w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-all"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container mx-auto px-4 text-center text-white">
+            <span class="inline-block bg-gold text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase mb-3" id="header-category">Renewable Energy</span>
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-black mb-6 fade-in-up" id="blog-title">
+                Complete Guide to Solar Energy for Your Home
+            </h1>
+            <div class="flex flex-wrap items-center justify-center gap-4 text-sm text-white/90">
+                <span><i class="fas fa-user mr-2 text-gold"></i><span id="header-author">Sarah Green</span></span>
+                <span><i class="fas fa-calendar-alt mr-2 text-gold"></i><span id="header-date">Dec 20, 2025</span></span>
+                <span><i class="fas fa-clock mr-2 text-gold"></i><span id="header-read-time">5 min read</span></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Content Section -->
+    <section class="py-12 md:py-16 lg:py-20">
+        <div class="container mx-auto px-4">
+            <div class="grid lg:grid-cols-3 gap-8 lg:gap-12">
+                
+                <!-- Main Content -->
+                <div class="lg:col-span-2">
+                    <!-- Featured Image -->
+                    <img src="images/Renewable Energy.jpg" 
+                         alt="Blog Featured Image" 
+                         class="w-full rounded-2xl mb-8"
+                         id="featured-image"
+                         onerror="this.style.display='none'">
+                    
+                    <!-- Blog Content -->
+                    <div class="blog-content" id="blog-content">
+                        <!-- Content will be dynamically loaded here -->
+                    </div>
+                    
+                    <!-- Tags Section -->
+                    <div class="mt-8 md:mt-12 mb-8 md:mb-12">
+                        <h3 class="text-xl md:text-2xl font-bold mb-4">Tags</h3>
+                        <div id="tags-container" class="flex flex-wrap gap-2">
+                            <!-- Tags will be dynamically loaded here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Share Section -->
+                    <div class="card-bg rounded-2xl p-6 md:p-8 mb-8 md:mb-12">
+                        <h3 class="text-xl md:text-2xl font-bold mb-6">Share This Article</h3>
+                        <div class="flex gap-3 md:gap-4 flex-wrap">
+                            <a href="#" class="w-12 h-12 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg bg-[#1877F2]" onclick="shareOnFacebook(); return false;">
+                                <i class="fab fa-facebook-f text-lg"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg bg-[#1DA1F2]" onclick="shareOnTwitter(); return false;">
+                                <i class="fab fa-twitter text-lg"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg bg-[#0A66C2]" onclick="shareOnLinkedIn(); return false;">
+                                <i class="fab fa-linkedin-in text-lg"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg bg-[#25D366]" onclick="shareOnWhatsApp(); return false;">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Author Section -->
+                    <div class="card-bg rounded-2xl p-8 flex flex-col md:flex-row items-center md:items-start gap-6 mb-8 md:mb-12">
+                        <div class="w-24 h-24 rounded-full bg-gradient-to-br from-olive to-gold flex items-center justify-center text-white text-3xl font-bold shrink-0" id="author-avatar">SG</div>
+                        <div class="text-center md:text-left">
+                            <h3 class="text-xl md:text-2xl font-bold mb-2" id="author-name">Sarah Green</h3>
+                            <p class="text-xs md:text-sm text-gold font-semibold mb-3" id="author-title">Environmental Scientist & Sustainability Expert</p>
+                            <p class="text-sm md:text-base opacity-80" id="author-bio">
+                                Sarah is a passionate advocate for renewable energy with over 10 years of experience in sustainable development.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Comments Section -->
+                    <div class="mb-8 md:mb-12">
+                        <h3 class="text-xl md:text-2xl font-bold mb-6">Comments (3)</h3>
+                        
+                        <div class="card-bg rounded-xl p-5 mb-4">
+                            <div class="flex items-start gap-3 md:gap-4 mb-3">
+                                <div class="w-10 h-10 md:w-12 md:h-12 bg-olive rounded-full flex items-center justify-center text-white font-bold shrink-0 text-sm md:text-base">
+                                    JD
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm md:text-base">John Doe</h4>
+                                    <p class="text-xs md:text-sm opacity-60">2 days ago</p>
+                                </div>
+                            </div>
+                            <p class="text-sm md:text-base opacity-80">
+                                Great article! Very informative and practical. I'm definitely considering solar panels for my home now.
+                            </p>
+                        </div>
+                        
+                        <div class="card-bg rounded-xl p-5 mb-4">
+                            <div class="flex items-start gap-3 md:gap-4 mb-3">
+                                <div class="w-10 h-10 md:w-12 md:h-12 bg-gold rounded-full flex items-center justify-center text-white font-bold shrink-0 text-sm md:text-base">
+                                    EM
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm md:text-base">Emma Martinez</h4>
+                                    <p class="text-xs md:text-sm opacity-60">3 days ago</p>
+                                </div>
+                            </div>
+                            <p class="text-sm md:text-base opacity-80">
+                                Thanks for sharing this comprehensive guide. The cost breakdown was especially helpful!
+                            </p>
+                        </div>
+                        
+                        <div class="card-bg rounded-xl p-5 mb-4">
+                            <div class="flex items-start gap-3 md:gap-4 mb-3">
+                                <div class="w-10 h-10 md:w-12 md:h-12 bg-olive rounded-full flex items-center justify-center text-white font-bold shrink-0 text-sm md:text-base">
+                                    RC
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm md:text-base">Robert Chen</h4>
+                                    <p class="text-xs md:text-sm opacity-60">5 days ago</p>
+                                </div>
+                            </div>
+                            <p class="text-sm md:text-base opacity-80">
+                                I installed solar panels last year and my electricity bills have dropped by 70%. Highly recommend!
+                            </p>
+                        </div>
+                        
+                        <!-- Comment Form -->
+                        <div class="card-bg rounded-2xl p-6 mt-8">
+                            <h4 class="text-lg md:text-xl font-bold mb-4">Leave a Comment</h4>
+                            <form>
+                                <div class="mb-4">
+                                    <input type="text" placeholder="Your Name" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 text-sm md:text-base" required>
+                                </div>
+                                <div class="mb-4">
+                                    <input type="email" placeholder="Your Email" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 text-sm md:text-base" required>
+                                </div>
+                                <div class="mb-4">
+                                    <textarea placeholder="Your Comment" rows="5" class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 text-sm md:text-base" required></textarea>
+                                </div>
+                                <button type="submit" class="bg-olive text-white px-7 py-2.5 rounded-lg font-semibold border-2 border-olive hover:bg-transparent hover:text-olive transition-all duration-300">
+                                    Post Comment
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <!-- Sidebar -->
+                <div class="lg:col-span-1">
+                    <!-- Table of Contents -->
+                    <div class="card-bg rounded-2xl p-6 sticky top-24">
+                        <h3 class="text-lg md:text-xl font-bold mb-4">Table of Contents</h3>
+                        <div id="toc-links" class="space-y-2">
+                            <!-- TOC will be dynamically loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Articles Section -->
+    <section class="py-12 md:py-16 lg:py-20 bg-olive text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12">Related Articles</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" id="related-articles">
+                <!-- Related articles will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - MATCHING PRICING PAGE LOGO -->
+    <footer class="bg-olive text-white py-12 md:py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-12">
+                <div>
+                    <!-- UPDATED: Same logo as navbar with GG circle + text + tagline -->
+                    <a href="index.html" class="flex items-center gap-3 mb-6 no-underline">
+                        <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center font-extrabold text-xl text-white shrink-0">
+                            GG
+                        </div>
+                        <div>
+                            <span class="text-xl md:text-2xl font-bold text-white block">GrowwGreen</span>
+                            <span class="text-xs text-white/80 block -mt-1">Sustainable Living</span>
+                        </div>
+                    </a>
+                    <p class="opacity-90 mb-6 text-sm md:text-base">
+                        Building a sustainable future, one action at a time. Join us in creating lasting environmental change.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-white text-olive rounded-full flex items-center justify-center hover:bg-gold hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white text-olive rounded-full flex items-center justify-center hover:bg-gold hover:text-white transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white text-olive rounded-full flex items-center justify-center hover:bg-gold hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white text-olive rounded-full flex items-center justify-center hover:bg-gold hover:text-white transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg md:text-xl font-bold mb-6">Quick Links</h3>
+                    <ul class="space-y-3 text-sm md:text-base">
+                        <li><a href="index.html" class="opacity-90 hover:text-gold transition">Home</a></li>
+                        <li><a href="about.html" class="opacity-90 hover:text-gold transition">About Us</a></li>
+                        <li><a href="solutions.html" class="opacity-90 hover:text-gold transition">Solutions</a></li>
+                        <li><a href="pricing.html" class="opacity-90 hover:text-gold transition">Pricing</a></li>
+                        <li><a href="faq.html" class="opacity-90 hover:text-gold transition">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg md:text-xl font-bold mb-6">Resources</h3>
+                    <ul class="space-y-3 text-sm md:text-base">
+                        <li><a href="blog.html" class="opacity-90 hover:text-gold transition">Blog</a></li>
+                        <li><a href="user-dashboard.html" class="opacity-90 hover:text-gold transition">Dashboard</a></li>
+                        <li><a href="#" class="opacity-90 hover:text-gold transition">Case Studies</a></li>
+                        <li><a href="#" class="opacity-90 hover:text-gold transition">Downloads</a></li>
+                        <li><a href="contact.html" class="opacity-90 hover:text-gold transition">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg md:text-xl font-bold mb-6">Newsletter</h3>
+                    <p class="opacity-90 mb-4 text-sm md:text-base">Subscribe for sustainability tips and updates.</p>
+                    <form class="space-y-3">
+                        <input type="email" placeholder="Your email" class="w-full px-4 py-3 rounded-lg text-gray-800 text-sm md:text-base" required>
+                        <button type="submit" class="w-full bg-gold text-white px-4 py-3 rounded-lg font-semibold hover:bg-white hover:text-olive transition text-sm md:text-base">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-white border-opacity-20 pt-8 flex flex-col md:flex-row justify-between items-center text-sm md:text-base">
+                <p class="opacity-90 mb-4 md:mb-0">&copy; 2026 GrowwGreen. All rights reserved.</p>
+                <div class="flex flex-wrap justify-center gap-4 md:gap-6">
+                    <a href="#" class="opacity-90 hover:text-gold transition">Privacy Policy</a>
+                    <a href="#" class="opacity-90 hover:text-gold transition">Terms of Service</a>
+                    <a href="#" class="opacity-90 hover:text-gold transition">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-top" class="fixed bottom-6 right-6 md:bottom-8 md:right-8 w-10 h-10 md:w-12 md:h-12 bg-olive text-white rounded-full shadow-lg hidden hover:bg-gold transition z-50">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Blog Data
+        const blogData = {
+            'solar-energy-guide': {
+                title: 'Complete Guide to Solar Energy for Your Home',
+                category: 'Renewable Energy',
+                author: 'Sarah Green',
+                authorTitle: 'Environmental Scientist & Sustainability Expert',
+                authorBio: 'Sarah is a passionate advocate for renewable energy with over 10 years of experience in sustainable development.',
+                authorAvatar: 'SG',
+                date: 'Dec 20, 2025',
+                readTime: '5 min read',
+                featuredImage: 'images/Renewable Energy.jpg',
+                tags: ['Solar Energy', 'Renewable Energy', 'Home Improvement', 'Sustainability', 'Energy Savings'],
+                content: `
+                    <h2>Why Solar Energy?</h2>
+                    <p>Solar energy is one of the most accessible and effective ways to reduce your carbon footprint while saving money on electricity bills. With advances in technology and decreasing costs, there's never been a better time to go solar.</p>
+                    
+                    <img src="images/deatilspageimage1.jpg" alt="Solar Panels" onerror="this.style.display='none'">
+                    
+                    <h2>Benefits of Solar Energy</h2>
+                    <p>Installing solar panels on your home comes with numerous advantages:</p>
+                    <ul>
+                        <li><strong>Cost Savings:</strong> Reduce or eliminate your electricity bills</li>
+                        <li><strong>Environmental Impact:</strong> Significantly reduce your carbon footprint</li>
+                        <li><strong>Energy Independence:</strong> Produce your own clean energy</li>
+                        <li><strong>Increased Property Value:</strong> Homes with solar panels sell faster and for more</li>
+                        <li><strong>Government Incentives:</strong> Take advantage of tax credits and rebates</li>
+                    </ul>
+                    
+                    <h2>Understanding Solar Panel Systems</h2>
+                    <p>A typical residential solar panel system consists of several key components:</p>
+                    <ol>
+                        <li><strong>Solar Panels:</strong> Convert sunlight into DC electricity</li>
+                        <li><strong>Inverter:</strong> Converts DC electricity to AC for home use</li>
+                        <li><strong>Mounting System:</strong> Secures panels to your roof</li>
+                        <li><strong>Monitoring System:</strong> Tracks energy production</li>
+                        <li><strong>Battery Storage (Optional):</strong> Stores excess energy for later use</li>
+                    </ol>
+                    
+                    <h3>Cost Considerations</h3>
+                    <p>The average cost of a residential solar panel system ranges from $15,000 to $25,000 before incentives. However, with federal tax credits and state rebates, your actual cost could be 40-50% lower.</p>
+                    
+                    <img src="images/deatilspageimage2.jpg" alt="Solar Installation" onerror="this.style.display='none'">
+                    
+                    <h2>Installation Process</h2>
+                    <p>Installing solar panels typically takes 1-3 months from initial consultation to final activation:</p>
+                    <ol>
+                        <li><strong>Site Assessment:</strong> Evaluate your roof and energy needs</li>
+                        <li><strong>Design & Permits:</strong> Create system design and obtain permits</li>
+                        <li><strong>Installation:</strong> Mount panels and connect electrical components</li>
+                        <li><strong>Inspection:</strong> Local authorities verify the installation</li>
+                        <li><strong>Activation:</strong> Connect to the grid and start generating power</li>
+                    </ol>
+                    
+                    <h2>Maintenance and Longevity</h2>
+                    <p>Solar panels require minimal maintenance and typically last 25-30 years. Regular cleaning and annual inspections ensure optimal performance throughout their lifespan.</p>
+                    
+                    <h3>Return on Investment</h3>
+                    <p>Most homeowners see a return on their investment within 7-10 years, after which all energy savings are pure profit. Over the system's lifetime, you could save $50,000 or more on electricity costs.</p>
+                    
+                    <h2>Getting Started</h2>
+                    <p>Ready to make the switch to solar? Start by:</p>
+                    <ul>
+                        <li>Researching local solar installers and reading reviews</li>
+                        <li>Getting multiple quotes to compare prices</li>
+                        <li>Checking available incentives in your area</li>
+                        <li>Evaluating financing options</li>
+                        <li>Scheduling a site assessment</li>
+                    </ul>
+                    
+                    <p>Solar energy is a smart investment in your home, your finances, and our planet's future. Take the first step today!</p>
+                `
+            },
+            'zero-waste-living': {
+                title: '10 Simple Ways to Start Zero Waste Living',
+                category: 'Lifestyle',
+                author: 'Emily Rodriguez',
+                authorTitle: 'Zero Waste Lifestyle Coach',
+                authorBio: 'Emily has been living a zero waste lifestyle for 5 years and helps others transition to sustainable living.',
+                authorAvatar: 'ER',
+                date: 'Dec 18, 2025',
+                readTime: '7 min read',
+                featuredImage: 'images/Waste Management.jpg',
+                tags: ['Zero Waste', 'Lifestyle', 'Sustainability', 'Eco-Friendly', 'Green Living'],
+                content: `
+                    <h2>What is Zero Waste Living?</h2>
+                    <p>Zero waste living is a lifestyle philosophy that encourages redesigning resource life cycles so that all products are reused. The goal is to send nothing to landfills or incinerators.</p>
+                    
+                    <h2>The 5 Rs of Zero Waste</h2>
+                    <p>Before we dive into practical tips, understand the five principles:</p>
+                    <ol>
+                        <li><strong>Refuse:</strong> Say no to what you don't need</li>
+                        <li><strong>Reduce:</strong> Minimize what you do need</li>
+                        <li><strong>Reuse:</strong> Choose reusable over disposable</li>
+                        <li><strong>Recycle:</strong> Properly recycle what you can't refuse, reduce, or reuse</li>
+                        <li><strong>Rot:</strong> Compost organic materials</li>
+                    </ol>
+                    
+                    <h2>10 Simple Ways to Start</h2>
+                    
+                    <h3>1. Carry Reusable Bags</h3>
+                    <p>Always keep reusable shopping bags with you. Keep some in your car, purse, and by your front door so you never forget them.</p>
+                    
+                    <h3>2. Use Reusable Water Bottles</h3>
+                    <p>Invest in a quality stainless steel or glass water bottle. Americans throw away 35 billion plastic bottles every year.</p>
+                    
+                    <p>Start today with just one or two changes and gradually add more as they become habits. Progress over perfection!</p>
+                `
+            },
+            'water-conservation-tips': {
+                title: 'Water Conservation Tips for Every Household',
+                category: 'Water',
+                author: 'Michael Chen',
+                authorTitle: 'Environmental Engineer',
+                authorBio: 'Michael specializes in water resource management and helps communities implement conservation strategies.',
+                authorAvatar: 'MC',
+                date: 'Dec 15, 2025',
+                readTime: '6 min read',
+                featuredImage: 'images/Water Conservation.jpg',
+                tags: ['Water Conservation', 'Sustainability', 'Home Tips', 'Environment', 'Save Money'],
+                content: `
+                    <h2>Why Water Conservation Matters</h2>
+                    <p>Water is our most precious resource, yet we often take it for granted. With growing populations and climate change affecting water supplies, conservation has never been more critical.</p>
+                    
+                    <h2>Indoor Water Conservation</h2>
+                    <h3>Bathroom Tips</h3>
+                    <p>The bathroom is where most household water is used. Here's how to reduce consumption.</p>
+                    
+                    <p>Start today with just one or two changes. Every drop counts!</p>
+                `
+            },
+            'green-building-future': {
+                title: 'The Future of Green Building Design',
+                category: 'Architecture',
+                author: 'Jessica Thompson',
+                authorTitle: 'Sustainable Architecture Specialist',
+                authorBio: 'Jessica has designed award-winning green buildings and advocates for sustainable construction practices worldwide.',
+                authorAvatar: 'JT',
+                date: 'Dec 12, 2025',
+                readTime: '8 min read',
+                featuredImage: 'images/Green Building.jpg',
+                tags: ['Green Building', 'Architecture', 'Sustainability', 'Design', 'Innovation'],
+                content: `
+                    <h2>The Evolution of Green Building</h2>
+                    <p>Green building design has evolved from a niche concept to a mainstream necessity. As climate change accelerates, sustainable architecture is no longer optional—it's essential for our planet's future.</p>
+                    
+                    <p>As we face the challenges of climate change, green building design will play a crucial role in creating a sustainable, livable future for all.</p>
+                `
+            }
+        };
+        
+        // Get blog ID from URL
+        function getBlogId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('blog') || 'solar-energy-guide';
+        }
+        
+        // Load blog content
+        function loadBlogContent() {
+            const blogId = getBlogId();
+            const blog = blogData[blogId];
+            
+            if (!blog) {
+                document.getElementById('blog-content').innerHTML = '<p>Blog post not found.</p>';
+                return;
+            }
+            
+            // Update header
+            document.getElementById('blog-title').textContent = blog.title;
+            document.getElementById('header-category').textContent = blog.category;
+            document.getElementById('header-author').textContent = blog.author;
+            document.getElementById('header-date').textContent = blog.date;
+            document.getElementById('header-read-time').textContent = blog.readTime;
+            
+            // Update featured image
+            document.getElementById('featured-image').src = blog.featuredImage;
+            
+            // Update content
+            document.getElementById('blog-content').innerHTML = blog.content;
+            
+            // Update author section
+            document.getElementById('author-avatar').textContent = blog.authorAvatar;
+            document.getElementById('author-name').textContent = blog.author;
+            document.getElementById('author-title').textContent = blog.authorTitle;
+            document.getElementById('author-bio').textContent = blog.authorBio;
+            
+            // Update tags
+            const tagsContainer = document.getElementById('tags-container');
+            tagsContainer.innerHTML = blog.tags.map(tag => 
+                `<span class="inline-block card-bg px-4 py-2 rounded-full text-sm transition-all duration-300 cursor-pointer hover:bg-olive hover:text-white">${tag}</span>`
+            ).join('');
+            
+            // Generate table of contents
+            generateTOC();
+            
+            // Load related articles
+            loadRelatedArticles(blogId);
+        }
+        
+        // Generate Table of Contents
+        function generateTOC() {
+            const content = document.getElementById('blog-content');
+            const headings = content.querySelectorAll('h2, h3');
+            const tocLinks = document.getElementById('toc-links');
+            
+            let tocHTML = '';
+            headings.forEach((heading, index) => {
+                const id = `section-${index}`;
+                heading.id = id;
+                const indent = heading.tagName === 'H3' ? 'pl-4' : '';
+                tocHTML += `<a href="#${id}" class="block py-2 transition-all duration-300 hover:text-gold border-l-2 border-transparent hover:border-gold pl-3 ${indent}">${heading.textContent}</a>`;
+            });
+            
+            tocLinks.innerHTML = tocHTML;
+        }
+        
+        // Load related articles
+        function loadRelatedArticles(currentBlogId) {
+            const relatedContainer = document.getElementById('related-articles');
+            const allBlogs = Object.keys(blogData).filter(id => id !== currentBlogId).slice(0, 3);
+            
+            relatedContainer.innerHTML = allBlogs.map(blogId => {
+                const blog = blogData[blogId];
+                return `
+                    <div class="card-bg rounded-2xl overflow-hidden transition-all duration-400 hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(95,111,82,0.2)]">
+                        <img src="${blog.featuredImage}" alt="${blog.title}" class="w-full h-[200px] object-cover" onerror="this.style.display='none'">
+                        <div class="p-4 md:p-6">
+                            <span class="inline-block bg-gold text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase mb-3">${blog.category}</span>
+                            <h3 class="text-lg md:text-xl font-bold mb-3 text-olive">${blog.title}</h3>
+                            <div class="flex items-center gap-4 text-xs md:text-sm opacity-70 mb-4">
+                                <span><i class="fas fa-calendar-alt mr-2 text-gold"></i>${blog.date}</span>
+                                <span><i class="fas fa-clock mr-2 text-gold"></i>${blog.readTime}</span>
+                            </div>
+                            <a href="blogdetails.html?blog=${blogId}" class="bg-gold text-white px-6 py-2.5 rounded-lg font-semibold transition-all duration-300 hover:bg-white hover:text-gold border-2 border-gold inline-flex items-center text-sm md:text-base">
+                                Read More <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // Share functions
+        function shareOnFacebook() {
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank');
+        }
+        
+        function shareOnTwitter() {
+            const blog = blogData[getBlogId()];
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(blog.title)}&url=${encodeURIComponent(window.location.href)}`, '_blank');
+        }
+        
+        function shareOnLinkedIn() {
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`, '_blank');
+        }
+        
+        function shareOnWhatsApp() {
+            const blog = blogData[getBlogId()];
+            window.open(`https://wa.me/?text=${encodeURIComponent(blog.title + ' ' + window.location.href)}`, '_blank');
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadBlogContent();
+        });
+        
+        // Theme and navigation scripts
+        const htmlElement = document.documentElement;
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        const currentDir = localStorage.getItem('direction') || 'ltr';
+        
+        htmlElement.setAttribute('data-theme', currentTheme);
+        htmlElement.setAttribute('dir', currentDir);
+        
+        const desktopThemeBtn = document.getElementById('desktop-theme-toggle-btn');
+        const desktopThemeIcon = document.getElementById('desktop-theme-icon');
+        
+        if (currentTheme === 'dark' && desktopThemeIcon) {
+            desktopThemeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+        
+        if (desktopThemeBtn) {
+            desktopThemeBtn.addEventListener('click', function() {
+                const theme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                htmlElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                
+                if (theme === 'dark') {
+                    desktopThemeIcon.classList.replace('fa-moon', 'fa-sun');
+                } else {
+                    desktopThemeIcon.classList.replace('fa-sun', 'fa-moon');
+                }
+                
+                const mobileIcon = document.getElementById('mobile-theme-icon');
+                if (mobileIcon) {
+                    if (theme === 'dark') {
+                        mobileIcon.classList.replace('fa-moon', 'fa-sun');
+                        document.querySelector('.theme-switch-dot').style.transform = 'translateX(24px)';
+                        document.querySelector('.theme-switch-dot').parentElement.style.backgroundColor = '#C9A227';
+                    } else {
+                        mobileIcon.classList.replace('fa-sun', 'fa-moon');
+                        document.querySelector('.theme-switch-dot').style.transform = 'translateX(0)';
+                        document.querySelector('.theme-switch-dot').parentElement.style.backgroundColor = '#6b7280';
+                    }
+                }
+            });
+        }
+        
+        const desktopRtlBtn = document.getElementById('desktop-rtl-toggle-btn');
+        
+        if (desktopRtlBtn) {
+            desktopRtlBtn.addEventListener('click', function() {
+                const direction = htmlElement.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl';
+                htmlElement.setAttribute('dir', direction);
+                localStorage.setItem('direction', direction);
+                
+                const rtlDot = document.querySelector('.rtl-switch-dot');
+                if (rtlDot) {
+                    const bg = rtlDot.parentElement;
+                    if (direction === 'rtl') {
+                        rtlDot.style.transform = 'translateX(24px)';
+                        bg.style.backgroundColor = '#C9A227';
+                    } else {
+                        rtlDot.style.transform = 'translateX(0)';
+                        bg.style.backgroundColor = '#6b7280';
+                    }
+                }
+            });
+        }
+        
+        const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+        const mobileThemeIcon = document.getElementById('mobile-theme-icon');
+        
+        if (currentTheme === 'dark' && mobileThemeIcon) {
+            mobileThemeIcon.classList.replace('fa-moon', 'fa-sun');
+            document.querySelector('.theme-switch-dot').style.transform = 'translateX(24px)';
+            document.querySelector('.theme-switch-dot').parentElement.style.backgroundColor = '#C9A227';
+        }
+        
+        if (mobileThemeToggle) {
+            mobileThemeToggle.addEventListener('click', function() {
+                const theme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                htmlElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                
+                const dot = document.querySelector('.theme-switch-dot');
+                const bg = dot.parentElement;
+                
+                if (theme === 'dark') {
+                    mobileThemeIcon.classList.replace('fa-moon', 'fa-sun');
+                    dot.style.transform = 'translateX(24px)';
+                    bg.style.backgroundColor = '#C9A227';
+                } else {
+                    mobileThemeIcon.classList.replace('fa-sun', 'fa-moon');
+                    dot.style.transform = 'translateX(0)';
+                    bg.style.backgroundColor = '#6b7280';
+                }
+                
+                if (desktopThemeIcon) {
+                    if (theme === 'dark') {
+                        desktopThemeIcon.classList.replace('fa-moon', 'fa-sun');
+                    } else {
+                        desktopThemeIcon.classList.replace('fa-sun', 'fa-moon');
+                    }
+                }
+            });
+        }
+        
+        const mobileRtlToggle = document.getElementById('mobile-rtl-toggle');
+        
+        if (currentDir === 'rtl') {
+            const rtlDot = document.querySelector('.rtl-switch-dot');
+            if (rtlDot) {
+                rtlDot.style.transform = 'translateX(24px)';
+                rtlDot.parentElement.style.backgroundColor = '#C9A227';
+            }
+        }
+        
+        if (mobileRtlToggle) {
+            mobileRtlToggle.addEventListener('click', function() {
+                const direction = htmlElement.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl';
+                htmlElement.setAttribute('dir', direction);
+                localStorage.setItem('direction', direction);
+                
+                const dot = document.querySelector('.rtl-switch-dot');
+                const bg = dot.parentElement;
+                
+                if (direction === 'rtl') {
+                    dot.style.transform = 'translateX(24px)';
+                    bg.style.backgroundColor = '#C9A227';
+                } else {
+                    dot.style.transform = 'translateX(0)';
+                    bg.style.backgroundColor = '#6b7280';
+                }
+            });
+        }
+        
+        function toggleDesktopDropdown(id) {
+            const dropdown = document.getElementById(id);
+            const allDropdowns = document.querySelectorAll('.dropdown');
+            
+            allDropdowns.forEach(dd => {
+                if (dd.id !== id) {
+                    dd.classList.remove('active');
+                }
+            });
+            
+            dropdown.classList.toggle('active');
+        }
+        
+        document.addEventListener('click', function(event) {
+            const dropdowns = document.querySelectorAll('.dropdown');
+            dropdowns.forEach(dropdown => {
+                if (!dropdown.contains(event.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+        });
+        
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+        }
+        if (closeMobileMenu && mobileMenu) {
+            closeMobileMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        }
+        
+        const mobileLinks = document.querySelectorAll('#mobile-menu a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+        
+        function toggleMobileDropdown(id) {
+            const dropdown = document.getElementById(id);
+            dropdown.classList.toggle('active');
+        }
+        
+        const scrollTopBtn = document.getElementById('scroll-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.remove('hidden');
+            } else {
+                scrollTopBtn.classList.add('hidden');
+            }
+        });
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1280) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

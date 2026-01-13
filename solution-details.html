@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GrowwGreen Solution Details">
+    <meta name="keywords" content="sustainability, green living, renewable energy, environment, eco-friendly">
+    <meta name="author" content="GrowwGreen">
+    <title>Solution Details - GrowwGreen</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/growwpark_logo.ico">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        :root {
+            --olive-green: #5F6F52;
+            --gold-accent: #C9A227;
+            --background: #FAF9F6;
+            --text: #2E2E2E;
+            --cards: #EAE7DC;
+            --navbar-bg: #5F6F52;
+        }
+        
+        [data-theme="dark"] {
+            --background: #1a1a1a;
+            --text: #FAF9F6;
+            --cards: #2a2a2a;
+            --navbar-bg: #3d4a36;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+        }
+        
+        html { scroll-behavior: smooth; }
+        
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--background); }
+        ::-webkit-scrollbar-thumb { background: var(--olive-green); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gold-accent); }
+        
+        .bg-olive { background-color: var(--olive-green) !important; }
+        .bg-gold { background-color: var(--gold-accent) !important; }
+        .text-olive { color: var(--olive-green) !important; }
+        .text-gold { color: var(--gold-accent) !important; }
+        .card-bg { background-color: var(--cards); }
+        
+        /* Navbar Styles */
+        .navbar-container {
+            background-color: var(--navbar-bg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Dropdown Menu Styles */
+        .nav-link {
+            color: white;
+            padding: 8px 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 500;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        
+        .nav-link:hover {
+            color: var(--gold-accent);
+        }
+        
+        .nav-link.active {
+            color: var(--gold-accent);
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--navbar-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dropdown:hover .dropdown-menu,
+        .dropdown.active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-item:hover {
+            background-color: rgba(201, 162, 39, 0.1);
+            color: var(--gold-accent);
+            padding-left: 28px;
+        }
+        
+        .dropdown-arrow {
+            font-size: 0.7rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .dropdown:hover .dropdown-arrow,
+        .dropdown.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up { animation: fadeInUp 0.6s ease-out; }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active { transform: translateX(0); }
+        
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding-left: 20px;
+        }
+        
+        .mobile-dropdown-content.active {
+            max-height: 500px;
+        }
+        
+        [dir="rtl"] .mobile-menu { 
+            transform: translateX(100%); 
+            left: auto;
+            right: 0;
+        }
+        [dir="rtl"] .mobile-menu.active { transform: translateX(0); }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--olive-green), var(--gold-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-section {
+            min-height: 50vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('images/Timeline Item 3.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding-top: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* UPDATED: Hamburger shows below 1280px (all devices except desktop) */
+        @media (max-width: 1279px) {
+            .desktop-nav {
+                display: none !important;
+            }
+            .mobile-menu-button {
+                display: flex !important;
+            }
+            .navbar-right-desktop {
+                display: none !important;
+            }
+        }
+        
+        /* Desktop 1280px and above - Only true desktop view */
+        @media (min-width: 1280px) {
+            .desktop-nav {
+                display: flex !important;
+            }
+            .mobile-menu-button {
+                display: none !important;
+            }
+            .navbar-right-desktop {
+                display: flex !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar-container py-3 fixed top-0 w-full z-[1000]">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                
+                <!-- Logo - Matching navbar and footer -->
+                <a href="index.html" class="flex items-center gap-3 no-underline transition-transform duration-300 hover:scale-105">
+                    <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center font-extrabold text-xl text-white shrink-0">
+                        GG
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-white">GrowwGreen</div>
+                        <span class="text-xs text-white/80 block -mt-1">Sustainable Living</span>
+                    </div>
+                </a>
+                
+                <!-- Desktop Menu (Shows at 1280px+) -->
+                <div class="desktop-nav items-center space-x-2" style="display: none;">
+                    
+                    <!-- Home Dropdown -->
+                    <div class="dropdown" id="home-dropdown">
+                        <div class="nav-link" onclick="toggleDesktopDropdown('home-dropdown')">
+                            Home <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </div>
+                        <div class="dropdown-menu">
+                            <a href="index.html" class="dropdown-item">
+                                <i class="fas fa-home mr-2"></i> Home 1
+                            </a>
+                            <a href="homepage2.html" class="dropdown-item">
+                                <i class="fas fa-leaf mr-2"></i> Home 2
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="solutions.html" class="nav-link active">Solutions</a>
+                    <a href="pricing.html" class="nav-link">Pricing</a>
+                    <a href="blog.html" class="nav-link">Blog</a>
+                    <a href="faq.html" class="nav-link">FAQ</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    
+                    <!-- Dashboard Dropdown -->
+                    <div class="dropdown" id="dashboard-dropdown">
+                        <div class="nav-link" onclick="toggleDesktopDropdown('dashboard-dropdown')">
+                            Dashboard <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </div>
+                        <div class="dropdown-menu">
+                            <a href="user-dashboard.html" class="dropdown-item">
+                                <i class="fas fa-user mr-2"></i> User Dashboard
+                            </a>
+                            <a href="admin-dashboard.html" class="dropdown-item">
+                                <i class="fas fa-user-shield mr-2"></i> Admin Dashboard
+                            </a>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <!-- Right Side Buttons (Desktop 1280px+) -->
+                <div class="navbar-right-desktop flex items-center gap-3" style="display: none;">
+                    <button class="w-10 h-10 bg-white/15 rounded-lg flex items-center justify-center text-white transition-all duration-300 hover:bg-gold shrink-0 border-0 cursor-pointer" id="desktop-theme-toggle-btn" title="Toggle Dark/Light Mode">
+                        <i class="fas fa-moon" id="desktop-theme-icon"></i>
+                    </button>
+                    <button class="w-10 h-10 bg-white/15 rounded-lg flex items-center justify-center text-white transition-all duration-300 hover:bg-gold shrink-0 border-0 cursor-pointer" id="desktop-rtl-toggle-btn" title="Toggle RTL">
+                        <i class="fas fa-language"></i>
+                    </button>
+                    <a href="login.html" class="w-10 h-10 bg-white/15 rounded-lg flex items-center justify-center text-white transition-all duration-300 hover:bg-gold shrink-0" title="Login">
+                        <i class="fas fa-user"></i>
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button (Shows below 1280px - ALL DEVICES except desktop) -->
+                <button id="mobile-menu-btn" class="hidden text-white text-2xl cursor-pointer p-2 bg-white/15 rounded-lg w-10 h-10 items-center justify-center mobile-menu-button">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed top-0 left-0 w-full h-full bg-[#2c2c2c] z-[9999] overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center font-extrabold text-xl text-white">GG</div>
+                    <div>
+                        <span class="text-2xl font-bold text-white block">GrowwGreen</span>
+                        <span class="text-xs text-white/80 block -mt-1">Sustainable Living</span>
+                    </div>
+                </a>
+                <div class="flex items-center gap-3">
+                    <a href="login.html" class="w-10 h-10 bg-gold rounded-full flex items-center justify-center text-white hover:bg-white hover:text-gold transition">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <button id="close-mobile-menu" class="text-white text-3xl">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="space-y-2">
+                <!-- Home Dropdown Mobile -->
+                <div>
+                    <button class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline cursor-pointer border-0 bg-transparent" onclick="toggleMobileDropdown('home-mobile')">
+                        <span><i class="fas fa-home mr-2"></i> Home</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </button>
+                    <div id="home-mobile" class="mobile-dropdown-content">
+                        <a href="index.html" class="block text-[#ccc] py-2.5 transition-all duration-300 hover:text-gold hover:pl-2.5">Home 1</a>
+                        <a href="homepage2.html" class="block text-[#ccc] py-2.5 transition-all duration-300 hover:text-gold hover:pl-2.5">Home 2</a>
+                    </div>
+                </div>
+                
+                <a href="about.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                    <span><i class="fas fa-info-circle mr-2"></i> About</span>
+                </a>
+                <a href="solutions.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                    <span><i class="fas fa-lightbulb mr-2"></i> Solutions</span>
+                </a>
+                <a href="pricing.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                    <span><i class="fas fa-tags mr-2"></i> Pricing</span>
+                </a>
+                <a href="blog.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                    <span><i class="fas fa-blog mr-2"></i> Blog</span>
+                </a>
+                <a href="faq.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                    <span><i class="fas fa-question-circle mr-2"></i> FAQ</span>
+                </a>
+                <a href="contact.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                    <span><i class="fas fa-envelope mr-2"></i> Contact</span>
+                </a>
+                
+                <!-- Dashboard Dropdown Mobile -->
+                <div>
+                    <button class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline cursor-pointer border-0 bg-transparent" onclick="toggleMobileDropdown('dashboard-mobile')">
+                        <span><i class="fas fa-tachometer-alt mr-2"></i> Dashboard</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </button>
+                    <div id="dashboard-mobile" class="mobile-dropdown-content">
+                        <a href="user-dashboard.html" class="block text-[#ccc] py-2.5 transition-all duration-300 hover:text-gold hover:pl-2.5">User Dashboard</a>
+                        <a href="admin-dashboard.html" class="block text-[#ccc] py-2.5 transition-all duration-300 hover:text-gold hover:pl-2.5">Admin Dashboard</a>
+                    </div>
+                </div>
+                
+                <!-- SETTINGS SECTION -->
+                <div class="pt-6 mt-6 border-t border-gray-700">
+                    <p class="text-white text-sm font-semibold mb-4 opacity-75">SETTINGS</p>
+                    
+                    <!-- Theme Toggle -->
+                    <div class="bg-white/10 rounded-lg p-3 flex items-center justify-between cursor-pointer transition-all duration-300 hover:bg-[#C9A227]/20 mb-3" id="mobile-theme-toggle">
+                        <div class="flex items-center">
+                            <i class="fas fa-moon text-white text-lg mr-3" id="mobile-theme-icon"></i>
+                            <span class="text-white font-medium">Dark Mode</span>
+                        </div>
+                        <div class="w-12 h-6 bg-gray-600 rounded-full relative">
+                            <div class="theme-switch-dot w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-all"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- RTL Toggle -->
+                    <div class="bg-white/10 rounded-lg p-3 flex items-center justify-between cursor-pointer transition-all duration-300 hover:bg-[#C9A227]/20 mb-3" id="mobile-rtl-toggle">
+                        <div class="flex items-center">
+                            <i class="fas fa-language text-white text-lg mr-3"></i>
+                            <span class="text-white font-medium">RTL Mode</span>
+                        </div>
+                        <div class="w-12 h-6 bg-gray-600 rounded-full relative">
+                            <div class="rtl-switch-dot w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-all"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container mx-auto px-4 text-center text-white">
+            <div class="mb-4">
+                <a href="solutions.html" class="text-white hover:text-gold transition inline-flex items-center">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Solutions
+                </a>
+            </div>
+            <h1 id="hero-title" class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 fade-in-up">
+                Solution <span class="text-gold">Details</span>
+            </h1>
+            <p id="hero-description" class="text-lg md:text-xl max-w-3xl mx-auto fade-in-up">
+                Comprehensive solution for your sustainability needs
+            </p>
+        </div>
+    </section>
+
+    <!-- Content Container -->
+    <div id="solution-content" class="container mx-auto px-4 py-16 md:py-24">
+        <!-- Content will be dynamically loaded here -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-olive text-white py-12 md:py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-12">
+                <div>
+                    <!-- UPDATED: Same logo as navbar with GG circle + text + tagline -->
+                    <a href="index.html" class="flex items-center gap-3 mb-6 no-underline">
+                        <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center font-extrabold text-xl text-white shrink-0">
+                            GG
+                        </div>
+                        <div>
+                            <span class="text-xl md:text-2xl font-bold text-white block">GrowwGreen</span>
+                            <span class="text-xs text-white/80 block -mt-1">Sustainable Living</span>
+                        </div>
+                    </a>
+                    <p class="opacity-90 mb-6 text-sm md:text-base">
+                        Building a sustainable future, one action at a time. Join us in creating lasting environmental change.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-white text-olive rounded-full flex items-center justify-center hover:bg-gold hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white text-olive rounded-full flex items-center justify-center hover:bg-gold hover:text-white transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white text-olive rounded-full flex items-center justify-center hover:bg-gold hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white text-olive rounded-full flex items-center justify-center hover:bg-gold hover:text-white transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg md:text-xl font-bold mb-6">Quick Links</h3>
+                    <ul class="space-y-3 text-sm md:text-base">
+                        <li><a href="index.html" class="opacity-90 hover:text-gold transition">Home</a></li>
+                        <li><a href="about.html" class="opacity-90 hover:text-gold transition">About Us</a></li>
+                        <li><a href="solutions.html" class="opacity-90 hover:text-gold transition">Solutions</a></li>
+                        <li><a href="pricing.html" class="opacity-90 hover:text-gold transition">Pricing</a></li>
+                        <li><a href="faq.html" class="opacity-90 hover:text-gold transition">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg md:text-xl font-bold mb-6">Resources</h3>
+                    <ul class="space-y-3 text-sm md:text-base">
+                        <li><a href="blog.html" class="opacity-90 hover:text-gold transition">Blog</a></li>
+                        <li><a href="user-dashboard.html" class="opacity-90 hover:text-gold transition">Dashboard</a></li>
+                        <li><a href="#" class="opacity-90 hover:text-gold transition">Case Studies</a></li>
+                        <li><a href="#" class="opacity-90 hover:text-gold transition">Downloads</a></li>
+                        <li><a href="contact.html" class="opacity-90 hover:text-gold transition">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg md:text-xl font-bold mb-6">Newsletter</h3>
+                    <p class="opacity-90 mb-4 text-sm md:text-base">Subscribe for sustainability tips and updates.</p>
+                    <form class="space-y-3">
+                        <input type="email" placeholder="Your email" class="w-full px-4 py-3 rounded-lg text-gray-800 text-sm md:text-base" required>
+                        <button type="submit" class="w-full bg-gold text-white px-4 py-3 rounded-lg font-semibold hover:bg-white hover:text-olive transition text-sm md:text-base">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-white border-opacity-20 pt-8 flex flex-col md:flex-row justify-between items-center text-sm md:text-base">
+                <p class="opacity-90 mb-4 md:mb-0">&copy; 2026 GrowwGreen. All rights reserved.</p>
+                <div class="flex flex-wrap justify-center gap-4 md:gap-6">
+                    <a href="#" class="opacity-90 hover:text-gold transition">Privacy Policy</a>
+                    <a href="#" class="opacity-90 hover:text-gold transition">Terms of Service</a>
+                    <a href="#" class="opacity-90 hover:text-gold transition">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-top" class="fixed bottom-6 right-6 md:bottom-8 md:right-8 w-10 h-10 md:w-12 md:h-12 bg-olive text-white rounded-full shadow-lg hidden hover:bg-gold transition z-50">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Solution Data with Updated Image Paths
+        const solutionData = {
+            'carbon-tracking': {
+                title: 'Carbon Tracking',
+                subtitle: 'Monitor and Reduce Your Carbon Footprint',
+                description: 'Our advanced carbon tracking solution helps you understand and minimize your environmental impact through real-time monitoring and personalized insights.',
+                image: 'images/Carbon Offsetting.jpg',
+                features: [
+                    { icon: 'fa-chart-line', title: 'Real-Time Tracking', desc: 'Monitor your carbon emissions across transportation, energy, and lifestyle choices in real-time.' },
+                    { icon: 'fa-brain', title: 'AI-Powered Insights', desc: 'Get personalized recommendations based on your habits and lifestyle patterns.' },
+                    { icon: 'fa-bullseye', title: 'Goal Setting', desc: 'Set reduction targets and track your progress with detailed analytics.' },
+                    { icon: 'fa-mobile-alt', title: 'Mobile App', desc: 'Track on-the-go with our intuitive mobile application.' }
+                ],
+                benefits: [
+                    'Reduce carbon footprint by up to 40%',
+                    'Save money on energy bills',
+                    'Contribute to global climate goals',
+                    'Share achievements with community'
+                ],
+                pricing: 'Starting at $9.99/month'
+            },
+            'renewable-energy': {
+                title: 'Renewable Energy',
+                subtitle: 'Switch to Clean, Sustainable Power',
+                description: 'Transition to renewable energy sources with our comprehensive solar calculator and provider matching service.',
+                image: 'images/Renewable Energy.jpg',
+                features: [
+                    { icon: 'fa-solar-panel', title: 'Solar Calculator', desc: 'Calculate potential savings and ROI for solar panel installation.' },
+                    { icon: 'fa-search', title: 'Provider Matching', desc: 'Find the best renewable energy providers in your area.' },
+                    { icon: 'fa-tools', title: 'Installation Support', desc: 'Get connected with certified installers and receive guidance.' },
+                    { icon: 'fa-chart-bar', title: 'Energy Analytics', desc: 'Monitor your renewable energy production and consumption.' }
+                ],
+                benefits: [
+                    'Reduce energy costs by up to 70%',
+                    'Increase property value',
+                    'Energy independence',
+                    'Government incentives and rebates'
+                ],
+                pricing: 'Free consultation + Custom pricing'
+            },
+            'waste-reduction': {
+                title: 'Waste Reduction',
+                subtitle: 'Minimize Waste, Maximize Impact',
+                description: 'Learn effective waste reduction strategies with our comprehensive guides and local recycling resources.',
+                image: 'images/Waste Management.jpg',
+                features: [
+                    { icon: 'fa-map-marker-alt', title: 'Recycling Locator', desc: 'Find nearby recycling centers and drop-off locations.' },
+                    { icon: 'fa-leaf', title: 'Composting Guide', desc: 'Step-by-step instructions for home composting.' },
+                    { icon: 'fa-shopping-bag', title: 'Zero-Waste Tips', desc: 'Practical tips for reducing household waste.' },
+                    { icon: 'fa-recycle', title: 'Material Guide', desc: 'Learn what can and cannot be recycled.' }
+                ],
+                benefits: [
+                    'Reduce landfill waste by 60%',
+                    'Lower waste management costs',
+                    'Create nutrient-rich compost',
+                    'Support circular economy'
+                ],
+                pricing: 'Free access + Premium features at $4.99/month'
+            },
+            'green-living': {
+                title: 'Green Living',
+                subtitle: 'Transform Your Home Sustainably',
+                description: 'Make your home eco-friendly with our curated product recommendations and energy efficiency tools.',
+                image: 'images/Green Building.jpg',
+                features: [
+                    { icon: 'fa-lightbulb', title: 'Product Reviews', desc: 'Verified eco-friendly product recommendations and reviews.' },
+                    { icon: 'fa-thermometer-half', title: 'Energy Audit', desc: 'Comprehensive home energy efficiency assessment.' },
+                    { icon: 'fa-home', title: 'Smart Home', desc: 'Integration with smart home devices for optimization.' },
+                    { icon: 'fa-water', title: 'Water Saving', desc: 'Tips and tools for reducing water consumption.' }
+                ],
+                benefits: [
+                    'Reduce utility bills by 30%',
+                    'Healthier indoor environment',
+                    'Modern, efficient appliances',
+                    'Improved home comfort'
+                ],
+                pricing: 'Starting at $14.99/month'
+            },
+            'water-conservation': {
+                title: 'Water Conservation',
+                subtitle: 'Smart Water Management Solutions',
+                description: 'Reduce water consumption with intelligent monitoring systems and conservation techniques.',
+                image: 'images/Water Conservation.jpg',
+                features: [
+                    { icon: 'fa-tachometer-alt', title: 'Usage Dashboard', desc: 'Real-time water consumption tracking and analytics.' },
+                    { icon: 'fa-seedling', title: 'Smart Irrigation', desc: 'Optimize garden watering based on weather and soil.' },
+                    { icon: 'fa-exclamation-triangle', title: 'Leak Detection', desc: 'Automatic alerts for unusual water usage patterns.' },
+                    { icon: 'fa-trophy', title: 'Conservation Goals', desc: 'Set targets and track your water-saving progress.' }
+                ],
+                benefits: [
+                    'Reduce water usage by 40%',
+                    'Lower water bills significantly',
+                    'Prevent costly water damage',
+                    'Healthier landscape management'
+                ],
+                pricing: 'Hardware + $12.99/month subscription'
+            },
+            'community-action': {
+                title: 'Community Action',
+                subtitle: 'Connect and Make Impact Together',
+                description: 'Join local sustainability initiatives and connect with environmentally conscious individuals.',
+                image: 'images/Community Network.jpg',
+                features: [
+                    { icon: 'fa-calendar', title: 'Event Finder', desc: 'Discover local environmental events and activities.' },
+                    { icon: 'fa-hands-helping', title: 'Volunteer Board', desc: 'Find volunteer opportunities in your community.' },
+                    { icon: 'fa-users', title: 'Social Network', desc: 'Connect with like-minded sustainability advocates.' },
+                    { icon: 'fa-project-diagram', title: 'Project Collaboration', desc: 'Start or join community sustainability projects.' }
+                ],
+                benefits: [
+                    'Amplify your environmental impact',
+                    'Build meaningful connections',
+                    'Learn from community experiences',
+                    'Create lasting local change'
+                ],
+                pricing: 'Free to join'
+            },
+            'sustainability-audits': {
+                title: 'Sustainability Audits',
+                subtitle: 'Comprehensive Environmental Assessment',
+                description: 'Get a complete analysis of your organization\'s environmental impact with actionable recommendations.',
+                image: 'images/AI-Powered-Analytics.jpg',
+                features: [
+                    { icon: 'fa-clipboard-check', title: 'Full Assessment', desc: 'Comprehensive evaluation of all business operations.' },
+                    { icon: 'fa-route', title: 'Action Plans', desc: 'Custom roadmap for sustainability improvements.' },
+                    { icon: 'fa-dollar-sign', title: 'ROI Analysis', desc: 'Financial impact assessment of recommended changes.' },
+                    { icon: 'fa-certificate', title: 'Certification Prep', desc: 'Guidance for sustainability certifications.' }
+                ],
+                benefits: [
+                    'Identify cost-saving opportunities',
+                    'Meet regulatory requirements',
+                    'Improve brand reputation',
+                    'Attract eco-conscious customers'
+                ],
+                pricing: 'Custom enterprise pricing'
+            },
+            'carbon-neutrality': {
+                title: 'Carbon Neutrality',
+                subtitle: 'Achieve Net-Zero Emissions',
+                description: 'Reach carbon neutrality through strategic emission reduction and verified offset programs.',
+                image: 'images/Carbon Offsetting.jpg',
+                features: [
+                    { icon: 'fa-chart-area', title: 'Baseline Assessment', desc: 'Measure your current carbon footprint accurately.' },
+                    { icon: 'fa-map', title: 'Reduction Roadmap', desc: 'Strategic plan for emission reduction over time.' },
+                    { icon: 'fa-tree', title: 'Offset Portfolio', desc: 'Access to verified carbon offset projects worldwide.' },
+                    { icon: 'fa-check-circle', title: 'Verification', desc: 'Third-party verification and certification.' }
+                ],
+                benefits: [
+                    'Achieve carbon neutral status',
+                    'Enhanced corporate reputation',
+                    'Meet stakeholder expectations',
+                    'Support global climate action'
+                ],
+                pricing: 'Custom enterprise pricing'
+            },
+            'esg-reporting': {
+                title: 'ESG Reporting',
+                subtitle: 'Streamlined Sustainability Reporting',
+                description: 'Automate your Environmental, Social, and Governance reporting with our comprehensive platform.',
+                image: 'images/Real-Time-Monitoring.jpg',
+                features: [
+                    { icon: 'fa-database', title: 'Data Collection', desc: 'Automated gathering of ESG metrics across operations.' },
+                    { icon: 'fa-balance-scale', title: 'Compliance Tracking', desc: 'Stay compliant with global ESG standards.' },
+                    { icon: 'fa-file-alt', title: 'Report Generation', desc: 'Generate professional reports with one click.' },
+                    { icon: 'fa-sync', title: 'Real-Time Updates', desc: 'Live dashboard with current ESG performance.' }
+                ],
+                benefits: [
+                    'Save 100+ hours annually',
+                    'Meet investor requirements',
+                    'Improve ESG scores',
+                    'Transparent stakeholder communication'
+                ],
+                pricing: 'Starting at $499/month'
+            },
+            'energy-management': {
+                title: 'Energy Management',
+                subtitle: 'Optimize Energy Usage & Costs',
+                description: 'Reduce energy consumption and costs with intelligent monitoring and automation systems.',
+                image: 'images/Energy-Consulting.jpg',
+                features: [
+                    { icon: 'fa-bolt', title: 'Smart Metering', desc: 'Real-time energy monitoring across all facilities.' },
+                    { icon: 'fa-cog', title: 'Automated Controls', desc: 'AI-driven optimization of energy systems.' },
+                    { icon: 'fa-chart-pie', title: 'Cost Analytics', desc: 'Detailed breakdown of energy expenses.' },
+                    { icon: 'fa-bell', title: 'Alerts & Insights', desc: 'Proactive notifications for optimization opportunities.' }
+                ],
+                benefits: [
+                    'Reduce energy costs by 30-50%',
+                    'Lower carbon emissions',
+                    'Extend equipment lifespan',
+                    'Improved operational efficiency'
+                ],
+                pricing: 'Custom pricing based on facilities'
+            },
+            'supply-chain': {
+                title: 'Sustainable Supply Chain',
+                subtitle: 'Build Transparent, Green Supply Chains',
+                description: 'Create a sustainable supply chain with vendor assessment and traceability solutions.',
+                image: 'images/Business-Integration.jpg',
+                features: [
+                    { icon: 'fa-star', title: 'Supplier Scoring', desc: 'Evaluate suppliers on sustainability criteria.' },
+                    { icon: 'fa-truck', title: 'Logistics Optimization', desc: 'Reduce emissions in transportation and delivery.' },
+                    { icon: 'fa-link', title: 'Traceability', desc: 'Track products from source to customer.' },
+                    { icon: 'fa-handshake', title: 'Collaboration Tools', desc: 'Work with suppliers to improve practices.' }
+                ],
+                benefits: [
+                    'Reduce supply chain emissions',
+                    'Mitigate sustainability risks',
+                    'Improve brand transparency',
+                    'Meet regulatory requirements'
+                ],
+                pricing: 'Custom enterprise pricing'
+            },
+            'employee-training': {
+                title: 'Employee Training',
+                subtitle: 'Educate & Engage Your Workforce',
+                description: 'Comprehensive sustainability training programs to engage and educate your employees.',
+                image: 'images/Training-Programs.jpg',
+                features: [
+                    { icon: 'fa-graduation-cap', title: 'Online Courses', desc: 'Self-paced learning modules on sustainability topics.' },
+                    { icon: 'fa-certificate', title: 'Certifications', desc: 'Industry-recognized sustainability certifications.' },
+                    { icon: 'fa-chalkboard-teacher', title: 'Workshops', desc: 'Custom in-person and virtual training sessions.' },
+                    { icon: 'fa-chart-line', title: 'Progress Tracking', desc: 'Monitor employee engagement and completion rates.' }
+                ],
+                benefits: [
+                    'Create sustainability culture',
+                    'Improve employee engagement',
+                    'Boost innovation',
+                    'Attract top talent'
+                ],
+                pricing: 'Starting at $299/month'
+            }
+        };
+
+        // Get solution from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const solutionKey = urlParams.get('solution');
+        const solution = solutionData[solutionKey];
+
+        if (solution) {
+            // Update hero section
+            document.getElementById('hero-title').innerHTML = `${solution.title} <span class="text-gold">Solution</span>`;
+            document.getElementById('hero-description').textContent = solution.subtitle;
+
+            // Build content using Tailwind CSS
+            const contentHTML = `
+                <!-- Overview Section -->
+                <div class="grid lg:grid-cols-2 gap-12 items-center mb-24">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-olive">${solution.subtitle}</h2>
+                        <p class="text-lg mb-8 opacity-80">${solution.description}</p>
+                        <div class="space-y-4 mb-8">
+                            ${solution.benefits.map(benefit => `
+                                <div class="flex items-center">
+                                    <i class="fas fa-check-circle text-gold text-2xl mr-4"></i>
+                                    <span class="text-lg">${benefit}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="login.html" class="bg-olive text-white px-7 py-2.5 rounded-lg font-semibold transition-all duration-300 border-2 border-olive hover:bg-transparent hover:text-olive hover:-translate-y-0.5 inline-block">
+                                <i class="fas fa-play-circle mr-2"></i>Get Started
+                            </a>
+                            <a href="contact.html" class="bg-gold text-white px-7 py-2.5 rounded-lg font-semibold transition-all duration-300 border-2 border-gold hover:bg-transparent hover:text-gold hover:-translate-y-0.5 inline-block">
+                                <i class="fas fa-comment-alt mr-2"></i>Contact Sales
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="${solution.image}" alt="${solution.title}" class="w-full h-[400px] object-cover rounded-2xl shadow-2xl" onerror="this.style.display='none'">
+                    </div>
+                </div>
+
+                <!-- Features Section -->
+                <div class="mb-24">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6">Key Features</h2>
+                        <p class="text-lg opacity-80 max-w-3xl mx-auto">
+                            Everything you need to achieve your sustainability goals
+                        </p>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        ${solution.features.map(feature => `
+                            <div class="text-center">
+                                <div class="w-[60px] h-[60px] bg-olive rounded-xl flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas ${feature.icon} text-white text-3xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3">${feature.title}</h3>
+                                <p class="opacity-80">${feature.desc}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <!-- Benefits Section -->
+                <div class="mb-24 card-bg rounded-3xl p-8 md:p-16">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6">Why Choose This Solution?</h2>
+                        <p class="text-lg opacity-80">
+                            Join thousands of satisfied users making a difference
+                        </p>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="card-bg p-8 rounded-2xl text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_10px_30px_rgba(95,111,82,0.15)]">
+                            <div class="text-5xl font-black text-olive mb-4">5K+</div>
+                            <p class="text-lg font-semibold">Active Users</p>
+                        </div>
+                        <div class="card-bg p-8 rounded-2xl text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_10px_30px_rgba(95,111,82,0.15)]">
+                            <div class="text-5xl font-black text-gold mb-4">98%</div>
+                            <p class="text-lg font-semibold">Satisfaction Rate</p>
+                        </div>
+                        <div class="card-bg p-8 rounded-2xl text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_10px_30px_rgba(95,111,82,0.15)]">
+                            <div class="text-5xl font-black text-olive mb-4">24/7</div>
+                            <p class="text-lg font-semibold">Support Available</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pricing Section -->
+                <div class="text-center bg-olive text-white rounded-3xl p-8 md:p-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Get Started?</h2>
+                    <p class="text-2xl mb-8 text-gold font-bold">${solution.pricing}</p>
+                    <p class="text-lg mb-8 opacity-90">
+                        Start your sustainability journey today with our comprehensive solution
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="login.html" class="bg-white text-olive px-8 py-4 rounded-lg font-bold text-lg hover:bg-gold hover:text-white transition">
+                            <i class="fas fa-rocket mr-2"></i>Start Free Trial
+                        </a>
+                        <a href="pricing.html" class="bg-white text-olive px-8 py-4 rounded-lg font-bold text-lg hover:bg-gold hover:text-white transition">
+                            <i class="fas fa-info-circle mr-2"></i>View All Plans
+                        </a>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('solution-content').innerHTML = contentHTML;
+        } else {
+            // Show error if solution not found
+            document.getElementById('solution-content').innerHTML = `
+                <div class="text-center py-24">
+                    <i class="fas fa-exclamation-circle text-6xl text-olive mb-6"></i>
+                    <h2 class="text-3xl font-bold mb-4">Solution Not Found</h2>
+                    <p class="text-lg opacity-80 mb-8">The solution you're looking for doesn't exist.</p>
+                    <a href="solutions.html" class="bg-olive text-white px-7 py-2.5 rounded-lg font-semibold transition-all duration-300 border-2 border-olive hover:bg-transparent hover:text-olive hover:-translate-y-0.5 inline-block">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to Solutions
+                    </a>
+                </div>
+            `;
+        }
+
+        // Theme and Navigation Code
+        const htmlElement = document.documentElement;
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        const currentDir = localStorage.getItem('direction') || 'ltr';
+        
+        htmlElement.setAttribute('data-theme', currentTheme);
+        htmlElement.setAttribute('dir', currentDir);
+        
+        // Desktop Theme Toggle
+        const desktopThemeBtn = document.getElementById('desktop-theme-toggle-btn');
+        const desktopThemeIcon = document.getElementById('desktop-theme-icon');
+        
+        if (currentTheme === 'dark' && desktopThemeIcon) {
+            desktopThemeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+        
+        if (desktopThemeBtn) {
+            desktopThemeBtn.addEventListener('click', function() {
+                const theme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                htmlElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                
+                if (theme === 'dark') {
+                    desktopThemeIcon.classList.replace('fa-moon', 'fa-sun');
+                } else {
+                    desktopThemeIcon.classList.replace('fa-sun', 'fa-moon');
+                }
+                
+                const mobileIcon = document.getElementById('mobile-theme-icon');
+                if (mobileIcon) {
+                    if (theme === 'dark') {
+                        mobileIcon.classList.replace('fa-moon', 'fa-sun');
+                        document.querySelector('.theme-switch-dot').style.transform = 'translateX(24px)';
+                        document.querySelector('.theme-switch-dot').parentElement.style.backgroundColor = '#C9A227';
+                    } else {
+                        mobileIcon.classList.replace('fa-sun', 'fa-moon');
+                        document.querySelector('.theme-switch-dot').style.transform = 'translateX(0)';
+                        document.querySelector('.theme-switch-dot').parentElement.style.backgroundColor = '#6b7280';
+                    }
+                }
+            });
+        }
+        
+        // Desktop RTL Toggle
+        const desktopRtlBtn = document.getElementById('desktop-rtl-toggle-btn');
+        
+        if (desktopRtlBtn) {
+            desktopRtlBtn.addEventListener('click', function() {
+                const direction = htmlElement.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl';
+                htmlElement.setAttribute('dir', direction);
+                localStorage.setItem('direction', direction);
+                
+                const rtlDot = document.querySelector('.rtl-switch-dot');
+                if (rtlDot) {
+                    const bg = rtlDot.parentElement;
+                    if (direction === 'rtl') {
+                        rtlDot.style.transform = 'translateX(24px)';
+                        bg.style.backgroundColor = '#C9A227';
+                    } else {
+                        rtlDot.style.transform = 'translateX(0)';
+                        bg.style.backgroundColor = '#6b7280';
+                    }
+                }
+            });
+        }
+        
+        // Mobile Theme Toggle
+        const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+        const mobileThemeIcon = document.getElementById('mobile-theme-icon');
+        
+        if (currentTheme === 'dark' && mobileThemeIcon) {
+            mobileThemeIcon.classList.replace('fa-moon', 'fa-sun');
+            document.querySelector('.theme-switch-dot').style.transform = 'translateX(24px)';
+            document.querySelector('.theme-switch-dot').parentElement.style.backgroundColor = '#C9A227';
+        }
+        
+        if (mobileThemeToggle) {
+            mobileThemeToggle.addEventListener('click', function() {
+                const theme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                htmlElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                
+                const dot = document.querySelector('.theme-switch-dot');
+                const bg = dot.parentElement;
+                
+                if (theme === 'dark') {
+                    mobileThemeIcon.classList.replace('fa-moon', 'fa-sun');
+                    dot.style.transform = 'translateX(24px)';
+                    bg.style.backgroundColor = '#C9A227';
+                } else {
+                    mobileThemeIcon.classList.replace('fa-sun', 'fa-moon');
+                    dot.style.transform = 'translateX(0)';
+                    bg.style.backgroundColor = '#6b7280';
+                }
+                
+                if (desktopThemeIcon) {
+                    if (theme === 'dark') {
+                        desktopThemeIcon.classList.replace('fa-moon', 'fa-sun');
+                    } else {
+                        desktopThemeIcon.classList.replace('fa-sun', 'fa-moon');
+                    }
+                }
+            });
+        }
+        
+        // Mobile RTL Toggle
+        const mobileRtlToggle = document.getElementById('mobile-rtl-toggle');
+        
+        if (currentDir === 'rtl') {
+            const rtlDot = document.querySelector('.rtl-switch-dot');
+            if (rtlDot) {
+                rtlDot.style.transform = 'translateX(24px)';
+                rtlDot.parentElement.style.backgroundColor = '#C9A227';
+            }
+        }
+        
+        if (mobileRtlToggle) {
+            mobileRtlToggle.addEventListener('click', function() {
+                const direction = htmlElement.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl';
+                htmlElement.setAttribute('dir', direction);
+                localStorage.setItem('direction', direction);
+                
+                const dot = document.querySelector('.rtl-switch-dot');
+                const bg = dot.parentElement;
+                
+                if (direction === 'rtl') {
+                    dot.style.transform = 'translateX(24px)';
+                    bg.style.backgroundColor = '#C9A227';
+                } else {
+                    dot.style.transform = 'translateX(0)';
+                    bg.style.backgroundColor = '#6b7280';
+                }
+            });
+        }
+        
+        // Desktop Dropdown Toggle
+        function toggleDesktopDropdown(id) {
+            const dropdown = document.getElementById(id);
+            const allDropdowns = document.querySelectorAll('.dropdown');
+            
+            allDropdowns.forEach(dd => {
+                if (dd.id !== id) {
+                    dd.classList.remove('active');
+                }
+            });
+            
+            dropdown.classList.toggle('active');
+        }
+        
+        document.addEventListener('click', function(event) {
+            const dropdowns = document.querySelectorAll('.dropdown');
+            dropdowns.forEach(dropdown => {
+                if (!dropdown.contains(event.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+        });
+        
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+        }
+        if (closeMobileMenu && mobileMenu) {
+            closeMobileMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        }
+        
+        const mobileLinks = document.querySelectorAll('#mobile-menu a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+        
+        // Mobile Dropdown Toggle
+        function toggleMobileDropdown(id) {
+            const dropdown = document.getElementById(id);
+            dropdown.classList.toggle('active');
+        }
+        
+        // Scroll to Top
+        const scrollTopBtn = document.getElementById('scroll-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.remove('hidden');
+            } else {
+                scrollTopBtn.classList.add('hidden');
+            }
+        });
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1280) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

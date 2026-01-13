@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact GrowwGreen - Get in touch with our sustainability experts">
+    <meta name="keywords" content="contact, support, sustainability, help">
+    <meta name="author" content="GrowwGreen">
+    <title>Contact Us - GrowwGreen</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/growwpark_logo.ico">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        :root {
+            --olive-green: #5F6F52;
+            --gold-accent: #C9A227;
+            --background: #FAF9F6;
+            --text: #2E2E2E;
+            --cards: #EAE7DC;
+            --navbar-bg: #5F6F52;
+        }
+        
+        [data-theme="dark"] {
+            --background: #1a1a1a;
+            --text: #FAF9F6;
+            --cards: #2a2a2a;
+            --navbar-bg: #3d4a36;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+        }
+        
+        html { scroll-behavior: smooth; }
+        
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--background); }
+        ::-webkit-scrollbar-thumb { background: var(--olive-green); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gold-accent); }
+        
+        .bg-olive { background-color: var(--olive-green) !important; }
+        .bg-gold { background-color: var(--gold-accent) !important; }
+        .text-olive { color: var(--olive-green) !important; }
+        .text-gold { color: var(--gold-accent) !important; }
+        .card-bg { background-color: var(--cards); }
+        
+        /* Navbar Styles */
+        .navbar-container {
+            background-color: var(--navbar-bg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Dropdown Menu Styles */
+        .nav-link {
+            color: white;
+            padding: 8px 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 500;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        
+        .nav-link:hover {
+            color: var(--gold-accent);
+        }
+        
+        .nav-link.active {
+            color: var(--gold-accent);
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--navbar-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dropdown:hover .dropdown-menu,
+        .dropdown.active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-item:hover {
+            background-color: rgba(201, 162, 39, 0.1);
+            color: var(--gold-accent);
+            padding-left: 28px;
+        }
+        
+        .dropdown-arrow {
+            font-size: 0.7rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .dropdown:hover .dropdown-arrow,
+        .dropdown.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up { animation: fadeInUp 0.6s ease-out; }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active { transform: translateX(0); }
+        
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding-left: 20px;
+        }
+        
+        .mobile-dropdown-content.active {
+            max-height: 500px;
+        }
+        
+        [dir="rtl"] .mobile-menu { 
+            transform: translateX(100%); 
+            left: auto;
+            right: 0;
+        }
+        [dir="rtl"] .mobile-menu.active { transform: translateX(0); }
+        
+        /* Contact Card Animation */
+        .contact-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--olive-green), var(--gold-accent));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .contact-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        /* Contact Icon */
+        .contact-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--olive-green), var(--gold-accent));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.75rem;
+            margin: 0 auto 20px;
+            transition: all 0.4s ease;
+        }
+        
+        .contact-card:hover .contact-icon {
+            transform: rotateY(360deg);
+        }
+        
+        /* Info Banner */
+        .info-banner {
+            background: linear-gradient(135deg, var(--olive-green), var(--gold-accent)) !important;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .info-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* COLORFUL ANIMATED ARROW FOR SUBMIT BUTTON */
+        @keyframes arrowFly {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(8px); }
+        }
+        
+        @keyframes colorChange {
+            0% { color: #fff; text-shadow: 0 0 10px #C9A227; }
+            25% { color: #FFD700; text-shadow: 0 0 15px #FFD700; }
+            50% { color: #FFA500; text-shadow: 0 0 20px #FFA500; }
+            75% { color: #FFD700; text-shadow: 0 0 15px #FFD700; }
+            100% { color: #fff; text-shadow: 0 0 10px #C9A227; }
+        }
+        
+        .submit-arrow {
+            display: inline-block;
+            animation: arrowFly 1.5s ease-in-out infinite, colorChange 2s ease-in-out infinite;
+            font-size: 1.1rem;
+            margin-left: 8px;
+        }
+        
+        .submit-btn:hover .submit-arrow {
+            animation: arrowFly 0.5s ease-in-out infinite, colorChange 1s ease-in-out infinite;
+        }
+        
+        /* MAP CONTAINER */
+        .map-wrapper {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+        
+        .map-container {
+            width: 100%;
+            height: 450px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(95, 111, 82, 0.3);
+            border: 2px solid var(--gold-accent);
+            position: relative;
+            background-color: var(--cards);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+            border-radius: 18px;
+        }
+        
+        .map-label {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        
+        .map-label h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--olive-green);
+            margin-bottom: 8px;
+        }
+        
+        .map-label p {
+            color: var(--text);
+            opacity: 0.7;
+        }
+        
+        /* Scroll to Top Button - SIMPLE OLIVE GREEN */
+        .scroll-top-btn {
+            background-color: var(--olive-green) !important;
+            transition: all 0.3s ease;
+        }
+
+        .scroll-top-btn:hover {
+            background-color: var(--gold-accent) !important;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(95, 111, 82, 0.4);
+        }
+
+        .scroll-top-btn i {
+            color: white;
+            font-size: 1.25rem;
+        }
+        
+        /* RESPONSIVE DESIGN - PERFECT ALIGNMENT */
+        @media (max-width: 1279px) {
+            .desktop-nav {
+                display: none !important;
+            }
+            .mobile-menu-button {
+                display: flex !important;
+            }
+            .navbar-right-desktop {
+                display: none !important;
+            }
+        }
+        
+        @media (min-width: 1280px) {
+            .desktop-nav {
+                display: flex !important;
+            }
+            .mobile-menu-button {
+                display: none !important;
+            }
+            .navbar-right-desktop {
+                display: flex !important;
+            }
+        }
+        
+        /* Tablet Responsive (768px - 1024px) */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .contact-card {
+                text-align: center;
+            }
+            
+            .contact-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+                margin: 0 auto 16px;
+            }
+            
+            .info-banner {
+                text-align: center;
+            }
+            
+            .map-container {
+                height: 380px;
+            }
+        }
+        
+        /* Mobile Responsive (max 767px) */
+        @media (max-width: 767px) {
+            .contact-card {
+                text-align: center;
+                padding: 24px 20px !important;
+            }
+            
+            .contact-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+                margin: 0 auto 16px;
+            }
+            
+            .info-banner {
+                text-align: center;
+            }
+            
+            .info-banner h3 {
+                font-size: 1.75rem !important;
+                margin-bottom: 28px !important;
+            }
+            
+            .info-banner .grid {
+                gap: 20px !important;
+            }
+            
+            .info-banner .text-5xl {
+                font-size: 2.5rem !important;
+            }
+            
+            .map-container {
+                height: 320px;
+                border-radius: 16px;
+                border: 2px solid var(--gold-accent);
+            }
+            
+            .map-label h3 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Small Mobile (max 480px) */
+        @media (max-width: 480px) {
+            .info-banner .text-5xl {
+                font-size: 2rem !important;
+            }
+            
+            .info-banner h3 {
+                font-size: 1.5rem !important;
+            }
+            
+            .map-container {
+                height: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar-container py-4 fixed top-0 w-full z-[1000]">
+        <div class="container mx-auto px-4 lg:px-6">
+            <div class="flex items-center justify-between">
+                
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-3 no-underline transition-transform duration-300 hover:scale-105">
+                    <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center font-extrabold text-xl text-white shrink-0">
+                        GG
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-white leading-tight">GrowwGreen</div>
+                        <span class="text-xs text-white/80 block -mt-0.5">Sustainable Living</span>
+                    </div>
+                </a>
+                
+                <!-- Desktop Menu (Shows at 1280px+) -->
+                <div class="desktop-nav items-center space-x-2" style="display: none;">
+                    
+                    <!-- Home Dropdown -->
+                    <div class="dropdown" id="home-dropdown">
+                        <div class="nav-link" onclick="toggleDesktopDropdown('home-dropdown')">
+                            Home <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </div>
+                        <div class="dropdown-menu">
+                            <a href="index.html" class="dropdown-item">
+                                <i class="fas fa-home mr-2"></i> Home 1
+                            </a>
+                            <a href="homepage2.html" class="dropdown-item">
+                                <i class="fas fa-leaf mr-2"></i> Home 2
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="solutions.html" class="nav-link">Solutions</a>
+                    <a href="pricing.html" class="nav-link">Pricing</a>
+                    <a href="blog.html" class="nav-link">Blog</a>
+                    <a href="faq.html" class="nav-link">FAQ</a>
+                    <a href="contact.html" class="nav-link active">Contact</a>
+                    
+                    <!-- Dashboard Dropdown -->
+                    <div class="dropdown" id="dashboard-dropdown">
+                        <div class="nav-link" onclick="toggleDesktopDropdown('dashboard-dropdown')">
+                            Dashboard <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </div>
+                        <div class="dropdown-menu">
+                            <a href="user-dashboard.html" class="dropdown-item">
+                                <i class="fas fa-user mr-2"></i> User Dashboard
+                            </a>
+                            <a href="admin-dashboard.html" class="dropdown-item">
+                                <i class="fas fa-user-shield mr-2"></i> Admin Dashboard
+                            </a>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <!-- Right Side Buttons (Desktop 1280px+) -->
+                <div class="navbar-right-desktop flex items-center gap-3" style="display: none;">
+                    <button class="w-10 h-10 bg-white/15 rounded-lg flex items-center justify-center text-white transition-all duration-300 hover:bg-gold shrink-0 border-0 cursor-pointer" id="desktop-theme-toggle-btn" title="Toggle Dark/Light Mode">
+                        <i class="fas fa-moon" id="desktop-theme-icon"></i>
+                    </button>
+                    <button class="w-10 h-10 bg-white/15 rounded-lg flex items-center justify-center text-white transition-all duration-300 hover:bg-gold shrink-0 border-0 cursor-pointer" id="desktop-rtl-toggle-btn" title="Toggle RTL">
+                        <i class="fas fa-language"></i>
+                    </button>
+                    <a href="login.html" class="w-10 h-10 bg-white/15 rounded-lg flex items-center justify-center text-white transition-all duration-300 hover:bg-gold shrink-0" title="Login">
+                        <i class="fas fa-user"></i>
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="hidden text-white text-2xl cursor-pointer p-2 bg-white/15 rounded-lg w-10 h-10 items-center justify-center mobile-menu-button">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed top-0 left-0 w-full h-full bg-[#2c2c2c] z-[9999] overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center font-extrabold text-xl text-white">GG</div>
+                    <div>
+                        <span class="text-2xl font-bold text-white block leading-tight">GrowwGreen</span>
+                        <span class="text-xs text-white/80 block -mt-0.5">Sustainable Living</span>
+                    </div>
+                </a>
+                <div class="flex items-center gap-3">
+                    <a href="login.html" class="w-10 h-10 bg-gold rounded-full flex items-center justify-center text-white hover:bg-white hover:text-gold transition">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <button id="close-mobile-menu" class="text-white text-3xl bg-transparent border-0 cursor-pointer">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="space-y-2">
+                <!-- Home Dropdown Mobile -->
+                <div>
+                    <button class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline cursor-pointer border-0 bg-transparent" onclick="toggleMobileDropdown('home-mobile')">
+                        <span><i class="fas fa-home mr-2"></i> Home</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </button>
+                    <div id="home-mobile" class="mobile-dropdown-content">
+                        <a href="index.html" class="block text-[#ccc] py-2.5 transition-all duration-300 hover:text-gold hover:pl-2.5">Home 1</a>
+                        <a href="homepage2.html" class="block text-[#ccc] py-2.5 transition-all duration-300 hover:text-gold hover:pl-2.5">Home 2</a>
+                    </div>
+                </div>
+                
+                <a href="about.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                    <span><i class="fas fa-info-circle mr-2"></i> About</span>
+                </a>
+                <a href="solutions.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                    <span><i class="fas fa-lightbulb mr-2"></i> Solutions</span>
+                </a>
+                <a href="pricing.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                    <span><i class="fas fa-tags mr-2"></i> Pricing</span>
+                </a>
+                <a href="blog.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                    <span><i class="fas fa-blog mr-2"></i> Blog</span>
+                </a>
+                <a href="faq.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                    <span><i class="fas fa-question-circle mr-2"></i> FAQ</span>
+                </a>
+                <a href="contact.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                    <span><i class="fas fa-envelope mr-2"></i> Contact</span>
+                </a>
+                
+                <!-- Dashboard Dropdown Mobile -->
+                <div>
+                    <button class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline cursor-pointer border-0 bg-transparent" onclick="toggleMobileDropdown('dashboard-mobile')">
+                        <span><i class="fas fa-tachometer-alt mr-2"></i> Dashboard</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </button>
+                    <div id="dashboard-mobile" class="mobile-dropdown-content">
+                        <a href="user-dashboard.html" class="block text-[#ccc] py-2.5 transition-all duration-300 hover:text-gold hover:pl-2.5">User Dashboard</a>
+                        <a href="admin-dashboard.html" class="block text-[#ccc] py-2.5 transition-all duration-300 hover:text-gold hover:pl-2.5">Admin Dashboard</a>
+                    </div>
+                </div>
+                
+                <!-- SETTINGS SECTION -->
+                <div class="pt-6 mt-6 border-t border-gray-700">
+                    <p class="text-white text-sm font-semibold mb-4 opacity-75">SETTINGS</p>
+                    
+                    <!-- Theme Toggle -->
+                    <div class="bg-white/10 rounded-lg p-3 flex items-center justify-between cursor-pointer transition-all duration-300 hover:bg-[#C9A227]/20 mb-3" id="mobile-theme-toggle">
+                        <div class="flex items-center">
+                            <i class="fas fa-moon text-white text-lg mr-3" id="mobile-theme-icon"></i>
+                            <span class="text-white font-medium">Dark Mode</span>
+                        </div>
+                        <div class="w-12 h-6 bg-gray-600 rounded-full relative">
+                            <div class="theme-switch-dot w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-all"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- RTL Toggle -->
+                    <div class="bg-white/10 rounded-lg p-3 flex items-center justify-between cursor-pointer transition-all duration-300 hover:bg-[#C9A227]/20 mb-3" id="mobile-rtl-toggle">
+                        <div class="flex items-center">
+                            <i class="fas fa-language text-white text-lg mr-3"></i>
+                            <span class="text-white font-medium">RTL Mode</span>
+                        </div>
+                        <div class="w-12 h-6 bg-gray-600 rounded-full relative">
+                            <div class="rtl-switch-dot w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-all"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <section class="min-h-[50vh] mt-20 flex items-center justify-center relative overflow-hidden">
+        <div class="container mx-auto px-4 lg:px-6 text-center relative z-10">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 fade-in-up text-olive">
+                Get In Touch With Us
+            </h1>
+            <p class="text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto opacity-80">
+                Have questions? We're here to help you on your sustainability journey
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact Cards Section -->
+    <section class="py-16 md:py-20">
+        <div class="container mx-auto px-4 lg:px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+                
+                <!-- Email Card -->
+                <div class="contact-card card-bg rounded-3xl p-8 transition-all duration-400 cursor-pointer relative hover:-translate-y-2 hover:shadow-2xl">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 text-center">Email Us</h3>
+                    <p class="text-sm opacity-70 mb-4 text-center">Send us an email anytime</p>
+                    <a href="mailto:support@growwgreen.com" class="text-gold font-semibold hover:underline text-base block text-center">
+                        support@growwgreen.com
+                    </a>
+                </div>
+                
+                <!-- Phone Card -->
+                <div class="contact-card card-bg rounded-3xl p-8 transition-all duration-400 cursor-pointer relative hover:-translate-y-2 hover:shadow-2xl">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 text-center">Call Us</h3>
+                    <p class="text-sm opacity-70 mb-4 text-center">Mon-Fri: 9AM - 6PM IST</p>
+                    <a href="tel:+911234567890" class="text-gold font-semibold hover:underline text-base block text-center">
+                        +91 123 456 7890
+                    </a>
+                </div>
+                
+                <!-- Location Card -->
+                <div class="contact-card card-bg rounded-3xl p-8 transition-all duration-400 cursor-pointer relative hover:-translate-y-2 hover:shadow-2xl">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 text-center">Visit Us</h3>
+                    <p class="text-sm opacity-70 mb-4 text-center">Come say hello</p>
+                    <p class="text-sm font-semibold leading-relaxed text-center">
+                        Hosur, Tamil Nadu<br>India - 635109
+                    </p>
+                </div>
+                
+                <!-- Live Chat Card -->
+                <div class="contact-card card-bg rounded-3xl p-8 transition-all duration-400 cursor-pointer relative hover:-translate-y-2 hover:shadow-2xl">
+                    <div class="contact-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 text-center">Live Chat</h3>
+                    <p class="text-sm opacity-70 mb-4 text-center">Chat with our team</p>
+                    <button onclick="openLiveChat()" class="text-gold font-semibold hover:underline text-base bg-transparent border-0 cursor-pointer block mx-auto">
+                        Start Chat →
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form & Info Section -->
+    <section class="pb-20 md:pb-24">
+        <div class="container mx-auto px-4 lg:px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-start">
+                
+                <!-- Contact Form -->
+                <div class="card-bg rounded-3xl p-8 md:p-10 shadow-xl">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-3">Send Us a Message</h2>
+                    <p class="opacity-70 mb-8 text-base md:text-lg">Fill out the form below and we'll get back to you within 24 hours</p>
+                    
+                    <form id="contact-form" onsubmit="handleSubmit(event)" class="space-y-6">
+                        <div>
+                            <label class="block mb-2 font-semibold text-base">Your Name *</label>
+                            <input type="text" class="w-full px-5 py-4 border-2 border-transparent rounded-xl card-bg text-base transition-all duration-300 focus:outline-none focus:border-gold focus:shadow-lg focus:ring-4 focus:ring-gold/10" placeholder="John Doe" required style="color: var(--text); background-color: var(--cards);">
+                        </div>
+                        
+                        <div>
+                            <label class="block mb-2 font-semibold text-base">Email Address *</label>
+                            <input type="email" class="w-full px-5 py-4 border-2 border-transparent rounded-xl card-bg text-base transition-all duration-300 focus:outline-none focus:border-gold focus:shadow-lg focus:ring-4 focus:ring-gold/10" placeholder="john@example.com" required style="color: var(--text); background-color: var(--cards);">
+                        </div>
+                        
+                        <div>
+                            <label class="block mb-2 font-semibold text-base">Phone Number</label>
+                            <input type="tel" class="w-full px-5 py-4 border-2 border-transparent rounded-xl card-bg text-base transition-all duration-300 focus:outline-none focus:border-gold focus:shadow-lg focus:ring-4 focus:ring-gold/10" placeholder="+91 12345 67890" style="color: var(--text); background-color: var(--cards);">
+                        </div>
+                        
+                        <div>
+                            <label class="block mb-2 font-semibold text-base">Subject *</label>
+                            <select class="w-full px-5 py-4 border-2 border-transparent rounded-xl card-bg text-base transition-all duration-300 focus:outline-none focus:border-gold focus:shadow-lg focus:ring-4 focus:ring-gold/10" required style="color: var(--text); background-color: var(--cards);">
+                                <option value="">Choose a subject</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="support">Technical Support</option>
+                                <option value="partnership">Partnership Opportunity</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block mb-2 font-semibold text-base">Message *</label>
+                            <textarea class="w-full px-5 py-4 border-2 border-transparent rounded-xl card-bg text-base transition-all duration-300 focus:outline-none focus:border-gold focus:shadow-lg focus:ring-4 focus:ring-gold/10 resize-y min-h-[150px]" placeholder="Tell us how we can help you..." required style="color: var(--text); background-color: var(--cards);"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn w-full bg-olive text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 border-2 border-olive hover:bg-transparent hover:text-olive hover:-translate-y-1 cursor-pointer shadow-lg hover:shadow-xl">
+                            Send Message<span class="submit-arrow">✈️</span>
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Info Banner & Map -->
+                <div class="space-y-8">
+                    
+                    <!-- Info Banner - GOLDEN GRADIENT -->
+                    <div class="info-banner rounded-3xl p-10 md:p-12 text-white relative overflow-hidden shadow-2xl">
+                        <h3 class="text-3xl md:text-4xl font-bold mb-8 relative z-10">Why Contact Us?</h3>
+                        <div class="grid grid-cols-2 gap-6 mb-8 relative z-10">
+                            <div class="text-center">
+                                <span class="text-5xl font-extrabold block mb-2">24/7</span>
+                                <p class="text-sm opacity-90">Support Available</p>
+                            </div>
+                            <div class="text-center">
+                                <span class="text-5xl font-extrabold block mb-2">&lt;1hr</span>
+                                <p class="text-sm opacity-90">Response Time</p>
+                            </div>
+                            <div class="text-center">
+                                <span class="text-5xl font-extrabold block mb-2">50K+</span>
+                                <p class="text-sm opacity-90">Happy Clients</p>
+                            </div>
+                            <div class="text-center">
+                                <span class="text-5xl font-extrabold block mb-2">98%</span>
+                                <p class="text-sm opacity-90">Satisfaction Rate</p>
+                            </div>
+                        </div>
+                        <p class="opacity-90 text-base leading-relaxed relative z-10">
+                            Our dedicated team of sustainability experts is ready to assist you with any questions or concerns. We're committed to helping you achieve your environmental goals.
+                        </p>
+                    </div>
+                    
+                    <!-- Map Section -->
+                    <div class="map-wrapper">
+                        <div class="map-label">
+                            <h3>📍 Find Us Here</h3>
+                            <p>Visit our office in Hosur, Tamil Nadu</p>
+                        </div>
+                        <div class="map-container">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62693.53499055765!2d77.76688687431641!3d12.735632399999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae710bd1e16c27%3A0xc9eb2d81613b614e!2sHosur%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1704459600000!5m2!1sen!2sin"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                title="GrowwGreen Location - Hosur, Tamil Nadu">
+                            </iframe>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Media -->
+                    <div class="card-bg rounded-3xl p-8 md:p-10 text-center shadow-xl">
+                        <h3 class="text-2xl md:text-3xl font-bold mb-4">Follow Us</h3>
+                        <p class="opacity-70 mb-8 text-base">Stay connected on social media</p>
+                        <div class="flex justify-center gap-4 flex-wrap">
+                            <a href="#" class="w-14 h-14 rounded-full flex items-center justify-center text-white text-2xl transition-all duration-300 hover:-translate-y-2 hover:scale-110 shadow-xl" style="background-color: #1877F2;">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="w-14 h-14 rounded-full flex items-center justify-center text-white text-2xl transition-all duration-300 hover:-translate-y-2 hover:scale-110 shadow-xl" style="background-color: #1DA1F2;">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="w-14 h-14 rounded-full flex items-center justify-center text-white text-2xl transition-all duration-300 hover:-translate-y-2 hover:scale-110 shadow-xl" style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="w-14 h-14 rounded-full flex items-center justify-center text-white text-2xl transition-all duration-300 hover:-translate-y-2 hover:scale-110 shadow-xl" style="background-color: #0A66C2;">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-olive text-white py-16 md:py-20">
+        <div class="container mx-auto px-4 lg:px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 mb-12">
+                <div>
+                    <a href="index.html" class="flex items-center gap-3 mb-6 no-underline">
+                        <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center font-extrabold text-xl text-white shrink-0">
+                            GG
+                        </div>
+                        <div>
+                            <span class="text-2xl font-bold text-white block leading-tight">GrowwGreen</span>
+                            <span class="text-xs text-white/80 block -mt-0.5">Sustainable Living</span>
+                        </div>
+                    </a>
+                    <p class="opacity-90 mb-6 text-base leading-relaxed">
+                        Building a sustainable future, one action at a time. Join us in creating lasting environmental change.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-11 h-11 bg-white text-olive rounded-full flex items-center justify-center hover:bg-gold hover:text-white transition-all duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-11 h-11 bg-white text-olive rounded-full flex items-center justify-center hover:bg-gold hover:text-white transition-all duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-11 h-11 bg-white text-olive rounded-full flex items-center justify-center hover:bg-gold hover:text-white transition-all duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-11 h-11 bg-white text-olive rounded-full flex items-center justify-center hover:bg-gold hover:text-white transition-all duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Quick Links</h3>
+                    <ul class="space-y-3 text-base list-none">
+                        <li><a href="index.html" class="opacity-90 hover:text-gold transition-colors duration-300 no-underline">Home</a></li>
+                        <li><a href="about.html" class="opacity-90 hover:text-gold transition-colors duration-300 no-underline">About Us</a></li>
+                        <li><a href="solutions.html" class="opacity-90 hover:text-gold transition-colors duration-300 no-underline">Solutions</a></li>
+                        <li><a href="pricing.html" class="opacity-90 hover:text-gold transition-colors duration-300 no-underline">Pricing</a></li>
+                        <li><a href="faq.html" class="opacity-90 hover:text-gold transition-colors duration-300 no-underline">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Resources</h3>
+                    <ul class="space-y-3 text-base list-none">
+                        <li><a href="blog.html" class="opacity-90 hover:text-gold transition-colors duration-300 no-underline">Blog</a></li>
+                        <li><a href="user-dashboard.html" class="opacity-90 hover:text-gold transition-colors duration-300 no-underline">Dashboard</a></li>
+                        <li><a href="#" class="opacity-90 hover:text-gold transition-colors duration-300 no-underline">Case Studies</a></li>
+                        <li><a href="#" class="opacity-90 hover:text-gold transition-colors duration-300 no-underline">Downloads</a></li>
+                        <li><a href="contact.html" class="opacity-90 hover:text-gold transition-colors duration-300 no-underline">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Newsletter</h3>
+                    <p class="opacity-90 mb-5 text-base">Subscribe for sustainability tips and updates.</p>
+                    <form class="space-y-3">
+                        <input type="email" placeholder="Your email" class="w-full px-4 py-3.5 rounded-lg text-gray-800 text-base focus:outline-none focus:ring-2 focus:ring-gold" required>
+                        <button type="submit" class="w-full bg-gold text-white px-4 py-3.5 rounded-lg font-semibold hover:bg-white hover:text-olive transition-all duration-300 text-base shadow-lg hover:shadow-xl border-0 cursor-pointer">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center text-base gap-4">
+                <p class="opacity-90">&copy; 2026 GrowwGreen. All rights reserved.</p>
+                <div class="flex flex-wrap justify-center gap-6">
+                    <a href="#" class="opacity-90 hover:text-gold transition-colors duration-300 no-underline">Privacy Policy</a>
+                    <a href="#" class="opacity-90 hover:text-gold transition-colors duration-300 no-underline">Terms of Service</a>
+                    <a href="#" class="opacity-90 hover:text-gold transition-colors duration-300 no-underline">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button - SIMPLE OLIVE GREEN -->
+    <button id="scroll-top" class="scroll-top-btn fixed bottom-8 right-8 w-14 h-14 text-white rounded-full shadow-lg hidden z-[999] flex items-center justify-center border-0 cursor-pointer">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Form Submit Handler
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('Thank you for contacting us! We will get back to you within 24 hours.');
+            document.getElementById('contact-form').reset();
+        }
+        
+        // Live Chat Function
+        function openLiveChat() {
+            alert('Live chat feature coming soon! For immediate assistance, please email us at support@growwgreen.com or call +91 123 456 7890');
+        }
+        
+        // Theme and navigation scripts
+        const htmlElement = document.documentElement;
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        const currentDir = localStorage.getItem('direction') || 'ltr';
+        
+        htmlElement.setAttribute('data-theme', currentTheme);
+        htmlElement.setAttribute('dir', currentDir);
+        
+        const desktopThemeBtn = document.getElementById('desktop-theme-toggle-btn');
+        const desktopThemeIcon = document.getElementById('desktop-theme-icon');
+        
+        if (currentTheme === 'dark' && desktopThemeIcon) {
+            desktopThemeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+        
+        if (desktopThemeBtn) {
+            desktopThemeBtn.addEventListener('click', function() {
+                const theme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                htmlElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                
+                if (theme === 'dark') {
+                    desktopThemeIcon.classList.replace('fa-moon', 'fa-sun');
+                } else {
+                    desktopThemeIcon.classList.replace('fa-sun', 'fa-moon');
+                }
+                
+                const mobileIcon = document.getElementById('mobile-theme-icon');
+                if (mobileIcon) {
+                    if (theme === 'dark') {
+                        mobileIcon.classList.replace('fa-moon', 'fa-sun');
+                        document.querySelector('.theme-switch-dot').style.transform = 'translateX(24px)';
+                        document.querySelector('.theme-switch-dot').parentElement.style.backgroundColor = '#C9A227';
+                    } else {
+                        mobileIcon.classList.replace('fa-sun', 'fa-moon');
+                        document.querySelector('.theme-switch-dot').style.transform = 'translateX(0)';
+                        document.querySelector('.theme-switch-dot').parentElement.style.backgroundColor = '#6b7280';
+                    }
+                }
+            });
+        }
+        
+        const desktopRtlBtn = document.getElementById('desktop-rtl-toggle-btn');
+        
+        if (desktopRtlBtn) {
+            desktopRtlBtn.addEventListener('click', function() {
+                const direction = htmlElement.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl';
+                htmlElement.setAttribute('dir', direction);
+                localStorage.setItem('direction', direction);
+                
+                const rtlDot = document.querySelector('.rtl-switch-dot');
+                if (rtlDot) {
+                    const bg = rtlDot.parentElement;
+                    if (direction === 'rtl') {
+                        rtlDot.style.transform = 'translateX(24px)';
+                        bg.style.backgroundColor = '#C9A227';
+                    } else {
+                        rtlDot.style.transform = 'translateX(0)';
+                        bg.style.backgroundColor = '#6b7280';
+                    }
+                }
+            });
+        }
+        
+        const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+        const mobileThemeIcon = document.getElementById('mobile-theme-icon');
+        
+        if (currentTheme === 'dark' && mobileThemeIcon) {
+            mobileThemeIcon.classList.replace('fa-moon', 'fa-sun');
+            document.querySelector('.theme-switch-dot').style.transform = 'translateX(24px)';
+            document.querySelector('.theme-switch-dot').parentElement.style.backgroundColor = '#C9A227';
+        }
+        
+        if (mobileThemeToggle) {
+            mobileThemeToggle.addEventListener('click', function() {
+                const theme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                htmlElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                
+                const dot = document.querySelector('.theme-switch-dot');
+                const bg = dot.parentElement;
+                
+                if (theme === 'dark') {
+                    mobileThemeIcon.classList.replace('fa-moon', 'fa-sun');
+                    dot.style.transform = 'translateX(24px)';
+                    bg.style.backgroundColor = '#C9A227';
+                } else {
+                    mobileThemeIcon.classList.replace('fa-sun', 'fa-moon');
+                    dot.style.transform = 'translateX(0)';
+                    bg.style.backgroundColor = '#6b7280';
+                }
+                
+                if (desktopThemeIcon) {
+                    if (theme === 'dark') {
+                        desktopThemeIcon.classList.replace('fa-moon', 'fa-sun');
+                    } else {
+                        desktopThemeIcon.classList.replace('fa-sun', 'fa-moon');
+                    }
+                }
+            });
+        }
+        
+        const mobileRtlToggle = document.getElementById('mobile-rtl-toggle');
+        
+        if (currentDir === 'rtl') {
+            const rtlDot = document.querySelector('.rtl-switch-dot');
+            if (rtlDot) {
+                rtlDot.style.transform = 'translateX(24px)';
+                rtlDot.parentElement.style.backgroundColor = '#C9A227';
+            }
+        }
+        
+        if (mobileRtlToggle) {
+            mobileRtlToggle.addEventListener('click', function() {
+                const direction = htmlElement.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl';
+                htmlElement.setAttribute('dir', direction);
+                localStorage.setItem('direction', direction);
+                
+                const dot = document.querySelector('.rtl-switch-dot');
+                const bg = dot.parentElement;
+                
+                if (direction === 'rtl') {
+                    dot.style.transform = 'translateX(24px)';
+                    bg.style.backgroundColor = '#C9A227';
+                } else {
+                    dot.style.transform = 'translateX(0)';
+                    bg.style.backgroundColor = '#6b7280';
+                }
+            });
+        }
+        
+        function toggleDesktopDropdown(id) {
+            const dropdown = document.getElementById(id);
+            const allDropdowns = document.querySelectorAll('.dropdown');
+            
+            allDropdowns.forEach(dd => {
+                if (dd.id !== id) {
+                    dd.classList.remove('active');
+                }
+            });
+            
+            dropdown.classList.toggle('active');
+        }
+        
+        document.addEventListener('click', function(event) {
+            const dropdowns = document.querySelectorAll('.dropdown');
+            dropdowns.forEach(dropdown => {
+                if (!dropdown.contains(event.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+        });
+        
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+        }
+        if (closeMobileMenu && mobileMenu) {
+            closeMobileMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        }
+        
+        const mobileLinks = document.querySelectorAll('#mobile-menu a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+        
+        function toggleMobileDropdown(id) {
+            const dropdown = document.getElementById(id);
+            dropdown.classList.toggle('active');
+        }
+        
+        // Scroll to Top Button
+        const scrollTopBtn = document.getElementById('scroll-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.remove('hidden');
+            } else {
+                scrollTopBtn.classList.add('hidden');
+            }
+        });
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1280) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

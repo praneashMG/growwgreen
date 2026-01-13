@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GrowwGreen Solutions - Comprehensive Sustainability Services">
+    <meta name="keywords" content="sustainability, green living, renewable energy, environment, eco-friendly">
+    <meta name="author" content="GrowwGreen">
+    <title>Solutions - GrowwGreen</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/growwpark_logo.ico">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        :root {
+            --olive-green: #5F6F52;
+            --gold-accent: #C9A227;
+            --background: #FAF9F6;
+            --text: #2E2E2E;
+            --cards: #EAE7DC;
+            --navbar-bg: #5F6F52;
+        }
+        
+        [data-theme="dark"] {
+            --background: #1a1a1a;
+            --text: #FAF9F6;
+            --cards: #2a2a2a;
+            --navbar-bg: #3d4a36;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+        }
+        
+        html { scroll-behavior: smooth; }
+        
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--background); }
+        ::-webkit-scrollbar-thumb { background: var(--olive-green); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gold-accent); }
+        
+        .bg-olive { background-color: var(--olive-green) !important; }
+        .bg-gold { background-color: var(--gold-accent) !important; }
+        .text-olive { color: var(--olive-green) !important; }
+        .text-gold { color: var(--gold-accent) !important; }
+        .card-bg { background-color: var(--cards); }
+        
+        /* Navbar Styles */
+        .navbar-container {
+            background-color: var(--navbar-bg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Dropdown Menu Styles */
+        .nav-link {
+            color: white;
+            padding: 8px 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 500;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        
+        .nav-link:hover {
+            color: var(--gold-accent);
+        }
+        
+        .nav-link.active {
+            color: var(--gold-accent);
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--navbar-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dropdown:hover .dropdown-menu,
+        .dropdown.active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-item:hover {
+            background-color: rgba(201, 162, 39, 0.1);
+            color: var(--gold-accent);
+            padding-left: 28px;
+        }
+        
+        .dropdown-arrow {
+            font-size: 0.7rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .dropdown:hover .dropdown-arrow,
+        .dropdown.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up { animation: fadeInUp 0.6s ease-out; }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active { transform: translateX(0); }
+        
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding-left: 20px;
+        }
+        
+        .mobile-dropdown-content.active {
+            max-height: 500px;
+        }
+        
+        [dir="rtl"] .mobile-menu { 
+            transform: translateX(100%); 
+            left: auto;
+            right: 0;
+        }
+        [dir="rtl"] .mobile-menu.active { transform: translateX(0); }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--olive-green), var(--gold-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-section {
+            min-height: 60vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('images/Timeline Item 3.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding-top: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* UPDATED: Hamburger shows below 1280px (all devices except desktop) */
+        @media (max-width: 1279px) {
+            .desktop-nav {
+                display: none !important;
+            }
+            .mobile-menu-button {
+                display: flex !important;
+            }
+            .navbar-right-desktop {
+                display: none !important;
+            }
+        }
+        
+        /* Desktop 1280px and above - Only true desktop view */
+        @media (min-width: 1280px) {
+            .desktop-nav {
+                display: flex !important;
+            }
+            .mobile-menu-button {
+                display: none !important;
+            }
+            .navbar-right-desktop {
+                display: flex !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar-container py-3 fixed top-0 w-full z-[1000]">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                
+                <!-- Logo - Matching navbar and footer -->
+                <a href="index.html" class="flex items-center gap-3 no-underline transition-transform duration-300 hover:scale-105">
+                    <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center font-extrabold text-xl text-white shrink-0">
+                        GG
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-white">GrowwGreen</div>
+                        <span class="text-xs text-white/80 block -mt-1">Sustainable Living</span>
+                    </div>
+                </a>
+                
+                <!-- Desktop Menu (Shows at 1280px+) -->
+                <div class="desktop-nav items-center space-x-2" style="display: none;">
+                    
+                    <!-- Home Dropdown -->
+                    <div class="dropdown" id="home-dropdown">
+                        <div class="nav-link" onclick="toggleDesktopDropdown('home-dropdown')">
+                            Home <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </div>
+                        <div class="dropdown-menu">
+                            <a href="index.html" class="dropdown-item">
+                                <i class="fas fa-home mr-2"></i> Home 1
+                            </a>
+                            <a href="homepage2.html" class="dropdown-item">
+                                <i class="fas fa-leaf mr-2"></i> Home 2
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="solutions.html" class="nav-link active">Solutions</a>
+                    <a href="pricing.html" class="nav-link">Pricing</a>
+                    <a href="blog.html" class="nav-link">Blog</a>
+                    <a href="faq.html" class="nav-link">FAQ</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    
+                    <!-- Dashboard Dropdown -->
+                    <div class="dropdown" id="dashboard-dropdown">
+                        <div class="nav-link" onclick="toggleDesktopDropdown('dashboard-dropdown')">
+                            Dashboard <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </div>
+                        <div class="dropdown-menu">
+                            <a href="user-dashboard.html" class="dropdown-item">
+                                <i class="fas fa-user mr-2"></i> User Dashboard
+                            </a>
+                            <a href="admin-dashboard.html" class="dropdown-item">
+                                <i class="fas fa-user-shield mr-2"></i> Admin Dashboard
+                            </a>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <!-- Right Side Buttons (Desktop 1280px+) -->
+                <div class="navbar-right-desktop flex items-center gap-3" style="display: none;">
+                    <button class="w-10 h-10 bg-white/15 rounded-lg flex items-center justify-center text-white transition-all duration-300 hover:bg-gold shrink-0 border-0 cursor-pointer" id="desktop-theme-toggle-btn" title="Toggle Dark/Light Mode">
+                        <i class="fas fa-moon" id="desktop-theme-icon"></i>
+                    </button>
+                    <button class="w-10 h-10 bg-white/15 rounded-lg flex items-center justify-center text-white transition-all duration-300 hover:bg-gold shrink-0 border-0 cursor-pointer" id="desktop-rtl-toggle-btn" title="Toggle RTL">
+                        <i class="fas fa-language"></i>
+                    </button>
+                    <a href="login.html" class="w-10 h-10 bg-white/15 rounded-lg flex items-center justify-center text-white transition-all duration-300 hover:bg-gold shrink-0" title="Login">
+                        <i class="fas fa-user"></i>
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button (Shows below 1280px - ALL DEVICES except desktop) -->
+                <button id="mobile-menu-btn" class="hidden text-white text-2xl cursor-pointer p-2 bg-white/15 rounded-lg w-10 h-10 items-center justify-center mobile-menu-button">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed top-0 left-0 w-full h-full bg-[#2c2c2c] z-[9999] overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center font-extrabold text-xl text-white">GG</div>
+                    <div>
+                        <span class="text-2xl font-bold text-white block">GrowwGreen</span>
+                        <span class="text-xs text-white/80 block -mt-1">Sustainable Living</span>
+                    </div>
+                </a>
+                <div class="flex items-center gap-3">
+                    <a href="login.html" class="w-10 h-10 bg-gold rounded-full flex items-center justify-center text-white hover:bg-white hover:text-gold transition">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <button id="close-mobile-menu" class="text-white text-3xl">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="space-y-2">
+                <!-- Home Dropdown Mobile -->
+                <div>
+                    <button class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline cursor-pointer border-0 bg-transparent" onclick="toggleMobileDropdown('home-mobile')">
+                        <span><i class="fas fa-home mr-2"></i> Home</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </button>
+                    <div id="home-mobile" class="mobile-dropdown-content">
+                        <a href="index.html" class="block text-[#ccc] py-2.5 transition-all duration-300 hover:text-gold hover:pl-2.5">Home 1</a>
+                        <a href="homepage2.html" class="block text-[#ccc] py-2.5 transition-all duration-300 hover:text-gold hover:pl-2.5">Home 2</a>
+                    </div>
+                </div>
+                
+                <a href="about.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                    <span><i class="fas fa-info-circle mr-2"></i> About</span>
+                </a>
+                <a href="solutions.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                    <span><i class="fas fa-lightbulb mr-2"></i> Solutions</span>
+                </a>
+                <a href="pricing.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                    <span><i class="fas fa-tags mr-2"></i> Pricing</span>
+                </a>
+                <a href="blog.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                    <span><i class="fas fa-blog mr-2"></i> Blog</span>
+                </a>
+                <a href="faq.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                    <span><i class="fas fa-question-circle mr-2"></i> FAQ</span>
+                </a>
+                <a href="contact.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                    <span><i class="fas fa-envelope mr-2"></i> Contact</span>
+                </a>
+                
+                <!-- Dashboard Dropdown Mobile -->
+                <div>
+                    <button class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline cursor-pointer border-0 bg-transparent" onclick="toggleMobileDropdown('dashboard-mobile')">
+                        <span><i class="fas fa-tachometer-alt mr-2"></i> Dashboard</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </button>
+                    <div id="dashboard-mobile" class="mobile-dropdown-content">
+                        <a href="user-dashboard.html" class="block text-[#ccc] py-2.5 transition-all duration-300 hover:text-gold hover:pl-2.5">User Dashboard</a>
+                        <a href="admin-dashboard.html" class="block text-[#ccc] py-2.5 transition-all duration-300 hover:text-gold hover:pl-2.5">Admin Dashboard</a>
+                    </div>
+                </div>
+                
+                <!-- SETTINGS SECTION -->
+                <div class="pt-6 mt-6 border-t border-gray-700">
+                    <p class="text-white text-sm font-semibold mb-4 opacity-75">SETTINGS</p>
+                    
+                    <!-- Theme Toggle -->
+                    <div class="bg-white/10 rounded-lg p-3 flex items-center justify-between cursor-pointer transition-all duration-300 hover:bg-[#C9A227]/20 mb-3" id="mobile-theme-toggle">
+                        <div class="flex items-center">
+                            <i class="fas fa-moon text-white text-lg mr-3" id="mobile-theme-icon"></i>
+                            <span class="text-white font-medium">Dark Mode</span>
+                        </div>
+                        <div class="w-12 h-6 bg-gray-600 rounded-full relative">
+                            <div class="theme-switch-dot w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-all"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- RTL Toggle -->
+                    <div class="bg-white/10 rounded-lg p-3 flex items-center justify-between cursor-pointer transition-all duration-300 hover:bg-[#C9A227]/20 mb-3" id="mobile-rtl-toggle">
+                        <div class="flex items-center">
+                            <i class="fas fa-language text-white text-lg mr-3"></i>
+                            <span class="text-white font-medium">RTL Mode</span>
+                        </div>
+                        <div class="w-12 h-6 bg-gray-600 rounded-full relative">
+                            <div class="rtl-switch-dot w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-all"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container mx-auto px-4 text-center text-white">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 fade-in-up">
+                Our <span class="text-gold">Solutions</span>
+            </h1>
+            <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto fade-in-up">
+                Comprehensive sustainability solutions tailored for individuals, businesses, and communities to create lasting environmental impact.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 fade-in-up">
+                <a href="#individual-solutions" class="bg-white text-olive px-8 py-3 rounded-lg font-bold hover:bg-gold hover:text-white transition">
+                    Individual Solutions
+                </a>
+                <a href="#business-solutions" class="bg-white text-olive px-8 py-3 rounded-lg font-bold hover:bg-gold hover:text-white transition">
+                    Business Solutions
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Individual Solutions Section -->
+    <section id="individual-solutions" class="py-16 md:py-24">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">Individual Solutions</h2>
+                <p class="text-lg md:text-xl opacity-80 max-w-3xl mx-auto">
+                    Empower your sustainable lifestyle with tools and resources designed for everyday impact.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Solution 1 - Carbon Tracking -->
+                <div class="card-bg rounded-2xl overflow-hidden transition-all duration-400 cursor-pointer hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(95,111,82,0.2)]">
+                    <img src="images/Carbon Offsetting.jpg" 
+                         alt="Carbon Tracking" 
+                         class="w-full h-[250px] object-cover rounded-t-2xl"
+                         onerror="this.style.display='none'">
+                    <div class="p-6 md:p-8">
+                        <div class="w-14 h-14 bg-olive rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-chart-line text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold mb-3 text-olive">Carbon Tracking</h3>
+                        <p class="opacity-80 mb-4">
+                            Monitor and reduce your personal carbon footprint with our intuitive tracking app and personalized recommendations.
+                        </p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-gold mr-2 mt-1"></i>
+                                <span class="text-sm">Real-time emissions tracking</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-gold mr-2 mt-1"></i>
+                                <span class="text-sm">AI-powered insights</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-gold mr-2 mt-1"></i>
+                                <span class="text-sm">Goal setting & progress tracking</span>
+                            </li>
+                        </ul>
+                        <a href="solution-details.html?solution=carbon-tracking" class="text-olive font-semibold hover:text-gold transition inline-flex items-center">
+                            Learn More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Solution 2 - Renewable Energy -->
+                <div class="card-bg rounded-2xl overflow-hidden transition-all duration-400 cursor-pointer hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(95,111,82,0.2)]">
+                    <img src="images/Renewable Energy.jpg" 
+                         alt="Renewable Energy" 
+                         class="w-full h-[250px] object-cover rounded-t-2xl"
+                         onerror="this.style.display='none'">
+                    <div class="p-6 md:p-8">
+                        <div class="w-14 h-14 bg-gold rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-solar-panel text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold mb-3 text-gold">Renewable Energy</h3>
+                        <p class="opacity-80 mb-4">
+                            Switch to clean energy sources with our solar panel calculator and renewable energy provider matching service.
+                        </p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-olive mr-2 mt-1"></i>
+                                <span class="text-sm">Solar savings calculator</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-olive mr-2 mt-1"></i>
+                                <span class="text-sm">Provider comparison tool</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-olive mr-2 mt-1"></i>
+                                <span class="text-sm">Installation guidance</span>
+                            </li>
+                        </ul>
+                        <a href="solution-details.html?solution=renewable-energy" class="text-gold font-semibold hover:text-olive transition inline-flex items-center">
+                            Learn More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Solution 3 - Waste Reduction -->
+                <div class="card-bg rounded-2xl overflow-hidden transition-all duration-400 cursor-pointer hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(95,111,82,0.2)]">
+                    <img src="images/Waste Management.jpg" 
+                         alt="Waste Management" 
+                         class="w-full h-[250px] object-cover rounded-t-2xl"
+                         onerror="this.style.display='none'">
+                    <div class="p-6 md:p-8">
+                        <div class="w-14 h-14 bg-olive rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-recycle text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold mb-3 text-olive">Waste Reduction</h3>
+                        <p class="opacity-80 mb-4">
+                            Learn to minimize waste, recycle effectively, and adopt zero-waste practices with our comprehensive guides.
+                        </p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-gold mr-2 mt-1"></i>
+                                <span class="text-sm">Recycling location finder</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-gold mr-2 mt-1"></i>
+                                <span class="text-sm">Zero-waste tips & tricks</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-gold mr-2 mt-1"></i>
+                                <span class="text-sm">Composting guides</span>
+                            </li>
+                        </ul>
+                        <a href="solution-details.html?solution=waste-reduction" class="text-olive font-semibold hover:text-gold transition inline-flex items-center">
+                            Learn More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Solution 4 - Green Living -->
+                <div class="card-bg rounded-2xl overflow-hidden transition-all duration-400 cursor-pointer hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(95,111,82,0.2)]">
+                    <img src="images/Green Building.jpg" 
+                         alt="Green Living" 
+                         class="w-full h-[250px] object-cover rounded-t-2xl"
+                         onerror="this.style.display='none'">
+                    <div class="p-6 md:p-8">
+                        <div class="w-14 h-14 bg-gold rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-home text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold mb-3 text-gold">Green Living</h3>
+                        <p class="opacity-80 mb-4">
+                            Transform your home with eco-friendly products, energy-efficient appliances, and sustainable living tips.
+                        </p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-olive mr-2 mt-1"></i>
+                                <span class="text-sm">Product recommendations</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-olive mr-2 mt-1"></i>
+                                <span class="text-sm">Energy audit tools</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-olive mr-2 mt-1"></i>
+                                <span class="text-sm">Smart home integration</span>
+                            </li>
+                        </ul>
+                        <a href="solution-details.html?solution=green-living" class="text-gold font-semibold hover:text-olive transition inline-flex items-center">
+                            Learn More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Solution 5 - Water Conservation -->
+                <div class="card-bg rounded-2xl overflow-hidden transition-all duration-400 cursor-pointer hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(95,111,82,0.2)]">
+                    <img src="images/Water Conservation.jpg" 
+                         alt="Water Conservation" 
+                         class="w-full h-[250px] object-cover rounded-t-2xl"
+                         onerror="this.style.display='none'">
+                    <div class="p-6 md:p-8">
+                        <div class="w-14 h-14 bg-olive rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-tint text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold mb-3 text-olive">Water Conservation</h3>
+                        <p class="opacity-80 mb-4">
+                            Reduce water consumption with smart monitoring systems and conservation techniques for home and garden.
+                        </p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-gold mr-2 mt-1"></i>
+                                <span class="text-sm">Usage tracking dashboard</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-gold mr-2 mt-1"></i>
+                                <span class="text-sm">Smart irrigation tips</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-gold mr-2 mt-1"></i>
+                                <span class="text-sm">Leak detection alerts</span>
+                            </li>
+                        </ul>
+                        <a href="solution-details.html?solution=water-conservation" class="text-olive font-semibold hover:text-gold transition inline-flex items-center">
+                            Learn More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Solution 6 - Community Action -->
+                <div class="card-bg rounded-2xl overflow-hidden transition-all duration-400 cursor-pointer hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(95,111,82,0.2)]">
+                    <img src="images/Training Programs.jpg" 
+                         alt="Community Action" 
+                         class="w-full h-[250px] object-cover rounded-t-2xl"
+                         onerror="this.style.display='none'">
+                    <div class="p-6 md:p-8">
+                        <div class="w-14 h-14 bg-gold rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-users text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold mb-3 text-gold">Community Action</h3>
+                        <p class="opacity-80 mb-4">
+                            Join local sustainability initiatives, participate in community projects, and connect with like-minded individuals.
+                        </p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-olive mr-2 mt-1"></i>
+                                <span class="text-sm">Event finder & calendar</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-olive mr-2 mt-1"></i>
+                                <span class="text-sm">Volunteer opportunities</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-olive mr-2 mt-1"></i>
+                                <span class="text-sm">Social networking</span>
+                            </li>
+                        </ul>
+                        <a href="solution-details.html?solution=community-action" class="text-gold font-semibold hover:text-olive transition inline-flex items-center">
+                            Learn More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Solutions Section -->
+    <section id="business-solutions" class="py-16 md:py-24 bg-olive text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">Business Solutions</h2>
+                <p class="text-lg md:text-xl opacity-90 max-w-3xl mx-auto">
+                    Scale your sustainability efforts with enterprise-grade tools and expert consulting services.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Business Solution 1 - Sustainability Audits -->
+                <div class="bg-white text-gray-800 rounded-2xl p-6 md:p-8 transition-all duration-400 cursor-pointer hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(95,111,82,0.2)]">
+                    <div class="w-14 h-14 bg-olive rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-building text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 text-olive">Sustainability Audits</h3>
+                    <p class="opacity-80 mb-4">
+                        Comprehensive assessment of your organization's environmental impact with actionable recommendations.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-gold mr-2 mt-1"></i>
+                            <span class="text-sm">Full environmental audit</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-gold mr-2 mt-1"></i>
+                            <span class="text-sm">Custom action plans</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-gold mr-2 mt-1"></i>
+                            <span class="text-sm">ROI analysis</span>
+                        </li>
+                    </ul>
+                    <a href="solution-details.html?solution=sustainability-audits" class="text-olive font-semibold hover:text-gold transition inline-flex items-center">
+                        Get Started <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- Business Solution 2 - Carbon Neutrality -->
+                <div class="bg-white text-gray-800 rounded-2xl p-6 md:p-8 transition-all duration-400 cursor-pointer hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(95,111,82,0.2)]">
+                    <div class="w-14 h-14 bg-gold rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-leaf text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 text-gold">Carbon Neutrality</h3>
+                    <p class="opacity-80 mb-4">
+                        Achieve carbon neutrality through emission reduction strategies and verified offset programs.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-olive mr-2 mt-1"></i>
+                            <span class="text-sm">Emission baseline assessment</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-olive mr-2 mt-1"></i>
+                            <span class="text-sm">Reduction roadmap</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-olive mr-2 mt-1"></i>
+                            <span class="text-sm">Offset project portfolio</span>
+                        </li>
+                    </ul>
+                    <a href="solution-details.html?solution=carbon-neutrality" class="text-gold font-semibold hover:text-olive transition inline-flex items-center">
+                        Get Started <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- Business Solution 3 - ESG Reporting -->
+                <div class="bg-white text-gray-800 rounded-2xl p-6 md:p-8 transition-all duration-400 cursor-pointer hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(95,111,82,0.2)]">
+                    <div class="w-14 h-14 bg-olive rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-bar text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 text-olive">ESG Reporting</h3>
+                    <p class="opacity-80 mb-4">
+                        Streamline your Environmental, Social, and Governance reporting with automated tools and expert guidance.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-gold mr-2 mt-1"></i>
+                            <span class="text-sm">Automated data collection</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-gold mr-2 mt-1"></i>
+                            <span class="text-sm">Compliance tracking</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-gold mr-2 mt-1"></i>
+                            <span class="text-sm">Report generation</span>
+                        </li>
+                    </ul>
+                    <a href="solution-details.html?solution=esg-reporting" class="text-olive font-semibold hover:text-gold transition inline-flex items-center">
+                        Get Started <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- Business Solution 4 - Energy Management -->
+                <div class="bg-white text-gray-800 rounded-2xl p-6 md:p-8 transition-all duration-400 cursor-pointer hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(95,111,82,0.2)]">
+                    <div class="w-14 h-14 bg-gold rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-bolt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 text-gold">Energy Management</h3>
+                    <p class="opacity-80 mb-4">
+                        Optimize energy consumption and costs with real-time monitoring and intelligent automation systems.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-olive mr-2 mt-1"></i>
+                            <span class="text-sm">Smart metering & analytics</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-olive mr-2 mt-1"></i>
+                            <span class="text-sm">Automated controls</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-olive mr-2 mt-1"></i>
+                            <span class="text-sm">Cost optimization</span>
+                        </li>
+                    </ul>
+                    <a href="solution-details.html?solution=energy-management" class="text-gold font-semibold hover:text-olive transition inline-flex items-center">
+                        Get Started <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- Business Solution 5 - Supply Chain -->
+                <div class="bg-white text-gray-800 rounded-2xl p-6 md:p-8 transition-all duration-400 cursor-pointer hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(95,111,82,0.2)]">
+                    <div class="w-14 h-14 bg-olive rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-truck text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 text-olive">Supply Chain</h3>
+                    <p class="opacity-80 mb-4">
+                        Build a sustainable supply chain with vendor assessment tools and transparency solutions.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-gold mr-2 mt-1"></i>
+                            <span class="text-sm">Supplier sustainability scoring</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-gold mr-2 mt-1"></i>
+                            <span class="text-sm">Logistics optimization</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-gold mr-2 mt-1"></i>
+                            <span class="text-sm">Traceability platform</span>
+                        </li>
+                    </ul>
+                    <a href="solution-details.html?solution=supply-chain" class="text-olive font-semibold hover:text-gold transition inline-flex items-center">
+                        Get Started <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- Business Solution 6 - Employee Training -->
+                <div class="bg-white text-gray-800 rounded-2xl p-6 md:p-8 transition-all duration-400 cursor-pointer hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(95,111,82,0.2)]">
+                    <div class="w-14 h-14 bg-gold rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-graduation-cap text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 text-gold">Employee Training</h3>
+                    <p class="opacity-80 mb-4">
+                        Engage and educate your workforce with comprehensive sustainability training programs and resources.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-olive mr-2 mt-1"></i>
+                            <span class="text-sm">Online learning platform</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-olive mr-2 mt-1"></i>
+                            <span class="text-sm">Certification programs</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-olive mr-2 mt-1"></i>
+                            <span class="text-sm">Custom workshops</span>
+                        </li>
+                    </ul>
+                    <a href="solution-details.html?solution=employee-training" class="text-gold font-semibold hover:text-olive transition inline-flex items-center">
+                        Get Started <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Corporate Programs Section -->
+    <section class="py-16 md:py-24">
+        <div class="container mx-auto px-4">
+            <div class="grid lg:grid-cols-2 gap-12 items-center bg-olive rounded-3xl overflow-hidden">
+                <div class="p-8 md:p-12 text-white order-2 lg:order-1">
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">Corporate Programs</h2>
+                    <p class="text-lg md:text-xl mb-8 opacity-90">
+                        Partner with us to develop customized sustainability programs that align with your business objectives and values.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-gold text-2xl mr-4"></i>
+                            <span class="text-lg">White-label platform solutions</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-gold text-2xl mr-4"></i>
+                            <span class="text-lg">Dedicated account management</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-gold text-2xl mr-4"></i>
+                            <span class="text-lg">Custom integration & API access</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-gold text-2xl mr-4"></i>
+                            <span class="text-lg">Priority support & consulting</span>
+                        </li>
+                    </ul>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="contact.html" class="bg-white text-olive px-8 py-4 rounded-lg font-bold text-lg hover:bg-gold hover:text-white transition">
+                            <i class="fas fa-envelope mr-2"></i>Contact Sales
+                        </a>
+                        <a href="pricing.html" class="bg-white text-olive px-8 py-4 rounded-lg font-bold text-lg hover:bg-gold hover:text-white transition">
+                            <i class="fas fa-tags mr-2"></i>View Pricing
+                        </a>
+                    </div>
+                </div>
+                <div class="h-full min-h-[400px] lg:min-h-[600px] order-1 lg:order-2">
+                    <img src="images/home2lastsectionimage.jpg" 
+                         alt="Corporate Programs" 
+                         class="w-full h-full object-cover rounded-2xl"
+                         onerror="this.style.display='none'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 md:py-24 card-bg">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">Solutions Impact</h2>
+                <p class="text-lg md:text-xl opacity-80">
+                    Real results from our comprehensive sustainability solutions
+                </p>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="text-5xl md:text-6xl font-black text-olive mb-4">5M+</div>
+                    <p class="text-lg md:text-xl">Tons CO2 Reduced</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl md:text-6xl font-black text-gold mb-4">2500+</div>
+                    <p class="text-lg md:text-xl">Businesses Served</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl md:text-6xl font-black text-olive mb-4">98%</div>
+                    <p class="text-lg md:text-xl">Success Rate</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl md:text-6xl font-black text-gold mb-4">40%</div>
+                    <p class="text-lg md:text-xl">Avg. Cost Savings</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section - CHANGED FROM bg-olive TO bg-gold -->
+    <section class="py-16 md:py-24 bg-gold text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">Ready to Transform Your Impact?</h2>
+            <p class="text-lg md:text-xl mb-10 max-w-3xl mx-auto opacity-90">
+                Choose the solution that fits your needs and start your sustainability journey today. Our experts are here to guide you every step of the way.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="login.html" class="bg-white text-olive px-8 py-4 rounded-lg font-bold text-lg hover:bg-olive hover:text-white transition">
+                    <i class="fas fa-rocket mr-2"></i>Get Started Free
+                </a>
+                <a href="contact.html" class="bg-white text-olive px-8 py-4 rounded-lg font-bold text-lg hover:bg-olive hover:text-white transition">
+                    <i class="fas fa-phone mr-2"></i>Schedule a Demo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-olive text-white py-12 md:py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-12">
+                <div>
+                    <!-- UPDATED: Same logo as navbar with GG circle + text + tagline -->
+                    <a href="index.html" class="flex items-center gap-3 mb-6 no-underline">
+                        <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center font-extrabold text-xl text-white shrink-0">
+                            GG
+                        </div>
+                        <div>
+                            <span class="text-xl md:text-2xl font-bold text-white block">GrowwGreen</span>
+                            <span class="text-xs text-white/80 block -mt-1">Sustainable Living</span>
+                        </div>
+                    </a>
+                    <p class="opacity-90 mb-6 text-sm md:text-base">
+                        Building a sustainable future, one action at a time. Join us in creating lasting environmental change.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-white text-olive rounded-full flex items-center justify-center hover:bg-gold hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white text-olive rounded-full flex items-center justify-center hover:bg-gold hover:text-white transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white text-olive rounded-full flex items-center justify-center hover:bg-gold hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white text-olive rounded-full flex items-center justify-center hover:bg-gold hover:text-white transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg md:text-xl font-bold mb-6">Quick Links</h3>
+                    <ul class="space-y-3 text-sm md:text-base">
+                        <li><a href="index.html" class="opacity-90 hover:text-gold transition">Home</a></li>
+                        <li><a href="about.html" class="opacity-90 hover:text-gold transition">About Us</a></li>
+                        <li><a href="solutions.html" class="opacity-90 hover:text-gold transition">Solutions</a></li>
+                        <li><a href="pricing.html" class="opacity-90 hover:text-gold transition">Pricing</a></li>
+                        <li><a href="faq.html" class="opacity-90 hover:text-gold transition">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg md:text-xl font-bold mb-6">Resources</h3>
+                    <ul class="space-y-3 text-sm md:text-base">
+                        <li><a href="blog.html" class="opacity-90 hover:text-gold transition">Blog</a></li>
+                        <li><a href="user-dashboard.html" class="opacity-90 hover:text-gold transition">Dashboard</a></li>
+                        <li><a href="#" class="opacity-90 hover:text-gold transition">Case Studies</a></li>
+                        <li><a href="#" class="opacity-90 hover:text-gold transition">Downloads</a></li>
+                        <li><a href="contact.html" class="opacity-90 hover:text-gold transition">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg md:text-xl font-bold mb-6">Newsletter</h3>
+                    <p class="opacity-90 mb-4 text-sm md:text-base">Subscribe for sustainability tips and updates.</p>
+                    <form class="space-y-3">
+                        <input type="email" placeholder="Your email" class="w-full px-4 py-3 rounded-lg text-gray-800 text-sm md:text-base" required>
+                        <button type="submit" class="w-full bg-gold text-white px-4 py-3 rounded-lg font-semibold hover:bg-white hover:text-olive transition text-sm md:text-base">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-white border-opacity-20 pt-8 flex flex-col md:flex-row justify-between items-center text-sm md:text-base">
+                <p class="opacity-90 mb-4 md:mb-0">&copy; 2026 GrowwGreen. All rights reserved.</p>
+                <div class="flex flex-wrap justify-center gap-4 md:gap-6">
+                    <a href="#" class="opacity-90 hover:text-gold transition">Privacy Policy</a>
+                    <a href="#" class="opacity-90 hover:text-gold transition">Terms of Service</a>
+                    <a href="#" class="opacity-90 hover:text-gold transition">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-top" class="fixed bottom-6 right-6 md:bottom-8 md:right-8 w-10 h-10 md:w-12 md:h-12 bg-olive text-white rounded-full shadow-lg hidden hover:bg-gold transition z-50">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        const htmlElement = document.documentElement;
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        const currentDir = localStorage.getItem('direction') || 'ltr';
+        
+        htmlElement.setAttribute('data-theme', currentTheme);
+        htmlElement.setAttribute('dir', currentDir);
+        
+        const desktopThemeBtn = document.getElementById('desktop-theme-toggle-btn');
+        const desktopThemeIcon = document.getElementById('desktop-theme-icon');
+        
+        if (currentTheme === 'dark' && desktopThemeIcon) {
+            desktopThemeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+        
+        if (desktopThemeBtn) {
+            desktopThemeBtn.addEventListener('click', function() {
+                const theme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                htmlElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                
+                if (theme === 'dark') {
+                    desktopThemeIcon.classList.replace('fa-moon', 'fa-sun');
+                } else {
+                    desktopThemeIcon.classList.replace('fa-sun', 'fa-moon');
+                }
+                
+                const mobileIcon = document.getElementById('mobile-theme-icon');
+                if (mobileIcon) {
+                    if (theme === 'dark') {
+                        mobileIcon.classList.replace('fa-moon', 'fa-sun');
+                        document.querySelector('.theme-switch-dot').style.transform = 'translateX(24px)';
+                        document.querySelector('.theme-switch-dot').parentElement.style.backgroundColor = '#C9A227';
+                    } else {
+                        mobileIcon.classList.replace('fa-sun', 'fa-moon');
+                        document.querySelector('.theme-switch-dot').style.transform = 'translateX(0)';
+                        document.querySelector('.theme-switch-dot').parentElement.style.backgroundColor = '#6b7280';
+                    }
+                }
+            });
+        }
+        
+        const desktopRtlBtn = document.getElementById('desktop-rtl-toggle-btn');
+        
+        if (desktopRtlBtn) {
+            desktopRtlBtn.addEventListener('click', function() {
+                const direction = htmlElement.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl';
+                htmlElement.setAttribute('dir', direction);
+                localStorage.setItem('direction', direction);
+                
+                const rtlDot = document.querySelector('.rtl-switch-dot');
+                if (rtlDot) {
+                    const bg = rtlDot.parentElement;
+                    if (direction === 'rtl') {
+                        rtlDot.style.transform = 'translateX(24px)';
+                        bg.style.backgroundColor = '#C9A227';
+                    } else {
+                        rtlDot.style.transform = 'translateX(0)';
+                        bg.style.backgroundColor = '#6b7280';
+                    }
+                }
+            });
+        }
+        
+        const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+        const mobileThemeIcon = document.getElementById('mobile-theme-icon');
+        
+        if (currentTheme === 'dark' && mobileThemeIcon) {
+            mobileThemeIcon.classList.replace('fa-moon', 'fa-sun');
+            document.querySelector('.theme-switch-dot').style.transform = 'translateX(24px)';
+            document.querySelector('.theme-switch-dot').parentElement.style.backgroundColor = '#C9A227';
+        }
+        
+        if (mobileThemeToggle) {
+            mobileThemeToggle.addEventListener('click', function() {
+                const theme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                htmlElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                
+                const dot = document.querySelector('.theme-switch-dot');
+                const bg = dot.parentElement;
+                
+                if (theme === 'dark') {
+                    mobileThemeIcon.classList.replace('fa-moon', 'fa-sun');
+                    dot.style.transform = 'translateX(24px)';
+                    bg.style.backgroundColor = '#C9A227';
+                } else {
+                    mobileThemeIcon.classList.replace('fa-sun', 'fa-moon');
+                    dot.style.transform = 'translateX(0)';
+                    bg.style.backgroundColor = '#6b7280';
+                }
+                
+                if (desktopThemeIcon) {
+                    if (theme === 'dark') {
+                        desktopThemeIcon.classList.replace('fa-moon', 'fa-sun');
+                    } else {
+                        desktopThemeIcon.classList.replace('fa-sun', 'fa-moon');
+                    }
+                }
+            });
+        }
+        
+        const mobileRtlToggle = document.getElementById('mobile-rtl-toggle');
+        
+        if (currentDir === 'rtl') {
+            const rtlDot = document.querySelector('.rtl-switch-dot');
+            if (rtlDot) {
+                rtlDot.style.transform = 'translateX(24px)';
+                rtlDot.parentElement.style.backgroundColor = '#C9A227';
+            }
+        }
+        
+        if (mobileRtlToggle) {
+            mobileRtlToggle.addEventListener('click', function() {
+                const direction = htmlElement.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl';
+                htmlElement.setAttribute('dir', direction);
+                localStorage.setItem('direction', direction);
+                
+                const dot = document.querySelector('.rtl-switch-dot');
+                const bg = dot.parentElement;
+                
+                if (direction === 'rtl') {
+                    dot.style.transform = 'translateX(24px)';
+                    bg.style.backgroundColor = '#C9A227';
+                } else {
+                    dot.style.transform = 'translateX(0)';
+                    bg.style.backgroundColor = '#6b7280';
+                }
+            });
+        }
+        
+        function toggleDesktopDropdown(id) {
+            const dropdown = document.getElementById(id);
+            const allDropdowns = document.querySelectorAll('.dropdown');
+            
+            allDropdowns.forEach(dd => {
+                if (dd.id !== id) {
+                    dd.classList.remove('active');
+                }
+            });
+            
+            dropdown.classList.toggle('active');
+        }
+        
+        document.addEventListener('click', function(event) {
+            const dropdowns = document.querySelectorAll('.dropdown');
+            dropdowns.forEach(dropdown => {
+                if (!dropdown.contains(event.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+        });
+        
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+        }
+        if (closeMobileMenu && mobileMenu) {
+            closeMobileMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        }
+        
+        const mobileLinks = document.querySelectorAll('#mobile-menu a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+        
+        function toggleMobileDropdown(id) {
+            const dropdown = document.getElementById(id);
+            dropdown.classList.toggle('active');
+        }
+        
+        const scrollTopBtn = document.getElementById('scroll-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.remove('hidden');
+            } else {
+                scrollTopBtn.classList.add('hidden');
+            }
+        });
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1280) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
