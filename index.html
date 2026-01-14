@@ -8,7 +8,6 @@
     <meta name="author" content="GrowwGreen">
     <title>GrowwGreen - Grow a Greener Future</title>
     
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="images/growwpark_logo.ico">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -205,20 +204,44 @@
             background: linear-gradient(90deg, var(--olive-green), var(--gold-accent));
         }
         
-        /* UPDATED: Hamburger shows below 1280px (all devices except desktop) */
+        /* --- HAMBURGER BUTTON ACTIVE DETECTION --- */
+        #mobile-menu-btn {
+            transition: background-color 0.1s ease, transform 0.1s ease;
+        }
+
+        #mobile-menu-btn:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+
+        #mobile-menu-btn:active {
+            transform: scale(0.9);
+            background-color: var(--gold-accent) !important;
+            border-color: transparent;
+        }
+
+        .btn-clicked-flash {
+            background-color: var(--gold-accent) !important;
+            color: white !important;
+            transform: scale(0.95);
+            box-shadow: 0 0 15px rgba(201, 162, 39, 0.6);
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+
+        /* --- STRICT BREAKPOINT FIX --- */
+        /* Forces Hamburger on all screens smaller than 1280px (Laptops/Tablets) */
         @media (max-width: 1279px) {
             .desktop-nav {
+                display: none !important;
+            }
+            .navbar-right-desktop {
                 display: none !important;
             }
             .mobile-menu-button {
                 display: flex !important;
             }
-            .navbar-right-desktop {
-                display: none !important;
-            }
         }
         
-        /* Desktop 1280px and above - Only true desktop view */
+        /* Only shows Desktop Menu on screens larger than 1280px */
         @media (min-width: 1280px) {
             .desktop-nav {
                 display: flex !important;
@@ -234,12 +257,10 @@
 </head>
 <body>
 
-    <!-- Navigation -->
     <nav id="navbar" class="navbar-container py-3 fixed top-0 w-full z-[1000]">
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-between">
                 
-                <!-- Logo -->
                 <a href="index.html" class="flex items-center gap-3 no-underline transition-transform duration-300 hover:scale-105">
                     <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center font-extrabold text-xl text-white shrink-0">
                         GG
@@ -250,10 +271,8 @@
                     </div>
                 </a>
                 
-                <!-- Desktop Menu (Shows at 1280px+) -->
                 <div class="desktop-nav items-center space-x-2" style="display: none;">
                     
-                    <!-- Home Dropdown -->
                     <div class="dropdown" id="home-dropdown">
                         <div class="nav-link active" onclick="toggleDesktopDropdown('home-dropdown')">
                             Home <i class="fas fa-chevron-down dropdown-arrow"></i>
@@ -275,7 +294,6 @@
                     <a href="faq.html" class="nav-link">FAQ</a>
                     <a href="contact.html" class="nav-link">Contact</a>
                     
-                    <!-- Dashboard Dropdown -->
                     <div class="dropdown" id="dashboard-dropdown">
                         <div class="nav-link" onclick="toggleDesktopDropdown('dashboard-dropdown')">
                             Dashboard <i class="fas fa-chevron-down dropdown-arrow"></i>
@@ -292,7 +310,6 @@
                     
                 </div>
                 
-                <!-- Right Side Buttons (Desktop 1280px+) -->
                 <div class="navbar-right-desktop flex items-center gap-3" style="display: none;">
                     <button class="w-10 h-10 bg-white/15 rounded-lg flex items-center justify-center text-white transition-all duration-300 hover:bg-gold shrink-0 border-0 cursor-pointer" id="desktop-theme-toggle-btn" title="Toggle Dark/Light Mode">
                         <i class="fas fa-moon" id="desktop-theme-icon"></i>
@@ -305,7 +322,6 @@
                     </a>
                 </div>
                 
-                <!-- Mobile Menu Button (Shows below 1280px - ALL DEVICES except desktop) -->
                 <button id="mobile-menu-btn" class="hidden text-white text-2xl cursor-pointer p-2 bg-white/15 rounded-lg w-10 h-10 items-center justify-center mobile-menu-button">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -313,7 +329,6 @@
         </div>
     </nav>
     
-    <!-- Mobile Menu -->
     <div id="mobile-menu" class="mobile-menu fixed top-0 left-0 w-full h-full bg-[#2c2c2c] z-[9999] overflow-y-auto">
         <div class="p-6">
             <div class="flex justify-between items-center mb-8">
@@ -328,16 +343,15 @@
                     <a href="login.html" class="w-10 h-10 bg-gold rounded-full flex items-center justify-center text-white hover:bg-white hover:text-gold transition">
                         <i class="fas fa-user"></i>
                     </a>
-                    <button id="close-mobile-menu" class="text-white text-3xl">
+                    <button id="close-mobile-menu" class="text-white text-3xl transition-transform active:scale-90">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
             </div>
             
             <div class="space-y-2">
-                <!-- Home Dropdown Mobile -->
                 <div>
-                    <button class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline cursor-pointer border-0 bg-transparent" onclick="toggleMobileDropdown('home-mobile')">
+                    <button class="flex items-center justify-between w-full text-gold text-lg font-medium py-3 no-underline cursor-pointer border-0 bg-transparent" onclick="toggleMobileDropdown('home-mobile')">
                         <span><i class="fas fa-home mr-2"></i> Home</span>
                         <i class="fas fa-chevron-down dropdown-arrow"></i>
                     </button>
@@ -366,7 +380,6 @@
                     <span><i class="fas fa-envelope mr-2"></i> Contact</span>
                 </a>
                 
-                <!-- Dashboard Dropdown Mobile -->
                 <div>
                     <button class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline cursor-pointer border-0 bg-transparent" onclick="toggleMobileDropdown('dashboard-mobile')">
                         <span><i class="fas fa-tachometer-alt mr-2"></i> Dashboard</span>
@@ -378,11 +391,9 @@
                     </div>
                 </div>
                 
-                <!-- SETTINGS SECTION -->
                 <div class="pt-6 mt-6 border-t border-gray-700">
                     <p class="text-white text-sm font-semibold mb-4 opacity-75">SETTINGS</p>
                     
-                    <!-- Theme Toggle -->
                     <div class="bg-white/10 rounded-lg p-3 flex items-center justify-between cursor-pointer transition-all duration-300 hover:bg-[#C9A227]/20 mb-3" id="mobile-theme-toggle">
                         <div class="flex items-center">
                             <i class="fas fa-moon text-white text-lg mr-3" id="mobile-theme-icon"></i>
@@ -393,7 +404,6 @@
                         </div>
                     </div>
                     
-                    <!-- RTL Toggle -->
                     <div class="bg-white/10 rounded-lg p-3 flex items-center justify-between cursor-pointer transition-all duration-300 hover:bg-[#C9A227]/20 mb-3" id="mobile-rtl-toggle">
                         <div class="flex items-center">
                             <i class="fas fa-language text-white text-lg mr-3"></i>
@@ -408,7 +418,6 @@
         </div>
     </div>
 
-    <!-- Hero Section -->
     <section class="min-h-[90vh] bg-gradient-to-br from-[rgba(95,111,82,0.05)] to-[rgba(201,162,39,0.05)] pt-[120px] pb-10 flex items-center">
         <div class="container mx-auto px-4">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
@@ -451,7 +460,6 @@
         </div>
     </section>
 
-    <!-- Sustainability Intro Section -->
     <section class="py-16 md:py-20">
         <div class="container mx-auto px-4">
             <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16">
@@ -495,7 +503,6 @@
         </div>
     </section>
 
-    <!-- Featured Solutions Section -->
     <section class="py-16 md:py-20 bg-olive text-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12 md:mb-16">
@@ -506,7 +513,6 @@
             </div>
             
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                <!-- Solution 1 -->
                 <div class="bg-white text-gray-800 rounded-2xl p-6 md:p-8 transition-all duration-300 cursor-pointer hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(95,111,82,0.2)]">
                     <img src="images/Renewable Energy.jpg" alt="Solar Panels Renewable Energy" class="w-full h-[200px] object-cover rounded-2xl mb-5" onerror="this.style.display='none'">
                     <div class="mb-6">
@@ -521,7 +527,6 @@
                     </a>
                 </div>
                 
-                <!-- Solution 2 -->
                 <div class="bg-white text-gray-800 rounded-2xl p-6 md:p-8 transition-all duration-300 cursor-pointer hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(95,111,82,0.2)]">
                     <img src="images/Waste Management.jpg" alt="Waste Management Recycling" class="w-full h-[200px] object-cover rounded-2xl mb-5" onerror="this.style.display='none'">
                     <div class="mb-6">
@@ -536,7 +541,6 @@
                     </a>
                 </div>
                 
-                <!-- Solution 3 -->
                 <div class="bg-white text-gray-800 rounded-2xl p-6 md:p-8 transition-all duration-300 cursor-pointer hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(95,111,82,0.2)]">
                     <img src="images/Water Conservation.jpg" alt="Water Conservation" class="w-full h-[200px] object-cover rounded-2xl mb-5" onerror="this.style.display='none'">
                     <div class="mb-6">
@@ -551,7 +555,6 @@
                     </a>
                 </div>
                 
-                <!-- Solution 4 -->
                 <div class="bg-white text-gray-800 rounded-2xl p-6 md:p-8 transition-all duration-300 cursor-pointer hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(95,111,82,0.2)]">
                     <img src="images/Green Transport.jpg" alt="Electric Bus Green Transport" class="w-full h-[200px] object-cover rounded-2xl mb-5" onerror="this.style.display='none'">
                     <div class="mb-6">
@@ -566,7 +569,6 @@
                     </a>
                 </div>
                 
-                <!-- Solution 5 -->
                 <div class="bg-white text-gray-800 rounded-2xl p-6 md:p-8 transition-all duration-300 cursor-pointer hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(95,111,82,0.2)]">
                     <img src="images/Sustainable Living.jpg" alt="Sustainable Living Green Home" class="w-full h-[200px] object-cover rounded-2xl mb-5" onerror="this.style.display='none'">
                     <div class="mb-6">
@@ -581,7 +583,6 @@
                     </a>
                 </div>
                 
-                <!-- Solution 6 -->
                 <div class="bg-white text-gray-800 rounded-2xl p-6 md:p-8 transition-all duration-300 cursor-pointer hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(95,111,82,0.2)]">
                     <img src="images/Green Industry.jpg" alt="Green Industry Sustainable Manufacturing" class="w-full h-[200px] object-cover rounded-2xl mb-5" onerror="this.style.display='none'">
                     <div class="mb-6">
@@ -605,7 +606,6 @@
         </div>
     </section>
 
-    <!-- Impact Stats Section -->
     <section id="impact" class="py-16 md:py-20">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12 md:mb-16">
@@ -683,7 +683,6 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
     <section class="py-16 md:py-20">
         <div class="container mx-auto px-4">
             <div class="bg-olive rounded-3xl p-8 md:p-12 lg:p-16 text-white text-center">
@@ -703,12 +702,10 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-olive text-white py-12 md:py-16">
         <div class="container mx-auto px-4">
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-12">
                 <div>
-                    <!-- UPDATED: Same logo as navbar with GG circle + text + tagline -->
                     <a href="index.html" class="flex items-center gap-3 mb-6 no-underline">
                         <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center font-extrabold text-xl text-white shrink-0">
                             GG
@@ -782,7 +779,6 @@
         </div>
     </footer>
 
-    <!-- Scroll to Top Button -->
     <button id="scroll-top" class="fixed bottom-6 right-6 md:bottom-8 md:right-8 w-10 h-10 md:w-12 md:h-12 bg-olive text-white rounded-full shadow-lg hidden hover:bg-gold transition z-50">
         <i class="fas fa-arrow-up"></i>
     </button>
@@ -805,8 +801,11 @@
             if (desktopThemeIcon) desktopThemeIcon.classList.replace('fa-moon', 'fa-sun');
             if (mobileThemeIcon) {
                 mobileThemeIcon.classList.replace('fa-moon', 'fa-sun');
-                document.querySelector('.theme-switch-dot').style.transform = 'translateX(24px)';
-                document.querySelector('.theme-switch-dot').parentElement.style.backgroundColor = '#C9A227';
+                const dot = document.querySelector('.theme-switch-dot');
+                if(dot) {
+                    dot.style.transform = 'translateX(24px)';
+                    dot.parentElement.style.backgroundColor = '#C9A227';
+                }
             }
         }
         
@@ -858,16 +857,17 @@
         
         // Desktop RTL Toggle
         const desktopRtlToggleBtn = document.getElementById('desktop-rtl-toggle-btn');
-        
-        // Mobile RTL Toggle
         const mobileRtlToggle = document.getElementById('mobile-rtl-toggle');
-        
         const currentDir = localStorage.getItem('direction') || 'ltr';
+        
         htmlElement.setAttribute('dir', currentDir);
         
         if (currentDir === 'rtl' && mobileRtlToggle) {
-            document.querySelector('.rtl-switch-dot').style.transform = 'translateX(24px)';
-            document.querySelector('.rtl-switch-dot').parentElement.style.backgroundColor = '#C9A227';
+            const dot = document.querySelector('.rtl-switch-dot');
+            if(dot) {
+                dot.style.transform = 'translateX(24px)';
+                dot.parentElement.style.backgroundColor = '#C9A227';
+            }
         }
         
         // Desktop RTL Toggle Click
@@ -931,16 +931,24 @@
             });
         });
         
-        // Mobile Menu
+        // Mobile Menu Logic with Flash Active State
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const closeMobileMenu = document.getElementById('close-mobile-menu');
         
         if (mobileMenuBtn && mobileMenu) {
-            mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+            mobileMenuBtn.addEventListener('click', (e) => {
+                mobileMenuBtn.classList.add('btn-clicked-flash');
+                setTimeout(() => {
+                    mobileMenu.classList.add('active');
+                    mobileMenuBtn.classList.remove('btn-clicked-flash');
+                }, 200);
+            });
         }
         if (closeMobileMenu && mobileMenu) {
-            closeMobileMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
+            closeMobileMenu.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
         }
         
         // Close mobile menu when clicking a link
@@ -1000,10 +1008,13 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
         
-        // Hide hamburger on window resize to desktop
+        // Hide hamburger on window resize to desktop (strict 1280px check)
         window.addEventListener('resize', () => {
             if (window.innerWidth >= 1280) {
                 mobileMenu.classList.remove('active');
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.classList.remove('active');
+                }
             }
         });
     </script>

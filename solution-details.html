@@ -8,7 +8,6 @@
     <meta name="author" content="GrowwGreen">
     <title>Solution Details - GrowwGreen</title>
     
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="images/growwpark_logo.ico">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -201,20 +200,42 @@
             justify-content: center;
         }
         
-        /* UPDATED: Hamburger shows below 1280px (all devices except desktop) */
+        /* --- HAMBURGER BUTTON ACTIVE DETECTION --- */
+        #mobile-menu-btn {
+            transition: background-color 0.1s ease, transform 0.1s ease;
+        }
+
+        #mobile-menu-btn:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+
+        #mobile-menu-btn:active {
+            transform: scale(0.9);
+            background-color: var(--gold-accent) !important;
+            border-color: transparent;
+        }
+
+        .btn-clicked-flash {
+            background-color: var(--gold-accent) !important;
+            color: white !important;
+            transform: scale(0.95);
+            box-shadow: 0 0 15px rgba(201, 162, 39, 0.6);
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+
+        /* STRICT BREAKPOINT LOGIC: 1280px */
         @media (max-width: 1279px) {
             .desktop-nav {
+                display: none !important;
+            }
+            .navbar-right-desktop {
                 display: none !important;
             }
             .mobile-menu-button {
                 display: flex !important;
             }
-            .navbar-right-desktop {
-                display: none !important;
-            }
         }
         
-        /* Desktop 1280px and above - Only true desktop view */
         @media (min-width: 1280px) {
             .desktop-nav {
                 display: flex !important;
@@ -230,12 +251,10 @@
 </head>
 <body>
 
-    <!-- Navigation -->
     <nav id="navbar" class="navbar-container py-3 fixed top-0 w-full z-[1000]">
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-between">
                 
-                <!-- Logo - Matching navbar and footer -->
                 <a href="index.html" class="flex items-center gap-3 no-underline transition-transform duration-300 hover:scale-105">
                     <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center font-extrabold text-xl text-white shrink-0">
                         GG
@@ -246,10 +265,8 @@
                     </div>
                 </a>
                 
-                <!-- Desktop Menu (Shows at 1280px+) -->
                 <div class="desktop-nav items-center space-x-2" style="display: none;">
                     
-                    <!-- Home Dropdown -->
                     <div class="dropdown" id="home-dropdown">
                         <div class="nav-link" onclick="toggleDesktopDropdown('home-dropdown')">
                             Home <i class="fas fa-chevron-down dropdown-arrow"></i>
@@ -271,7 +288,6 @@
                     <a href="faq.html" class="nav-link">FAQ</a>
                     <a href="contact.html" class="nav-link">Contact</a>
                     
-                    <!-- Dashboard Dropdown -->
                     <div class="dropdown" id="dashboard-dropdown">
                         <div class="nav-link" onclick="toggleDesktopDropdown('dashboard-dropdown')">
                             Dashboard <i class="fas fa-chevron-down dropdown-arrow"></i>
@@ -288,7 +304,6 @@
                     
                 </div>
                 
-                <!-- Right Side Buttons (Desktop 1280px+) -->
                 <div class="navbar-right-desktop flex items-center gap-3" style="display: none;">
                     <button class="w-10 h-10 bg-white/15 rounded-lg flex items-center justify-center text-white transition-all duration-300 hover:bg-gold shrink-0 border-0 cursor-pointer" id="desktop-theme-toggle-btn" title="Toggle Dark/Light Mode">
                         <i class="fas fa-moon" id="desktop-theme-icon"></i>
@@ -301,7 +316,6 @@
                     </a>
                 </div>
                 
-                <!-- Mobile Menu Button (Shows below 1280px - ALL DEVICES except desktop) -->
                 <button id="mobile-menu-btn" class="hidden text-white text-2xl cursor-pointer p-2 bg-white/15 rounded-lg w-10 h-10 items-center justify-center mobile-menu-button">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -309,7 +323,6 @@
         </div>
     </nav>
     
-    <!-- Mobile Menu -->
     <div id="mobile-menu" class="mobile-menu fixed top-0 left-0 w-full h-full bg-[#2c2c2c] z-[9999] overflow-y-auto">
         <div class="p-6">
             <div class="flex justify-between items-center mb-8">
@@ -324,14 +337,13 @@
                     <a href="login.html" class="w-10 h-10 bg-gold rounded-full flex items-center justify-center text-white hover:bg-white hover:text-gold transition">
                         <i class="fas fa-user"></i>
                     </a>
-                    <button id="close-mobile-menu" class="text-white text-3xl">
+                    <button id="close-mobile-menu" class="text-white text-3xl transition-transform active:scale-90">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
             </div>
             
             <div class="space-y-2">
-                <!-- Home Dropdown Mobile -->
                 <div>
                     <button class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline cursor-pointer border-0 bg-transparent" onclick="toggleMobileDropdown('home-mobile')">
                         <span><i class="fas fa-home mr-2"></i> Home</span>
@@ -346,7 +358,7 @@
                 <a href="about.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
                     <span><i class="fas fa-info-circle mr-2"></i> About</span>
                 </a>
-                <a href="solutions.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                <a href="solutions.html" class="flex items-center justify-between w-full text-gold text-lg font-medium py-3 no-underline">
                     <span><i class="fas fa-lightbulb mr-2"></i> Solutions</span>
                 </a>
                 <a href="pricing.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
@@ -362,7 +374,6 @@
                     <span><i class="fas fa-envelope mr-2"></i> Contact</span>
                 </a>
                 
-                <!-- Dashboard Dropdown Mobile -->
                 <div>
                     <button class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline cursor-pointer border-0 bg-transparent" onclick="toggleMobileDropdown('dashboard-mobile')">
                         <span><i class="fas fa-tachometer-alt mr-2"></i> Dashboard</span>
@@ -374,11 +385,9 @@
                     </div>
                 </div>
                 
-                <!-- SETTINGS SECTION -->
                 <div class="pt-6 mt-6 border-t border-gray-700">
                     <p class="text-white text-sm font-semibold mb-4 opacity-75">SETTINGS</p>
                     
-                    <!-- Theme Toggle -->
                     <div class="bg-white/10 rounded-lg p-3 flex items-center justify-between cursor-pointer transition-all duration-300 hover:bg-[#C9A227]/20 mb-3" id="mobile-theme-toggle">
                         <div class="flex items-center">
                             <i class="fas fa-moon text-white text-lg mr-3" id="mobile-theme-icon"></i>
@@ -389,7 +398,6 @@
                         </div>
                     </div>
                     
-                    <!-- RTL Toggle -->
                     <div class="bg-white/10 rounded-lg p-3 flex items-center justify-between cursor-pointer transition-all duration-300 hover:bg-[#C9A227]/20 mb-3" id="mobile-rtl-toggle">
                         <div class="flex items-center">
                             <i class="fas fa-language text-white text-lg mr-3"></i>
@@ -404,7 +412,6 @@
         </div>
     </div>
 
-    <!-- Hero Section -->
     <section class="hero-section">
         <div class="container mx-auto px-4 text-center text-white">
             <div class="mb-4">
@@ -421,17 +428,13 @@
         </div>
     </section>
 
-    <!-- Content Container -->
     <div id="solution-content" class="container mx-auto px-4 py-16 md:py-24">
-        <!-- Content will be dynamically loaded here -->
-    </div>
+        </div>
 
-    <!-- Footer -->
     <footer class="bg-olive text-white py-12 md:py-16">
         <div class="container mx-auto px-4">
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-12">
                 <div>
-                    <!-- UPDATED: Same logo as navbar with GG circle + text + tagline -->
                     <a href="index.html" class="flex items-center gap-3 mb-6 no-underline">
                         <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center font-extrabold text-xl text-white shrink-0">
                             GG
@@ -505,13 +508,12 @@
         </div>
     </footer>
 
-    <!-- Scroll to Top Button -->
     <button id="scroll-top" class="fixed bottom-6 right-6 md:bottom-8 md:right-8 w-10 h-10 md:w-12 md:h-12 bg-olive text-white rounded-full shadow-lg hidden hover:bg-gold transition z-50">
         <i class="fas fa-arrow-up"></i>
     </button>
 
     <script>
-        // Solution Data with Updated Image Paths
+        // --- Solution Data Logic (PRESERVED) ---
         const solutionData = {
             'carbon-tracking': {
                 title: 'Carbon Tracking',
@@ -743,19 +745,16 @@
             }
         };
 
-        // Get solution from URL parameter
+        // --- Render Solution Logic ---
         const urlParams = new URLSearchParams(window.location.search);
         const solutionKey = urlParams.get('solution');
         const solution = solutionData[solutionKey];
 
         if (solution) {
-            // Update hero section
             document.getElementById('hero-title').innerHTML = `${solution.title} <span class="text-gold">Solution</span>`;
             document.getElementById('hero-description').textContent = solution.subtitle;
 
-            // Build content using Tailwind CSS
             const contentHTML = `
-                <!-- Overview Section -->
                 <div class="grid lg:grid-cols-2 gap-12 items-center mb-24">
                     <div>
                         <h2 class="text-3xl md:text-4xl font-bold mb-6 text-olive">${solution.subtitle}</h2>
@@ -782,13 +781,10 @@
                     </div>
                 </div>
 
-                <!-- Features Section -->
                 <div class="mb-24">
                     <div class="text-center mb-16">
                         <h2 class="text-3xl md:text-4xl font-bold mb-6">Key Features</h2>
-                        <p class="text-lg opacity-80 max-w-3xl mx-auto">
-                            Everything you need to achieve your sustainability goals
-                        </p>
+                        <p class="text-lg opacity-80 max-w-3xl mx-auto">Everything you need to achieve your sustainability goals</p>
                     </div>
                     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                         ${solution.features.map(feature => `
@@ -803,13 +799,10 @@
                     </div>
                 </div>
 
-                <!-- Benefits Section -->
                 <div class="mb-24 card-bg rounded-3xl p-8 md:p-16">
                     <div class="text-center mb-12">
                         <h2 class="text-3xl md:text-4xl font-bold mb-6">Why Choose This Solution?</h2>
-                        <p class="text-lg opacity-80">
-                            Join thousands of satisfied users making a difference
-                        </p>
+                        <p class="text-lg opacity-80">Join thousands of satisfied users making a difference</p>
                     </div>
                     <div class="grid md:grid-cols-3 gap-8">
                         <div class="card-bg p-8 rounded-2xl text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_10px_30px_rgba(95,111,82,0.15)]">
@@ -827,13 +820,10 @@
                     </div>
                 </div>
 
-                <!-- Pricing Section -->
                 <div class="text-center bg-olive text-white rounded-3xl p-8 md:p-16">
                     <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Get Started?</h2>
                     <p class="text-2xl mb-8 text-gold font-bold">${solution.pricing}</p>
-                    <p class="text-lg mb-8 opacity-90">
-                        Start your sustainability journey today with our comprehensive solution
-                    </p>
+                    <p class="text-lg mb-8 opacity-90">Start your sustainability journey today with our comprehensive solution</p>
                     <div class="flex flex-wrap justify-center gap-4">
                         <a href="login.html" class="bg-white text-olive px-8 py-4 rounded-lg font-bold text-lg hover:bg-gold hover:text-white transition">
                             <i class="fas fa-rocket mr-2"></i>Start Free Trial
@@ -844,10 +834,8 @@
                     </div>
                 </div>
             `;
-
             document.getElementById('solution-content').innerHTML = contentHTML;
         } else {
-            // Show error if solution not found
             document.getElementById('solution-content').innerHTML = `
                 <div class="text-center py-24">
                     <i class="fas fa-exclamation-circle text-6xl text-olive mb-6"></i>
@@ -860,7 +848,7 @@
             `;
         }
 
-        // Theme and Navigation Code
+        // --- Standard UI Logic (Theme, Mobile Menu) ---
         const htmlElement = document.documentElement;
         const currentTheme = localStorage.getItem('theme') || 'light';
         const currentDir = localStorage.getItem('direction') || 'ltr';
@@ -868,197 +856,116 @@
         htmlElement.setAttribute('data-theme', currentTheme);
         htmlElement.setAttribute('dir', currentDir);
         
-        // Desktop Theme Toggle
+        // Theme & RTL Toggles
         const desktopThemeBtn = document.getElementById('desktop-theme-toggle-btn');
         const desktopThemeIcon = document.getElementById('desktop-theme-icon');
-        
-        if (currentTheme === 'dark' && desktopThemeIcon) {
-            desktopThemeIcon.classList.replace('fa-moon', 'fa-sun');
-        }
-        
-        if (desktopThemeBtn) {
-            desktopThemeBtn.addEventListener('click', function() {
-                const theme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-                htmlElement.setAttribute('data-theme', theme);
-                localStorage.setItem('theme', theme);
-                
-                if (theme === 'dark') {
-                    desktopThemeIcon.classList.replace('fa-moon', 'fa-sun');
-                } else {
-                    desktopThemeIcon.classList.replace('fa-sun', 'fa-moon');
-                }
-                
-                const mobileIcon = document.getElementById('mobile-theme-icon');
-                if (mobileIcon) {
-                    if (theme === 'dark') {
-                        mobileIcon.classList.replace('fa-moon', 'fa-sun');
-                        document.querySelector('.theme-switch-dot').style.transform = 'translateX(24px)';
-                        document.querySelector('.theme-switch-dot').parentElement.style.backgroundColor = '#C9A227';
-                    } else {
-                        mobileIcon.classList.replace('fa-sun', 'fa-moon');
-                        document.querySelector('.theme-switch-dot').style.transform = 'translateX(0)';
-                        document.querySelector('.theme-switch-dot').parentElement.style.backgroundColor = '#6b7280';
-                    }
-                }
-            });
-        }
-        
-        // Desktop RTL Toggle
-        const desktopRtlBtn = document.getElementById('desktop-rtl-toggle-btn');
-        
-        if (desktopRtlBtn) {
-            desktopRtlBtn.addEventListener('click', function() {
-                const direction = htmlElement.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl';
-                htmlElement.setAttribute('dir', direction);
-                localStorage.setItem('direction', direction);
-                
-                const rtlDot = document.querySelector('.rtl-switch-dot');
-                if (rtlDot) {
-                    const bg = rtlDot.parentElement;
-                    if (direction === 'rtl') {
-                        rtlDot.style.transform = 'translateX(24px)';
-                        bg.style.backgroundColor = '#C9A227';
-                    } else {
-                        rtlDot.style.transform = 'translateX(0)';
-                        bg.style.backgroundColor = '#6b7280';
-                    }
-                }
-            });
-        }
-        
-        // Mobile Theme Toggle
         const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
         const mobileThemeIcon = document.getElementById('mobile-theme-icon');
-        
-        if (currentTheme === 'dark' && mobileThemeIcon) {
-            mobileThemeIcon.classList.replace('fa-moon', 'fa-sun');
-            document.querySelector('.theme-switch-dot').style.transform = 'translateX(24px)';
-            document.querySelector('.theme-switch-dot').parentElement.style.backgroundColor = '#C9A227';
-        }
-        
-        if (mobileThemeToggle) {
-            mobileThemeToggle.addEventListener('click', function() {
-                const theme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-                htmlElement.setAttribute('data-theme', theme);
-                localStorage.setItem('theme', theme);
+        const desktopRtlBtn = document.getElementById('desktop-rtl-toggle-btn');
+        const mobileRtlToggle = document.getElementById('mobile-rtl-toggle');
+
+        function updateThemeUI(theme) {
+            if (desktopThemeIcon) {
+                desktopThemeIcon.classList.remove('fa-moon', 'fa-sun');
+                desktopThemeIcon.classList.add(theme === 'dark' ? 'fa-sun' : 'fa-moon');
+            }
+            if (mobileThemeIcon) {
+                mobileThemeIcon.classList.remove('fa-moon', 'fa-sun');
+                mobileThemeIcon.classList.add(theme === 'dark' ? 'fa-sun' : 'fa-moon');
                 
                 const dot = document.querySelector('.theme-switch-dot');
-                const bg = dot.parentElement;
-                
-                if (theme === 'dark') {
-                    mobileThemeIcon.classList.replace('fa-moon', 'fa-sun');
-                    dot.style.transform = 'translateX(24px)';
-                    bg.style.backgroundColor = '#C9A227';
-                } else {
-                    mobileThemeIcon.classList.replace('fa-sun', 'fa-moon');
-                    dot.style.transform = 'translateX(0)';
-                    bg.style.backgroundColor = '#6b7280';
+                if (dot) {
+                    dot.style.transform = theme === 'dark' ? 'translateX(24px)' : 'translateX(0)';
+                    dot.parentElement.style.backgroundColor = theme === 'dark' ? '#C9A227' : '#6b7280';
                 }
-                
-                if (desktopThemeIcon) {
-                    if (theme === 'dark') {
-                        desktopThemeIcon.classList.replace('fa-moon', 'fa-sun');
-                    } else {
-                        desktopThemeIcon.classList.replace('fa-sun', 'fa-moon');
-                    }
-                }
-            });
-        }
-        
-        // Mobile RTL Toggle
-        const mobileRtlToggle = document.getElementById('mobile-rtl-toggle');
-        
-        if (currentDir === 'rtl') {
-            const rtlDot = document.querySelector('.rtl-switch-dot');
-            if (rtlDot) {
-                rtlDot.style.transform = 'translateX(24px)';
-                rtlDot.parentElement.style.backgroundColor = '#C9A227';
             }
         }
-        
-        if (mobileRtlToggle) {
-            mobileRtlToggle.addEventListener('click', function() {
-                const direction = htmlElement.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl';
-                htmlElement.setAttribute('dir', direction);
-                localStorage.setItem('direction', direction);
-                
-                const dot = document.querySelector('.rtl-switch-dot');
-                const bg = dot.parentElement;
-                
-                if (direction === 'rtl') {
-                    dot.style.transform = 'translateX(24px)';
-                    bg.style.backgroundColor = '#C9A227';
-                } else {
-                    dot.style.transform = 'translateX(0)';
-                    bg.style.backgroundColor = '#6b7280';
-                }
-            });
+
+        updateThemeUI(currentTheme);
+
+        function toggleTheme() {
+            const current = htmlElement.getAttribute('data-theme');
+            const newTheme = current === 'dark' ? 'light' : 'dark';
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeUI(newTheme);
         }
-        
-        // Desktop Dropdown Toggle
+
+        if(desktopThemeBtn) desktopThemeBtn.addEventListener('click', toggleTheme);
+        if(mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
+
+        // RTL Logic
+        function updateRtlUI(dir) {
+            const dot = document.querySelector('.rtl-switch-dot');
+            if(dot) {
+                dot.style.transform = dir === 'rtl' ? 'translateX(24px)' : 'translateX(0)';
+                dot.parentElement.style.backgroundColor = dir === 'rtl' ? '#C9A227' : '#6b7280';
+            }
+        }
+        updateRtlUI(currentDir);
+
+        function toggleRTL() {
+            const current = htmlElement.getAttribute('dir');
+            const newDir = current === 'rtl' ? 'ltr' : 'rtl';
+            htmlElement.setAttribute('dir', newDir);
+            localStorage.setItem('direction', newDir);
+            updateRtlUI(newDir);
+        }
+
+        if(desktopRtlBtn) desktopRtlBtn.addEventListener('click', toggleRTL);
+        if(mobileRtlToggle) mobileRtlToggle.addEventListener('click', toggleRTL);
+
+        // Desktop Dropdown
         function toggleDesktopDropdown(id) {
             const dropdown = document.getElementById(id);
-            const allDropdowns = document.querySelectorAll('.dropdown');
-            
-            allDropdowns.forEach(dd => {
-                if (dd.id !== id) {
-                    dd.classList.remove('active');
-                }
+            document.querySelectorAll('.dropdown').forEach(d => {
+                if(d.id !== id) d.classList.remove('active');
             });
-            
             dropdown.classList.toggle('active');
         }
-        
-        document.addEventListener('click', function(event) {
-            const dropdowns = document.querySelectorAll('.dropdown');
-            dropdowns.forEach(dropdown => {
-                if (!dropdown.contains(event.target)) {
-                    dropdown.classList.remove('active');
-                }
-            });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
+            }
         });
-        
-        // Mobile Menu
+
+        // --- MOBILE MENU FLASH EFFECT ---
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const closeMobileMenu = document.getElementById('close-mobile-menu');
         
         if (mobileMenuBtn && mobileMenu) {
-            mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenuBtn.classList.add('btn-clicked-flash');
+                setTimeout(() => {
+                    mobileMenu.classList.add('active');
+                    mobileMenuBtn.classList.remove('btn-clicked-flash');
+                }, 200);
+            });
         }
-        if (closeMobileMenu && mobileMenu) {
+        if (closeMobileMenu) {
             closeMobileMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
         }
-        
-        const mobileLinks = document.querySelectorAll('#mobile-menu a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-            });
-        });
-        
-        // Mobile Dropdown Toggle
-        function toggleMobileDropdown(id) {
-            const dropdown = document.getElementById(id);
-            dropdown.classList.toggle('active');
-        }
-        
-        // Scroll to Top
+
+        // Mobile Dropdown Accordion
+        window.toggleMobileDropdown = function(id) {
+            const el = document.getElementById(id);
+            if(el) el.classList.toggle('active');
+        };
+
+        // Scroll Top
         const scrollTopBtn = document.getElementById('scroll-top');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                scrollTopBtn.classList.remove('hidden');
-            } else {
-                scrollTopBtn.classList.add('hidden');
-            }
+            if(window.scrollY > 300) scrollTopBtn.classList.remove('hidden');
+            else scrollTopBtn.classList.add('hidden');
         });
-        scrollTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-        
+        scrollTopBtn.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
+
+        // Resize Check (Strict 1280px)
         window.addEventListener('resize', () => {
             if (window.innerWidth >= 1280) {
-                mobileMenu.classList.remove('active');
+                if(mobileMenu) mobileMenu.classList.remove('active');
             }
         });
     </script>

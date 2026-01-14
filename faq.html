@@ -8,7 +8,6 @@
     <meta name="author" content="GrowwGreen">
     <title>FAQ - GrowwGreen</title>
     
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="images/growwpark_logo.ico">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -193,20 +192,44 @@
             max-height: 1000px;
         }
         
-        /* UPDATED: Hamburger shows below 1280px (all devices except desktop) */
+        /* --- HAMBURGER BUTTON ACTIVE DETECTION --- */
+        #mobile-menu-btn {
+            transition: background-color 0.1s ease, transform 0.1s ease;
+        }
+
+        #mobile-menu-btn:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+
+        #mobile-menu-btn:active {
+            transform: scale(0.9);
+            background-color: var(--gold-accent) !important;
+            border-color: transparent;
+        }
+
+        .btn-clicked-flash {
+            background-color: var(--gold-accent) !important;
+            color: white !important;
+            transform: scale(0.95);
+            box-shadow: 0 0 15px rgba(201, 162, 39, 0.6);
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+
+        /* STRICT BREAKPOINT LOGIC: 1280px */
+        /* Forces Hamburger on all screens smaller than 1280px (Laptops/Tablets) */
         @media (max-width: 1279px) {
             .desktop-nav {
+                display: none !important;
+            }
+            .navbar-right-desktop {
                 display: none !important;
             }
             .mobile-menu-button {
                 display: flex !important;
             }
-            .navbar-right-desktop {
-                display: none !important;
-            }
         }
         
-        /* Desktop 1280px and above - Only true desktop view */
+        /* Only shows Desktop Menu on screens larger than 1280px */
         @media (min-width: 1280px) {
             .desktop-nav {
                 display: flex !important;
@@ -222,26 +245,22 @@
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav id="navbar" class="navbar-container py-4 fixed top-0 w-full z-[1000]">
-        <div class="container mx-auto px-4 lg:px-6">
+    <nav id="navbar" class="navbar-container py-3 fixed top-0 w-full z-[1000]">
+        <div class="container mx-auto px-4">
             <div class="flex items-center justify-between">
                 
-                <!-- Logo - Matching pricing page -->
                 <a href="index.html" class="flex items-center gap-3 no-underline transition-transform duration-300 hover:scale-105">
                     <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center font-extrabold text-xl text-white shrink-0">
                         GG
                     </div>
                     <div>
-                        <div class="text-2xl font-bold text-white leading-tight">GrowwGreen</div>
-                        <span class="text-xs text-white/80 block -mt-0.5">Sustainable Living</span>
+                        <div class="text-2xl font-bold text-white">GrowwGreen</div>
+                        <span class="text-xs text-white/80 block -mt-1">Sustainable Living</span>
                     </div>
                 </a>
                 
-                <!-- Desktop Menu (Shows at 1280px+) -->
                 <div class="desktop-nav items-center space-x-2" style="display: none;">
                     
-                    <!-- Home Dropdown -->
                     <div class="dropdown" id="home-dropdown">
                         <div class="nav-link" onclick="toggleDesktopDropdown('home-dropdown')">
                             Home <i class="fas fa-chevron-down dropdown-arrow"></i>
@@ -263,7 +282,6 @@
                     <a href="faq.html" class="nav-link active">FAQ</a>
                     <a href="contact.html" class="nav-link">Contact</a>
                     
-                    <!-- Dashboard Dropdown -->
                     <div class="dropdown" id="dashboard-dropdown">
                         <div class="nav-link" onclick="toggleDesktopDropdown('dashboard-dropdown')">
                             Dashboard <i class="fas fa-chevron-down dropdown-arrow"></i>
@@ -280,7 +298,6 @@
                     
                 </div>
                 
-                <!-- Right Side Buttons (Desktop 1280px+) -->
                 <div class="navbar-right-desktop flex items-center gap-3" style="display: none;">
                     <button class="w-10 h-10 bg-white/15 rounded-lg flex items-center justify-center text-white transition-all duration-300 hover:bg-gold shrink-0 border-0 cursor-pointer" id="desktop-theme-toggle-btn" title="Toggle Dark/Light Mode">
                         <i class="fas fa-moon" id="desktop-theme-icon"></i>
@@ -293,7 +310,6 @@
                     </a>
                 </div>
                 
-                <!-- Mobile Menu Button (Shows below 1280px - ALL DEVICES except desktop) -->
                 <button id="mobile-menu-btn" class="hidden text-white text-2xl cursor-pointer p-2 bg-white/15 rounded-lg w-10 h-10 items-center justify-center mobile-menu-button">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -301,15 +317,14 @@
         </div>
     </nav>
     
-    <!-- Mobile Menu -->
     <div id="mobile-menu" class="mobile-menu fixed top-0 left-0 w-full h-full bg-[#2c2c2c] z-[9999] overflow-y-auto">
         <div class="p-6">
             <div class="flex justify-between items-center mb-8">
                 <a href="index.html" class="flex items-center gap-3">
                     <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center font-extrabold text-xl text-white">GG</div>
                     <div>
-                        <span class="text-2xl font-bold text-white block leading-tight">GrowwGreen</span>
-                        <span class="text-xs text-white/80 block -mt-0.5">Sustainable Living</span>
+                        <span class="text-2xl font-bold text-white block">GrowwGreen</span>
+                        <span class="text-xs text-white/80 block -mt-1">Sustainable Living</span>
                     </div>
                 </a>
                 <div class="flex items-center gap-3">
@@ -323,7 +338,6 @@
             </div>
             
             <div class="space-y-2">
-                <!-- Home Dropdown Mobile -->
                 <div>
                     <button class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline cursor-pointer border-0 bg-transparent" onclick="toggleMobileDropdown('home-mobile')">
                         <span><i class="fas fa-home mr-2"></i> Home</span>
@@ -347,14 +361,13 @@
                 <a href="blog.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
                     <span><i class="fas fa-blog mr-2"></i> Blog</span>
                 </a>
-                <a href="faq.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                <a href="faq.html" class="flex items-center justify-between w-full text-gold text-lg font-medium py-3 no-underline">
                     <span><i class="fas fa-question-circle mr-2"></i> FAQ</span>
                 </a>
                 <a href="contact.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
                     <span><i class="fas fa-envelope mr-2"></i> Contact</span>
                 </a>
                 
-                <!-- Dashboard Dropdown Mobile -->
                 <div>
                     <button class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline cursor-pointer border-0 bg-transparent" onclick="toggleMobileDropdown('dashboard-mobile')">
                         <span><i class="fas fa-tachometer-alt mr-2"></i> Dashboard</span>
@@ -366,11 +379,9 @@
                     </div>
                 </div>
                 
-                <!-- SETTINGS SECTION -->
                 <div class="pt-6 mt-6 border-t border-gray-700">
                     <p class="text-white text-sm font-semibold mb-4 opacity-75">SETTINGS</p>
                     
-                    <!-- Theme Toggle -->
                     <div class="bg-white/10 rounded-lg p-3 flex items-center justify-between cursor-pointer transition-all duration-300 hover:bg-[#C9A227]/20 mb-3" id="mobile-theme-toggle">
                         <div class="flex items-center">
                             <i class="fas fa-moon text-white text-lg mr-3" id="mobile-theme-icon"></i>
@@ -381,7 +392,6 @@
                         </div>
                     </div>
                     
-                    <!-- RTL Toggle -->
                     <div class="bg-white/10 rounded-lg p-3 flex items-center justify-between cursor-pointer transition-all duration-300 hover:bg-[#C9A227]/20 mb-3" id="mobile-rtl-toggle">
                         <div class="flex items-center">
                             <i class="fas fa-language text-white text-lg mr-3"></i>
@@ -396,7 +406,6 @@
         </div>
     </div>
 
-    <!-- Page Header - WITH OLIVE GREEN BACKGROUND -->
     <section class="min-h-[60vh] pt-32 pb-20 flex items-center justify-center bg-olive">
         <div class="container mx-auto px-4 lg:px-6 text-center">
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 fade-in-up text-white">
@@ -408,7 +417,6 @@
         </div>
     </section>
 
-    <!-- Search Section -->
     <section class="py-16 md:py-20">
         <div class="container mx-auto px-4 lg:px-6">
             <div class="max-w-3xl mx-auto relative">
@@ -425,11 +433,9 @@
         </div>
     </section>
 
-    <!-- FAQ Content -->
     <section class="pb-20 md:pb-24">
         <div class="container mx-auto px-4 lg:px-6">
             
-            <!-- General Questions -->
             <div class="card-bg rounded-3xl p-8 md:p-10 mb-8">
                 <div class="w-16 h-16 bg-gradient-to-br from-olive to-gold rounded-2xl flex items-center justify-center text-white text-4xl mb-6">
                     <i class="fas fa-info-circle"></i>
@@ -493,7 +499,6 @@
                 </div>
             </div>
             
-            <!-- Solar Energy -->
             <div class="card-bg rounded-3xl p-8 md:p-10 mb-8">
                 <div class="w-16 h-16 bg-gradient-to-br from-olive to-gold rounded-2xl flex items-center justify-center text-white text-4xl mb-6">
                     <i class="fas fa-solar-panel"></i>
@@ -543,7 +548,6 @@
                 </div>
             </div>
             
-            <!-- Water Conservation -->
             <div class="card-bg rounded-3xl p-8 md:p-10 mb-8">
                 <div class="w-16 h-16 bg-gradient-to-br from-olive to-gold rounded-2xl flex items-center justify-center text-white text-4xl mb-6">
                     <i class="fas fa-tint"></i>
@@ -593,7 +597,6 @@
                 </div>
             </div>
             
-            <!-- Waste Reduction -->
             <div class="card-bg rounded-3xl p-8 md:p-10 mb-8">
                 <div class="w-16 h-16 bg-gradient-to-br from-olive to-gold rounded-2xl flex items-center justify-center text-white text-4xl mb-6">
                     <i class="fas fa-recycle"></i>
@@ -643,7 +646,6 @@
                 </div>
             </div>
             
-            <!-- Account & Pricing -->
             <div class="card-bg rounded-3xl p-8 md:p-10 mb-8">
                 <div class="w-16 h-16 bg-gradient-to-br from-olive to-gold rounded-2xl flex items-center justify-center text-white text-4xl mb-6">
                     <i class="fas fa-user-circle"></i>
@@ -696,7 +698,6 @@
         </div>
     </section>
 
-    <!-- Contact CTA Section - Gold Background -->
     <section class="pb-20 md:pb-24">
         <div class="container mx-auto px-4 lg:px-6">
             <div class="bg-gold rounded-3xl p-12 md:p-16 lg:p-20 text-center text-white shadow-2xl">
@@ -712,12 +713,10 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-olive text-white py-16 md:py-20">
         <div class="container mx-auto px-4 lg:px-6">
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 mb-12">
                 <div>
-                    <!-- Same logo as navbar -->
                     <a href="index.html" class="flex items-center gap-3 mb-6 no-underline">
                         <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center font-extrabold text-xl text-white shrink-0">
                             GG
@@ -791,7 +790,6 @@
         </div>
     </footer>
 
-    <!-- Scroll to Top Button -->
     <button id="scroll-top" class="fixed bottom-8 right-8 w-12 h-12 bg-olive text-white rounded-full shadow-2xl hidden hover:bg-gold transition-all duration-300 z-50 flex items-center justify-center border-0 cursor-pointer">
         <i class="fas fa-arrow-up text-lg"></i>
     </button>
@@ -994,15 +992,28 @@
             });
         });
         
+        // --- MOBILE MENU FLASH EFFECT ---
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const closeMobileMenu = document.getElementById('close-mobile-menu');
         
         if (mobileMenuBtn && mobileMenu) {
-            mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+            mobileMenuBtn.addEventListener('click', (e) => {
+                // Add Flash Effect Class instantly
+                mobileMenuBtn.classList.add('btn-clicked-flash');
+                
+                // Wait 200ms before opening menu so the flash is visible
+                setTimeout(() => {
+                    mobileMenu.classList.add('active');
+                    // Remove flash class after menu opens
+                    mobileMenuBtn.classList.remove('btn-clicked-flash');
+                }, 200);
+            });
         }
         if (closeMobileMenu && mobileMenu) {
-            closeMobileMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
+            closeMobileMenu.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
         }
         
         const mobileLinks = document.querySelectorAll('#mobile-menu a');
@@ -1029,9 +1040,13 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
         
+        // Strictly hide hamburger when resizing back to desktop (1280px+)
         window.addEventListener('resize', () => {
             if (window.innerWidth >= 1280) {
                 mobileMenu.classList.remove('active');
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.classList.remove('btn-clicked-flash');
+                }
             }
         });
     </script>

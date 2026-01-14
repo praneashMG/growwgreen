@@ -8,7 +8,6 @@
     <meta name="author" content="GrowwGreen">
     <title>Contact Us - GrowwGreen</title>
     
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="images/growwpark_logo.ico">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -222,6 +221,18 @@
             transform: rotateY(360deg);
         }
         
+        /* Highlighted Form Box Style */
+        .form-highlight-box {
+            background-color: #ffffff;
+            border: 2px solid var(--gold-accent);
+            box-shadow: 0 25px 50px -12px rgba(201, 162, 39, 0.25);
+        }
+        
+        [data-theme="dark"] .form-highlight-box {
+            background-color: #2d2d2d;
+            border: 2px solid var(--gold-accent);
+        }
+
         /* Info Banner */
         .info-banner {
             background: linear-gradient(135deg, var(--olive-green), var(--gold-accent)) !important;
@@ -329,17 +340,40 @@
             color: white;
             font-size: 1.25rem;
         }
-        
-        /* RESPONSIVE DESIGN - PERFECT ALIGNMENT */
+
+        /* --- HAMBURGER BUTTON ACTIVE DETECTION --- */
+        #mobile-menu-btn {
+            transition: background-color 0.1s ease, transform 0.1s ease;
+        }
+
+        #mobile-menu-btn:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+
+        #mobile-menu-btn:active {
+            transform: scale(0.9);
+            background-color: var(--gold-accent) !important;
+            border-color: transparent;
+        }
+
+        .btn-clicked-flash {
+            background-color: var(--gold-accent) !important;
+            color: white !important;
+            transform: scale(0.95);
+            box-shadow: 0 0 15px rgba(201, 162, 39, 0.6);
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+
+        /* STRICT BREAKPOINT LOGIC: 1280px */
         @media (max-width: 1279px) {
             .desktop-nav {
                 display: none !important;
             }
-            .mobile-menu-button {
-                display: flex !important;
-            }
             .navbar-right-desktop {
                 display: none !important;
+            }
+            .mobile-menu-button {
+                display: flex !important;
             }
         }
         
@@ -355,94 +389,38 @@
             }
         }
         
-        /* Tablet Responsive (768px - 1024px) */
+        /* Other Specific Media Queries */
         @media (min-width: 768px) and (max-width: 1024px) {
-            .contact-card {
-                text-align: center;
-            }
-            
-            .contact-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 1.5rem;
-                margin: 0 auto 16px;
-            }
-            
-            .info-banner {
-                text-align: center;
-            }
-            
-            .map-container {
-                height: 380px;
-            }
+            .contact-card { text-align: center; }
+            .contact-icon { width: 60px; height: 60px; font-size: 1.5rem; margin: 0 auto 16px; }
+            .info-banner { text-align: center; }
+            .map-container { height: 380px; }
         }
         
-        /* Mobile Responsive (max 767px) */
         @media (max-width: 767px) {
-            .contact-card {
-                text-align: center;
-                padding: 24px 20px !important;
-            }
-            
-            .contact-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 1.5rem;
-                margin: 0 auto 16px;
-            }
-            
-            .info-banner {
-                text-align: center;
-            }
-            
-            .info-banner h3 {
-                font-size: 1.75rem !important;
-                margin-bottom: 28px !important;
-            }
-            
-            .info-banner .grid {
-                gap: 20px !important;
-            }
-            
-            .info-banner .text-5xl {
-                font-size: 2.5rem !important;
-            }
-            
-            .map-container {
-                height: 320px;
-                border-radius: 16px;
-                border: 2px solid var(--gold-accent);
-            }
-            
-            .map-label h3 {
-                font-size: 1.5rem;
-            }
+            .contact-card { text-align: center; padding: 24px 20px !important; }
+            .contact-icon { width: 60px; height: 60px; font-size: 1.5rem; margin: 0 auto 16px; }
+            .info-banner { text-align: center; }
+            .info-banner h3 { font-size: 1.75rem !important; margin-bottom: 28px !important; }
+            .info-banner .grid { gap: 20px !important; }
+            .info-banner .text-5xl { font-size: 2.5rem !important; }
+            .map-container { height: 320px; border-radius: 16px; border: 2px solid var(--gold-accent); }
+            .map-label h3 { font-size: 1.5rem; }
         }
         
-        /* Small Mobile (max 480px) */
         @media (max-width: 480px) {
-            .info-banner .text-5xl {
-                font-size: 2rem !important;
-            }
-            
-            .info-banner h3 {
-                font-size: 1.5rem !important;
-            }
-            
-            .map-container {
-                height: 280px;
-            }
+            .info-banner .text-5xl { font-size: 2rem !important; }
+            .info-banner h3 { font-size: 1.5rem !important; }
+            .map-container { height: 280px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
     <nav id="navbar" class="navbar-container py-4 fixed top-0 w-full z-[1000]">
         <div class="container mx-auto px-4 lg:px-6">
             <div class="flex items-center justify-between">
                 
-                <!-- Logo -->
                 <a href="index.html" class="flex items-center gap-3 no-underline transition-transform duration-300 hover:scale-105">
                     <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center font-extrabold text-xl text-white shrink-0">
                         GG
@@ -453,10 +431,8 @@
                     </div>
                 </a>
                 
-                <!-- Desktop Menu (Shows at 1280px+) -->
                 <div class="desktop-nav items-center space-x-2" style="display: none;">
                     
-                    <!-- Home Dropdown -->
                     <div class="dropdown" id="home-dropdown">
                         <div class="nav-link" onclick="toggleDesktopDropdown('home-dropdown')">
                             Home <i class="fas fa-chevron-down dropdown-arrow"></i>
@@ -478,7 +454,6 @@
                     <a href="faq.html" class="nav-link">FAQ</a>
                     <a href="contact.html" class="nav-link active">Contact</a>
                     
-                    <!-- Dashboard Dropdown -->
                     <div class="dropdown" id="dashboard-dropdown">
                         <div class="nav-link" onclick="toggleDesktopDropdown('dashboard-dropdown')">
                             Dashboard <i class="fas fa-chevron-down dropdown-arrow"></i>
@@ -495,7 +470,6 @@
                     
                 </div>
                 
-                <!-- Right Side Buttons (Desktop 1280px+) -->
                 <div class="navbar-right-desktop flex items-center gap-3" style="display: none;">
                     <button class="w-10 h-10 bg-white/15 rounded-lg flex items-center justify-center text-white transition-all duration-300 hover:bg-gold shrink-0 border-0 cursor-pointer" id="desktop-theme-toggle-btn" title="Toggle Dark/Light Mode">
                         <i class="fas fa-moon" id="desktop-theme-icon"></i>
@@ -508,7 +482,6 @@
                     </a>
                 </div>
                 
-                <!-- Mobile Menu Button -->
                 <button id="mobile-menu-btn" class="hidden text-white text-2xl cursor-pointer p-2 bg-white/15 rounded-lg w-10 h-10 items-center justify-center mobile-menu-button">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -516,7 +489,6 @@
         </div>
     </nav>
     
-    <!-- Mobile Menu -->
     <div id="mobile-menu" class="mobile-menu fixed top-0 left-0 w-full h-full bg-[#2c2c2c] z-[9999] overflow-y-auto">
         <div class="p-6">
             <div class="flex justify-between items-center mb-8">
@@ -538,7 +510,6 @@
             </div>
             
             <div class="space-y-2">
-                <!-- Home Dropdown Mobile -->
                 <div>
                     <button class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline cursor-pointer border-0 bg-transparent" onclick="toggleMobileDropdown('home-mobile')">
                         <span><i class="fas fa-home mr-2"></i> Home</span>
@@ -565,11 +536,10 @@
                 <a href="faq.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
                     <span><i class="fas fa-question-circle mr-2"></i> FAQ</span>
                 </a>
-                <a href="contact.html" class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline">
+                <a href="contact.html" class="flex items-center justify-between w-full text-gold text-lg font-medium py-3 no-underline">
                     <span><i class="fas fa-envelope mr-2"></i> Contact</span>
                 </a>
                 
-                <!-- Dashboard Dropdown Mobile -->
                 <div>
                     <button class="flex items-center justify-between w-full text-white text-lg font-medium py-3 no-underline cursor-pointer border-0 bg-transparent" onclick="toggleMobileDropdown('dashboard-mobile')">
                         <span><i class="fas fa-tachometer-alt mr-2"></i> Dashboard</span>
@@ -581,11 +551,9 @@
                     </div>
                 </div>
                 
-                <!-- SETTINGS SECTION -->
                 <div class="pt-6 mt-6 border-t border-gray-700">
                     <p class="text-white text-sm font-semibold mb-4 opacity-75">SETTINGS</p>
                     
-                    <!-- Theme Toggle -->
                     <div class="bg-white/10 rounded-lg p-3 flex items-center justify-between cursor-pointer transition-all duration-300 hover:bg-[#C9A227]/20 mb-3" id="mobile-theme-toggle">
                         <div class="flex items-center">
                             <i class="fas fa-moon text-white text-lg mr-3" id="mobile-theme-icon"></i>
@@ -596,7 +564,6 @@
                         </div>
                     </div>
                     
-                    <!-- RTL Toggle -->
                     <div class="bg-white/10 rounded-lg p-3 flex items-center justify-between cursor-pointer transition-all duration-300 hover:bg-[#C9A227]/20 mb-3" id="mobile-rtl-toggle">
                         <div class="flex items-center">
                             <i class="fas fa-language text-white text-lg mr-3"></i>
@@ -611,24 +578,21 @@
         </div>
     </div>
 
-    <!-- Page Header -->
-    <section class="min-h-[50vh] mt-20 flex items-center justify-center relative overflow-hidden">
+    <section class="min-h-[50vh] mt-20 flex items-center justify-center relative overflow-hidden bg-olive text-white">
         <div class="container mx-auto px-4 lg:px-6 text-center relative z-10">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 fade-in-up text-olive">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 fade-in-up text-white">
                 Get In Touch With Us
             </h1>
-            <p class="text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto opacity-80">
+            <p class="text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto opacity-90">
                 Have questions? We're here to help you on your sustainability journey
             </p>
         </div>
     </section>
 
-    <!-- Contact Cards Section -->
     <section class="py-16 md:py-20">
         <div class="container mx-auto px-4 lg:px-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
                 
-                <!-- Email Card -->
                 <div class="contact-card card-bg rounded-3xl p-8 transition-all duration-400 cursor-pointer relative hover:-translate-y-2 hover:shadow-2xl">
                     <div class="contact-icon">
                         <i class="fas fa-envelope"></i>
@@ -636,11 +600,10 @@
                     <h3 class="text-xl md:text-2xl font-bold mb-3 text-center">Email Us</h3>
                     <p class="text-sm opacity-70 mb-4 text-center">Send us an email anytime</p>
                     <a href="mailto:support@growwgreen.com" class="text-gold font-semibold hover:underline text-base block text-center">
-                        support@growwgreen.com
+                        go@growwgreen.com
                     </a>
                 </div>
                 
-                <!-- Phone Card -->
                 <div class="contact-card card-bg rounded-3xl p-8 transition-all duration-400 cursor-pointer relative hover:-translate-y-2 hover:shadow-2xl">
                     <div class="contact-icon">
                         <i class="fas fa-phone-alt"></i>
@@ -652,7 +615,6 @@
                     </a>
                 </div>
                 
-                <!-- Location Card -->
                 <div class="contact-card card-bg rounded-3xl p-8 transition-all duration-400 cursor-pointer relative hover:-translate-y-2 hover:shadow-2xl">
                     <div class="contact-icon">
                         <i class="fas fa-map-marker-alt"></i>
@@ -660,11 +622,10 @@
                     <h3 class="text-xl md:text-2xl font-bold mb-3 text-center">Visit Us</h3>
                     <p class="text-sm opacity-70 mb-4 text-center">Come say hello</p>
                     <p class="text-sm font-semibold leading-relaxed text-center">
-                        Hosur, Tamil Nadu<br>India - 635109
+                        San Francisco<br>California, USA
                     </p>
                 </div>
                 
-                <!-- Live Chat Card -->
                 <div class="contact-card card-bg rounded-3xl p-8 transition-all duration-400 cursor-pointer relative hover:-translate-y-2 hover:shadow-2xl">
                     <div class="contact-icon">
                         <i class="fas fa-comments"></i>
@@ -680,13 +641,11 @@
         </div>
     </section>
 
-    <!-- Contact Form & Info Section -->
     <section class="pb-20 md:pb-24">
         <div class="container mx-auto px-4 lg:px-6">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-start">
                 
-                <!-- Contact Form -->
-                <div class="card-bg rounded-3xl p-8 md:p-10 shadow-xl">
+                <div class="form-highlight-box rounded-3xl p-8 md:p-10 shadow-2xl">
                     <h2 class="text-3xl md:text-4xl font-bold mb-3">Send Us a Message</h2>
                     <p class="opacity-70 mb-8 text-base md:text-lg">Fill out the form below and we'll get back to you within 24 hours</p>
                     
@@ -703,7 +662,7 @@
                         
                         <div>
                             <label class="block mb-2 font-semibold text-base">Phone Number</label>
-                            <input type="tel" class="w-full px-5 py-4 border-2 border-transparent rounded-xl card-bg text-base transition-all duration-300 focus:outline-none focus:border-gold focus:shadow-lg focus:ring-4 focus:ring-gold/10" placeholder="+91 12345 67890" style="color: var(--text); background-color: var(--cards);">
+                            <input type="tel" class="w-full px-5 py-4 border-2 border-transparent rounded-xl card-bg text-base transition-all duration-300 focus:outline-none focus:border-gold focus:shadow-lg focus:ring-4 focus:ring-gold/10" placeholder="+1 12345 67890" style="color: var(--text); background-color: var(--cards);">
                         </div>
                         
                         <div>
@@ -729,10 +688,8 @@
                     </form>
                 </div>
                 
-                <!-- Info Banner & Map -->
                 <div class="space-y-8">
                     
-                    <!-- Info Banner - GOLDEN GRADIENT -->
                     <div class="info-banner rounded-3xl p-10 md:p-12 text-white relative overflow-hidden shadow-2xl">
                         <h3 class="text-3xl md:text-4xl font-bold mb-8 relative z-10">Why Contact Us?</h3>
                         <div class="grid grid-cols-2 gap-6 mb-8 relative z-10">
@@ -741,7 +698,7 @@
                                 <p class="text-sm opacity-90">Support Available</p>
                             </div>
                             <div class="text-center">
-                                <span class="text-5xl font-extrabold block mb-2">&lt;1hr</span>
+                                <span class="text-5xl font-extrabold block mb-2"><1hr</span>
                                 <p class="text-sm opacity-90">Response Time</p>
                             </div>
                             <div class="text-center">
@@ -758,24 +715,22 @@
                         </p>
                     </div>
                     
-                    <!-- Map Section -->
                     <div class="map-wrapper">
                         <div class="map-label">
                             <h3>📍 Find Us Here</h3>
-                            <p>Visit our office in Hosur, Tamil Nadu</p>
+                            <p>Visit our office in San Francisco, CA</p>
                         </div>
                         <div class="map-container">
                             <iframe 
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62693.53499055765!2d77.76688687431641!3d12.735632399999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae710bd1e16c27%3A0xc9eb2d81613b614e!2sHosur%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1704459600000!5m2!1sen!2sin"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100939.98555098464!2d-122.507640204439!3d37.75781498660761!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1710000000000!5m2!1sen!2sus"
                                 allowfullscreen=""
                                 loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"
-                                title="GrowwGreen Location - Hosur, Tamil Nadu">
+                                title="GrowwGreen Location - San Francisco, CA">
                             </iframe>
                         </div>
                     </div>
                     
-                    <!-- Social Media -->
                     <div class="card-bg rounded-3xl p-8 md:p-10 text-center shadow-xl">
                         <h3 class="text-2xl md:text-3xl font-bold mb-4">Follow Us</h3>
                         <p class="opacity-70 mb-8 text-base">Stay connected on social media</p>
@@ -801,7 +756,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-olive text-white py-16 md:py-20">
         <div class="container mx-auto px-4 lg:px-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 mb-12">
@@ -879,7 +833,6 @@
         </div>
     </footer>
 
-    <!-- Scroll to Top Button - SIMPLE OLIVE GREEN -->
     <button id="scroll-top" class="scroll-top-btn fixed bottom-8 right-8 w-14 h-14 text-white rounded-full shadow-lg hidden z-[999] flex items-center justify-center border-0 cursor-pointer">
         <i class="fas fa-arrow-up"></i>
     </button>
@@ -1050,15 +1003,28 @@
             });
         });
         
+        // --- MOBILE MENU FLASH EFFECT ---
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const closeMobileMenu = document.getElementById('close-mobile-menu');
         
         if (mobileMenuBtn && mobileMenu) {
-            mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+            mobileMenuBtn.addEventListener('click', (e) => {
+                // Add Flash Effect Class instantly
+                mobileMenuBtn.classList.add('btn-clicked-flash');
+                
+                // Wait 200ms before opening menu so the flash is visible
+                setTimeout(() => {
+                    mobileMenu.classList.add('active');
+                    // Remove flash class after menu opens
+                    mobileMenuBtn.classList.remove('btn-clicked-flash');
+                }, 200);
+            });
         }
         if (closeMobileMenu && mobileMenu) {
-            closeMobileMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
+            closeMobileMenu.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
         }
         
         const mobileLinks = document.querySelectorAll('#mobile-menu a');
@@ -1073,7 +1039,6 @@
             dropdown.classList.toggle('active');
         }
         
-        // Scroll to Top Button
         const scrollTopBtn = document.getElementById('scroll-top');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 300) {
@@ -1086,9 +1051,13 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
         
+        // Strictly hide hamburger when resizing back to desktop (1280px+)
         window.addEventListener('resize', () => {
             if (window.innerWidth >= 1280) {
                 mobileMenu.classList.remove('active');
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.classList.remove('btn-clicked-flash');
+                }
             }
         });
     </script>

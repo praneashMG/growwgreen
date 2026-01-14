@@ -8,7 +8,6 @@
     <meta name="author" content="GrowwGreen">
     <title>Login & Register - GrowwGreen</title>
     
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="images/growwpark_logo.ico">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -34,15 +33,33 @@
     </script>
     
     <style>
+        :root {
+            /* DEFINING THE GREEN COLOUR HERE */
+            --olive-green: #5F6F52;
+            --gold-accent: #C9A227;
+            --navbar-bg: #5F6F52; 
+        }
+        
+        [data-theme="dark"] {
+            --navbar-bg: #3d4a36;
+        }
+        
         * { 
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             scroll-behavior: smooth; 
         }
+        
         body { 
             font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
+            overflow: hidden;
+        }
+        
+        /* Navbar Styles - FORCING THE GREEN COLOUR */
+        .navbar-container {
+            background-color: var(--navbar-bg) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         
         /* Logo Animation */
@@ -64,12 +81,11 @@
         }
         
         /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #5F6F52; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #4a5841; }
         
-        [data-theme="dark"] ::-webkit-scrollbar-track { background: #1a1a1a; }
         [data-theme="dark"] ::-webkit-scrollbar-thumb { background: #C9A227; }
         
         /* Form fade animation */
@@ -81,206 +97,210 @@
         .form-active {
             animation: fadeIn 0.3s ease;
         }
+        
+        /* Fixed centered container - NO SCROLL */
+        .auth-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 360px;
+            padding: 0 1rem;
+        }
+        
+        /* Compact card - NO OVERFLOW */
+        .auth-card {
+            max-height: calc(100vh - 100px);
+            overflow: hidden;
+        }
+        
+        /* Tab button styles */
+        .tab-btn-active {
+            background: linear-gradient(to bottom right, #5F6F52, #C9A227) !important;
+            color: white !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .tab-btn-inactive {
+            background-color: transparent !important;
+            color: #374151;
+        }
+        
+        [data-theme="dark"] .tab-btn-inactive {
+            color: #D1D5DB;
+        }
     </style>
 </head>
 
-<body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white transition-colors duration-300 min-h-screen overflow-hidden">
+<body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white transition-colors duration-300 min-h-screen">
 
-    <!-- Top Navbar - FIXED -->
-    <nav class="fixed top-0 left-0 right-0 h-16 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border-b border-gray-200 dark:border-gray-800 z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-            
-            <!-- Logo Section -->
-            <a href="index.html" class="flex items-center gap-2 sm:gap-3 px-2 sm:px-3 py-1.5 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 no-underline group flex-shrink-0">
-                <!-- Circular Logo with GG -->
-                <div class="relative w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-gold to-yellow-600 rounded-full flex items-center justify-center overflow-hidden shadow-lg group-hover:shadow-xl transition-all duration-300 flex-shrink-0">
-                    <span class="text-white font-black text-base sm:text-xl z-10 relative">GG</span>
-                    <div class="logo-shine"></div>
-                </div>
+    <nav class="navbar-container py-2.5 fixed top-0 w-full z-50">
+        <div class="container mx-auto px-4 lg:px-6">
+            <div class="flex items-center justify-between">
                 
-                <!-- Text Section -->
-                <div class="hidden sm:flex flex-col">
-                    <span class="text-base sm:text-lg font-black text-gray-900 dark:text-white tracking-tight leading-tight">GrowwGreen</span>
-                    <span class="text-[9px] sm:text-[10px] font-semibold text-olive tracking-wider uppercase">Sustainable Living</span>
-                </div>
-            </a>
-            
-            <!-- Action Buttons - FIXED LAYOUT -->
-            <div class="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
-                <!-- Theme Toggle -->
-                <button id="theme-toggle" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-gradient-to-br hover:from-olive hover:to-gold hover:text-white hover:border-transparent hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg flex-shrink-0">
-                    <i class="fas fa-moon text-sm sm:text-base" id="theme-icon"></i>
-                </button>
+                <a href="index.html" class="flex items-center gap-2 no-underline transition-transform duration-300 hover:scale-105">
+                    <div class="w-9 h-9 bg-gradient-to-br from-gold to-yellow-600 rounded-full flex items-center justify-center overflow-hidden shadow-lg relative shrink-0">
+                        <span class="text-white font-black text-base z-10 relative">GG</span>
+                        <div class="logo-shine"></div>
+                    </div>
+                    <div>
+                        <div class="text-lg font-bold text-white leading-tight">GrowwGreen</div>
+                        <span class="text-xs text-white/80 block -mt-0.5">Sustainable Living</span>
+                    </div>
+                </a>
                 
-                <!-- RTL Toggle -->
-                <button id="rtl-toggle" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-gradient-to-br hover:from-olive hover:to-gold hover:text-white hover:border-transparent hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-lg flex-shrink-0">
-                    <i class="fas fa-language text-sm sm:text-base"></i>
-                </button>
+                <div class="flex items-center gap-2">
+                    <button id="theme-toggle" class="w-8 h-8 bg-white/15 rounded-lg flex items-center justify-center text-white transition-all duration-300 hover:bg-gold shrink-0 border-0 cursor-pointer" title="Toggle Dark/Light Mode">
+                        <i class="fas fa-moon text-xs" id="theme-icon"></i>
+                    </button>
+                    <button id="rtl-toggle" class="w-8 h-8 bg-white/15 rounded-lg flex items-center justify-center text-white transition-all duration-300 hover:bg-gold shrink-0 border-0 cursor-pointer" title="Toggle RTL">
+                        <i class="fas fa-language text-xs"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content - CENTERED & FIXED SIZE -->
-    <main class="fixed inset-0 top-16 flex items-center justify-center p-4 overflow-hidden">
-        <div class="w-full max-w-[380px]">
+    <div class="auth-container">
+        
+        <div class="auth-card bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-4 shadow-2xl">
             
-            <!-- Auth Card - EXTRA COMPACT & FIXED -->
-            <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-5 sm:p-6 shadow-2xl max-h-[calc(100vh-6rem)] overflow-hidden">
-                
-                <!-- Header - EXTRA COMPACT -->
-                <div class="text-center mb-4">
-                    <h1 class="text-lg sm:text-xl font-black text-gray-900 dark:text-white mb-1">Welcome to GrowwGreen 🌱</h1>
-                    <p class="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">Join the sustainability revolution</p>
-                </div>
-                
-                <!-- Tabs - EXTRA COMPACT -->
-                <div class="flex gap-1.5 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg mb-4">
-                    <button class="tab-btn flex-1 py-1.5 px-3 rounded-md font-bold text-[11px] transition-all duration-300 bg-gradient-to-br from-olive to-gold text-white shadow-lg" onclick="switchTab('login')">
+            <div class="text-center mb-3">
+                <h1 class="text-lg font-black text-gray-900 dark:text-white mb-0.5">Welcome to GrowwGreen 🌱</h1>
+                <p class="text-xs text-gray-600 dark:text-gray-400">Join the sustainability revolution</p>
+            </div>
+            
+            <div class="flex gap-1 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg mb-3">
+                <button id="login-tab" class="tab-btn flex-1 py-1.5 px-3 rounded-md font-bold text-xs transition-all duration-300 tab-btn-active" onclick="switchTab('login')">
+                    Login
+                </button>
+                <button id="register-tab" class="tab-btn flex-1 py-1.5 px-3 rounded-md font-bold text-xs transition-all duration-300 tab-btn-inactive hover:bg-gray-200 dark:hover:bg-gray-700" onclick="switchTab('register')">
+                    Register
+                </button>
+            </div>
+            
+            <div id="login-form" class="form-content form-active">
+                <form onsubmit="handleLogin(event)" class="space-y-2">
+                    
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-0.5">Email</label>
+                        <div class="relative">
+                            <i class="fas fa-envelope absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                            <input type="email" class="w-full pl-8 pr-2.5 py-1.5 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-olive focus:border-transparent transition-all text-gray-900 dark:text-white" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-0.5">Password</label>
+                        <div class="relative">
+                            <i class="fas fa-lock absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                            <input type="password" id="login-password" class="w-full pl-8 pr-9 py-1.5 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-olive focus:border-transparent transition-all text-gray-900 dark:text-white" placeholder="Enter your password" required>
+                            <i class="fas fa-eye absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer hover:text-olive transition-colors text-xs" onclick="togglePassword('login-password')"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between text-xs pt-0.5">
+                        <label class="flex items-center gap-1.5 cursor-pointer">
+                            <input type="checkbox" class="w-3 h-3 rounded border-gray-300 text-olive focus:ring-olive cursor-pointer">
+                            <span class="text-gray-600 dark:text-gray-400">Remember</span>
+                        </label>
+                        <a href="#" class="font-bold text-olive hover:text-gold transition-colors no-underline">Forgot?</a>
+                    </div>
+                    
+                    <button type="submit" class="w-full py-2 bg-gradient-to-br from-olive to-gold text-white font-bold text-xs rounded-lg hover:-translate-y-1 hover:shadow-xl transition-all duration-300 mt-3">
                         Login
                     </button>
-                    <button class="tab-btn flex-1 py-1.5 px-3 rounded-md font-bold text-[11px] transition-all duration-300 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700" onclick="switchTab('register')">
-                        Register
+                    
+                    <div class="flex items-center gap-2 my-2.5">
+                        <div class="flex-1 h-px bg-gray-300 dark:bg-gray-700"></div>
+                        <span class="text-xs text-gray-500 dark:text-gray-400 font-medium">OR</span>
+                        <div class="flex-1 h-px bg-gray-300 dark:bg-gray-700"></div>
+                    </div>
+                    
+                    <button type="button" class="w-full py-1.5 px-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg font-semibold text-xs text-gray-700 dark:text-gray-300 hover:border-olive hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2">
+                        <i class="fab fa-google text-xs" style="color: #DB4437;"></i>
+                        Google
                     </button>
-                </div>
-                
-                <!-- Login Form - EXTRA COMPACT -->
-                <div id="login-form" class="form-content form-active">
-                    <form onsubmit="handleLogin(event)" class="space-y-3">
-                        
-                        <!-- Email Input -->
-                        <div>
-                            <label class="block text-[11px] font-bold text-gray-700 dark:text-gray-300 mb-1">Email Address</label>
-                            <div class="relative">
-                                <i class="fas fa-envelope absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
-                                <input type="email" class="w-full pl-9 pr-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-olive focus:border-transparent transition-all text-gray-900 dark:text-white" placeholder="Enter your email" required>
-                            </div>
+                    
+                    <button type="button" class="w-full py-1.5 px-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg font-semibold text-xs text-gray-700 dark:text-gray-300 hover:border-olive hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 mt-1.5">
+                        <i class="fab fa-facebook text-xs" style="color: #4267B2;"></i>
+                        Facebook
+                    </button>
+                    
+                </form>
+            </div>
+            
+            <div id="register-form" class="form-content hidden" style="display: none;">
+                <form onsubmit="handleRegister(event)" class="space-y-2">
+                    
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-0.5">Full Name</label>
+                        <div class="relative">
+                            <i class="fas fa-user absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                            <input type="text" class="w-full pl-8 pr-2.5 py-1.5 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-olive focus:border-transparent transition-all text-gray-900 dark:text-white" placeholder="Enter your full name" required>
                         </div>
-                        
-                        <!-- Password Input -->
-                        <div>
-                            <label class="block text-[11px] font-bold text-gray-700 dark:text-gray-300 mb-1">Password</label>
-                            <div class="relative">
-                                <i class="fas fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
-                                <input type="password" id="login-password" class="w-full pl-9 pr-10 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-olive focus:border-transparent transition-all text-gray-900 dark:text-white" placeholder="Enter your password" required>
-                                <i class="fas fa-eye absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer hover:text-olive transition-colors text-xs" onclick="togglePassword('login-password')"></i>
-                            </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-0.5">Email</label>
+                        <div class="relative">
+                            <i class="fas fa-envelope absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                            <input type="email" class="w-full pl-8 pr-2.5 py-1.5 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-olive focus:border-transparent transition-all text-gray-900 dark:text-white" placeholder="Enter your email" required>
                         </div>
-                        
-                        <!-- Remember & Forgot -->
-                        <div class="flex items-center justify-between text-[10px] pt-0.5">
-                            <label class="flex items-center gap-1.5 cursor-pointer">
-                                <input type="checkbox" class="w-3 h-3 rounded border-gray-300 text-olive focus:ring-olive cursor-pointer">
-                                <span class="text-gray-600 dark:text-gray-400">Remember me</span>
-                            </label>
-                            <a href="#" class="font-bold text-olive hover:text-gold transition-colors no-underline">Forgot Password?</a>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-0.5">Password</label>
+                        <div class="relative">
+                            <i class="fas fa-lock absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                            <input type="password" id="register-password" class="w-full pl-8 pr-9 py-1.5 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-olive focus:border-transparent transition-all text-gray-900 dark:text-white" placeholder="Create password" required>
+                            <i class="fas fa-eye absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer hover:text-olive transition-colors text-xs" onclick="togglePassword('register-password')"></i>
                         </div>
-                        
-                        <!-- Submit Button -->
-                        <button type="submit" class="w-full py-2 bg-gradient-to-br from-olive to-gold text-white font-bold text-xs rounded-lg hover:-translate-y-1 hover:shadow-xl transition-all duration-300 mt-3">
-                            Login
-                        </button>
-                        
-                        <!-- Divider -->
-                        <div class="flex items-center gap-2.5 my-3">
-                            <div class="flex-1 h-px bg-gray-300 dark:bg-gray-700"></div>
-                            <span class="text-[9px] text-gray-500 dark:text-gray-400 font-medium">OR</span>
-                            <div class="flex-1 h-px bg-gray-300 dark:bg-gray-700"></div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-0.5">Confirm</label>
+                        <div class="relative">
+                            <i class="fas fa-lock absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                            <input type="password" id="confirm-password" class="w-full pl-8 pr-9 py-1.5 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-olive focus:border-transparent transition-all text-gray-900 dark:text-white" placeholder="Confirm password" required>
+                            <i class="fas fa-eye absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer hover:text-olive transition-colors text-xs" onclick="togglePassword('confirm-password')"></i>
                         </div>
-                        
-                        <!-- Social Buttons -->
-                        <button type="button" class="w-full py-2 px-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg font-semibold text-[11px] text-gray-700 dark:text-gray-300 hover:border-olive hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
-                            <i class="fab fa-google text-sm" style="color: #DB4437;"></i>
-                            Continue with Google
-                        </button>
-                        
-                        <button type="button" class="w-full py-2 px-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg font-semibold text-[11px] text-gray-700 dark:text-gray-300 hover:border-olive hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 mt-2">
-                            <i class="fab fa-facebook text-sm" style="color: #4267B2;"></i>
-                            Continue with Facebook
-                        </button>
-                        
-                    </form>
-                </div>
-                
-                <!-- Register Form - EXTRA COMPACT -->
-                <div id="register-form" class="form-content hidden">
-                    <form onsubmit="handleRegister(event)" class="space-y-3">
-                        
-                        <!-- Full Name Input -->
-                        <div>
-                            <label class="block text-[11px] font-bold text-gray-700 dark:text-gray-300 mb-1">Full Name</label>
-                            <div class="relative">
-                                <i class="fas fa-user absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
-                                <input type="text" class="w-full pl-9 pr-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-olive focus:border-transparent transition-all text-gray-900 dark:text-white" placeholder="Enter your full name" required>
-                            </div>
-                        </div>
-                        
-                        <!-- Email Input -->
-                        <div>
-                            <label class="block text-[11px] font-bold text-gray-700 dark:text-gray-300 mb-1">Email Address</label>
-                            <div class="relative">
-                                <i class="fas fa-envelope absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
-                                <input type="email" class="w-full pl-9 pr-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-olive focus:border-transparent transition-all text-gray-900 dark:text-white" placeholder="Enter your email" required>
-                            </div>
-                        </div>
-                        
-                        <!-- Password Input -->
-                        <div>
-                            <label class="block text-[11px] font-bold text-gray-700 dark:text-gray-300 mb-1">Password</label>
-                            <div class="relative">
-                                <i class="fas fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
-                                <input type="password" id="register-password" class="w-full pl-9 pr-10 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-olive focus:border-transparent transition-all text-gray-900 dark:text-white" placeholder="Create a password" required>
-                                <i class="fas fa-eye absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer hover:text-olive transition-colors text-xs" onclick="togglePassword('register-password')"></i>
-                            </div>
-                        </div>
-                        
-                        <!-- Confirm Password Input -->
-                        <div>
-                            <label class="block text-[11px] font-bold text-gray-700 dark:text-gray-300 mb-1">Confirm Password</label>
-                            <div class="relative">
-                                <i class="fas fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
-                                <input type="password" id="confirm-password" class="w-full pl-9 pr-10 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-olive focus:border-transparent transition-all text-gray-900 dark:text-white" placeholder="Confirm your password" required>
-                                <i class="fas fa-eye absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer hover:text-olive transition-colors text-xs" onclick="togglePassword('confirm-password')"></i>
-                            </div>
-                        </div>
-                        
-                        <!-- Terms Checkbox -->
-                        <label class="flex items-start gap-1.5 cursor-pointer pt-0.5">
-                            <input type="checkbox" class="w-3 h-3 mt-0.5 rounded border-gray-300 text-olive focus:ring-olive cursor-pointer flex-shrink-0" required>
-                            <span class="text-[10px] text-gray-600 dark:text-gray-400 leading-tight">
-                                I agree to the <a href="#" class="font-bold text-olive hover:text-gold transition-colors no-underline">Terms & Conditions</a>
-                            </span>
-                        </label>
-                        
-                        <!-- Submit Button -->
-                        <button type="submit" class="w-full py-2 bg-gradient-to-br from-olive to-gold text-white font-bold text-xs rounded-lg hover:-translate-y-1 hover:shadow-xl transition-all duration-300 mt-3">
-                            Create Account
-                        </button>
-                        
-                        <!-- Divider -->
-                        <div class="flex items-center gap-2.5 my-3">
-                            <div class="flex-1 h-px bg-gray-300 dark:bg-gray-700"></div>
-                            <span class="text-[9px] text-gray-500 dark:text-gray-400 font-medium">OR</span>
-                            <div class="flex-1 h-px bg-gray-300 dark:bg-gray-700"></div>
-                        </div>
-                        
-                        <!-- Social Buttons -->
-                        <button type="button" class="w-full py-2 px-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg font-semibold text-[11px] text-gray-700 dark:text-gray-300 hover:border-olive hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
-                            <i class="fab fa-google text-sm" style="color: #DB4437;"></i>
-                            Sign up with Google
-                        </button>
-                        
-                        <button type="button" class="w-full py-2 px-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg font-semibold text-[11px] text-gray-700 dark:text-gray-300 hover:border-olive hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 mt-2">
-                            <i class="fab fa-facebook text-sm" style="color: #4267B2;"></i>
-                            Sign up with Facebook
-                        </button>
-                        
-                    </form>
-                </div>
-                
+                    </div>
+                    
+                    <label class="flex items-start gap-1.5 cursor-pointer pt-0.5">
+                        <input type="checkbox" class="w-3 h-3 mt-0.5 rounded border-gray-300 text-olive focus:ring-olive cursor-pointer flex-shrink-0" required>
+                        <span class="text-xs text-gray-600 dark:text-gray-400 leading-tight">
+                            I agree to <a href="#" class="font-bold text-olive hover:text-gold transition-colors no-underline">Terms</a>
+                        </span>
+                    </label>
+                    
+                    <button type="submit" class="w-full py-2 bg-gradient-to-br from-olive to-gold text-white font-bold text-xs rounded-lg hover:-translate-y-1 hover:shadow-xl transition-all duration-300 mt-2.5">
+                        Create Account
+                    </button>
+                    
+                    <div class="flex items-center gap-2 my-2.5">
+                        <div class="flex-1 h-px bg-gray-300 dark:bg-gray-700"></div>
+                        <span class="text-xs text-gray-500 dark:text-gray-400 font-medium">OR</span>
+                        <div class="flex-1 h-px bg-gray-300 dark:bg-gray-700"></div>
+                    </div>
+                    
+                    <button type="button" class="w-full py-1.5 px-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg font-semibold text-xs text-gray-700 dark:text-gray-300 hover:border-olive hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2">
+                        <i class="fab fa-google text-xs" style="color: #DB4437;"></i>
+                        Google
+                    </button>
+                    
+                    <button type="button" class="w-full py-1.5 px-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg font-semibold text-xs text-gray-700 dark:text-gray-300 hover:border-olive hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 mt-1.5">
+                        <i class="fab fa-facebook text-xs" style="color: #4267B2;"></i>
+                        Facebook
+                    </button>
+                    
+                </form>
             </div>
             
         </div>
-    </main>
+        
+    </div>
 
     <script>
         // Theme Toggle
@@ -289,17 +309,22 @@
         const themeIcon = document.getElementById('theme-icon');
         const currentTheme = localStorage.getItem('theme') || 'light';
         
+        html.setAttribute('data-theme', currentTheme);
+        
         if (currentTheme === 'dark') {
-            html.classList.add('dark');
             themeIcon.classList.replace('fa-moon', 'fa-sun');
         }
         
         themeBtn.addEventListener('click', () => {
-            html.classList.toggle('dark');
-            const isDark = html.classList.contains('dark');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            themeIcon.classList.toggle('fa-moon');
-            themeIcon.classList.toggle('fa-sun');
+            const theme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            
+            if (theme === 'dark') {
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            }
         });
         
         // RTL Toggle
@@ -315,32 +340,29 @@
         
         // Switch Tabs
         function switchTab(tab) {
-            const tabBtns = document.querySelectorAll('.tab-btn');
+            const loginTab = document.getElementById('login-tab');
+            const registerTab = document.getElementById('register-tab');
             const loginForm = document.getElementById('login-form');
             const registerForm = document.getElementById('register-form');
             
             if (tab === 'login') {
-                // Update buttons
-                tabBtns[0].classList.add('bg-gradient-to-br', 'from-olive', 'to-gold', 'text-white', 'shadow-lg');
-                tabBtns[0].classList.remove('text-gray-700', 'dark:text-gray-300', 'hover:bg-gray-200', 'dark:hover:bg-gray-700');
-                tabBtns[1].classList.remove('bg-gradient-to-br', 'from-olive', 'to-gold', 'text-white', 'shadow-lg');
-                tabBtns[1].classList.add('text-gray-700', 'dark:text-gray-300', 'hover:bg-gray-200', 'dark:hover:bg-gray-700');
+                loginTab.className = 'tab-btn flex-1 py-1.5 px-3 rounded-md font-bold text-xs transition-all duration-300 tab-btn-active';
+                registerTab.className = 'tab-btn flex-1 py-1.5 px-3 rounded-md font-bold text-xs transition-all duration-300 tab-btn-inactive hover:bg-gray-200 dark:hover:bg-gray-700';
                 
-                // Show login form
                 loginForm.classList.remove('hidden');
+                loginForm.style.display = 'block';
                 loginForm.classList.add('form-active');
                 registerForm.classList.add('hidden');
+                registerForm.style.display = 'none';
             } else {
-                // Update buttons
-                tabBtns[1].classList.add('bg-gradient-to-br', 'from-olive', 'to-gold', 'text-white', 'shadow-lg');
-                tabBtns[1].classList.remove('text-gray-700', 'dark:text-gray-300', 'hover:bg-gray-200', 'dark:hover:bg-gray-700');
-                tabBtns[0].classList.remove('bg-gradient-to-br', 'from-olive', 'to-gold', 'text-white', 'shadow-lg');
-                tabBtns[0].classList.add('text-gray-700', 'dark:text-gray-300', 'hover:bg-gray-200', 'dark:hover:bg-gray-700');
+                registerTab.className = 'tab-btn flex-1 py-1.5 px-3 rounded-md font-bold text-xs transition-all duration-300 tab-btn-active';
+                loginTab.className = 'tab-btn flex-1 py-1.5 px-3 rounded-md font-bold text-xs transition-all duration-300 tab-btn-inactive hover:bg-gray-200 dark:hover:bg-gray-700';
                 
-                // Show register form
                 registerForm.classList.remove('hidden');
+                registerForm.style.display = 'block';
                 registerForm.classList.add('form-active');
                 loginForm.classList.add('hidden');
+                loginForm.style.display = 'none';
             }
         }
         
@@ -362,7 +384,6 @@
         function handleLogin(e) {
             e.preventDefault();
             alert('Login functionality coming soon!');
-            // Example: window.location.href = 'user-dashboard.html';
         }
         
         // Handle Register
